@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>abdurDaily — Abdur Rahman, Full-Stack Web Developer</title>
+  <meta name="description" content="abdurDaily — Abdur Rahman, full-stack web developer building fast, secure and scalable products with Laravel, PHP, Next.js and React for clients in the USA, Bangladesh and worldwide.">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta property="og:title" content="abdurDaily — Full-Stack Web Developer">
+  <meta property="og:description" content="Laravel · PHP · Next.js · React. Web software that businesses rely on.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121210'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='30' fill='%23ff5a1f'%3EaD%3C/text%3E%3C/svg%3E">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Abdur Rahman",
+    "alternateName": "abdurDaily",
+    "jobTitle": "Full-Stack Web Developer",
+    "knowsAbout": ["Laravel", "PHP", "Next.js", "React", "MySQL", "REST APIs"],
+    "address": { "@type": "PostalAddress", "addressCountry": "BD" },
+    "email": "mailto:hello@yourdomain.com"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Preloader -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__logo logo">abdur<span>Daily</span><i class="caret"></i></div>
+    <div class="preloader__log mono">
+      <span class="js-boot">booting portfolio…</span>
+      <span class="preloader__count"><span class="js-count">0</span>%</span>
+    </div>
+    <div class="preloader__bar"><span></span></div>
+  </div>
+
+  <!-- Cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
+  <div class="hover-preview" aria-hidden="true"><img alt=""></div>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top site-nav" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand logo" href="#home" aria-label="abdurDaily home">abdur<span>Daily</span><i class="caret"></i></a>
+      <button class="navbar-toggler nav-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span><span></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#stack">Stack</a></li>
+          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#clients">Clients</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-ink magnetic"><span>Hire me</span> <i class="bi bi-arrow-up-right"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <div class="container position-relative">
+        <div class="hero__top mono">
+          <span class="pill"><span class="status__dot"></span> Available for new projects</span>
+          <span class="pill"><i class="bi bi-clock"></i> Dhaka · <span class="js-clock">--:--</span></span>
+        </div>
+
+        <div class="row align-items-center g-5">
+          <div class="col-lg-7">
+            <p class="kicker mono hero__kicker">// full-stack web developer</p>
+            <h1 class="hero__title" data-hero-split>I engineer web products that <span class="hl">scale</span> with your business.</h1>
+            <p class="hero__sub">
+              I'm <strong>Abdur Rahman</strong>. I design, build and ship production-grade applications with
+              <strong>Laravel</strong>, <strong>PHP</strong>, <strong>Next.js</strong> and <strong>React</strong> —
+              for startups and businesses in the USA, Bangladesh and worldwide.
+            </p>
+            <div class="hero__cta d-flex flex-wrap gap-3">
+              <a href="#work" class="btn btn-accent btn-lg magnetic"><span>See my work</span> <i class="bi bi-arrow-down-right"></i></a>
+              <a href="#contact" class="btn btn-line btn-lg magnetic"><span>Book a call</span></a>
+            </div>
+            <div class="hero__trust">
+              <div class="avatars" aria-hidden="true">
+                <span>JM</span><span>TH</span><span>SC</span><span>OK</span><span class="avatars__more">+40</span>
+              </div>
+              <p><strong>Trusted by 40+ clients</strong><span class="mono">USA · Bangladesh · UK · worldwide</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="terminal" data-tilt>
+              <div class="terminal__bar">
+                <span></span><span></span><span></span>
+                <em class="mono">~/clients/new-project — zsh</em>
+              </div>
+              <pre class="terminal__body mono" aria-label="Terminal showing a build and deploy workflow"><code class="js-terminal"></code><i class="terminal__cursor"></i></pre>
+              <span class="chip chip--1 mono"><i class="devicon-laravel-original colored"></i> Laravel 11</span>
+              <span class="chip chip--2 mono"><i class="devicon-nextjs-plain"></i> Next.js 15</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BRANDS ============ -->
+    <section class="brands" aria-label="Brands I've worked with">
+      <div class="container">
+        <p class="brands__title mono">Trusted by teams across the USA, Bangladesh &amp; beyond</p>
+      </div>
+      <!-- Replace these placeholder wordmarks with your real client logos -->
+      <div class="marquee" data-direction="left">
+        <div class="marquee__track">
+          <div class="marquee__group">
+            <span class="brand-logo"><i class="bi bi-hexagon-fill"></i> NovaPay</span>
+            <span class="brand-logo"><i class="bi bi-triangle-fill"></i> Bridgewise</span>
+            <span class="brand-logo"><i class="bi bi-circle-square"></i> Orbitly</span>
+            <span class="brand-logo"><i class="bi bi-lightning-charge-fill"></i> Voltera</span>
+            <span class="brand-logo"><i class="bi bi-flower1"></i> Bloomcart</span>
+            <span class="brand-logo"><i class="bi bi-buildings-fill"></i> UrbanNest</span>
+            <span class="brand-logo"><i class="bi bi-heart-pulse-fill"></i> MediSync</span>
+            <span class="brand-logo"><i class="bi bi-mortarboard-fill"></i> Learnly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section-head">
+          <p class="label mono" data-reveal><span>01</span> About</p>
+          <h2 class="section-title" data-split>A developer who thinks like a <span class="hl">product owner</span>.</h2>
+        </div>
+
+        <div class="row g-5 align-items-start">
+          <div class="col-lg-5">
+            <!-- Replace the src with your own smiling photo, e.g. assets/img/abdur.jpg (portrait, ~900×1100) -->
+            <figure class="portrait">
+              <div class="img-reveal portrait__img" data-img-reveal>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80" alt="Abdur Rahman smiling" loading="lazy" width="900" height="1100">
+              </div>
+              <span class="portrait__hello">Hi, I'm Abdur <span class="wave">👋</span></span>
+              <div class="portrait__badge" aria-hidden="true">
+                <svg viewBox="0 0 120 120"><defs><path id="badgeCircle" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><text><textPath href="#badgeCircle">abdurDaily • full-stack developer • </textPath></text></svg>
+                <span class="portrait__smile">😊</span>
+              </div>
+              <div class="portrait__card mono"><span class="status__dot"></span> usually replies in &lt; 12h</div>
+              <figcaption class="mono">Abdur Rahman — Full-stack developer, Bangladesh</figcaption>
+            </figure>
+          </div>
+          <div class="col-lg-7">
+            <p class="about__lead" data-reveal>
+              Clients don't hire me to write code — they hire me to <strong>solve business problems</strong>.
+              I own the full lifecycle: architecture, back-end, front-end, deployment and support. One accountable
+              engineer instead of a chain of freelancers.
+            </p>
+
+            <div class="config" data-reveal>
+              <div class="config__head mono"><span><i class="bi bi-file-earmark-code"></i> profile.config</span><span>yaml</span></div>
+              <dl class="config__body mono">
+                <div><dt>name</dt><dd>"Abdur Rahman"</dd></div>
+                <div><dt>role</dt><dd>"Full-Stack Web Developer"</dd></div>
+                <div><dt>backend</dt><dd>[Laravel, PHP, Node.js, MySQL]</dd></div>
+                <div><dt>frontend</dt><dd>[Next.js, React, TypeScript, Tailwind]</dd></div>
+                <div><dt>clients</dt><dd>[USA, Bangladesh, Worldwide]</dd></div>
+                <div><dt>values</dt><dd>[clean_code, clear_updates, on_time]</dd></div>
+                <div><dt>status</dt><dd class="ok">open_to_work ●</dd></div>
+              </dl>
+            </div>
+
+            <div class="row g-3 about__counts">
+              <div class="col-6 col-md-3" data-reveal><strong><span data-count="5">0</span>+</strong><span>years experience</span></div>
+              <div class="col-6 col-md-3" data-reveal><strong><span data-count="80">0</span>+</strong><span>projects shipped</span></div>
+              <div class="col-6 col-md-3" data-reveal><strong><span data-count="40">0</span>+</strong><span>happy clients</span></div>
+              <div class="col-6 col-md-3" data-reveal><strong><span data-count="6">0</span></strong><span>countries served</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="label mono" data-reveal><span>02</span> Services</p>
+            <h2 class="section-title" data-split>What I can <span class="hl">build</span> for you.</h2>
+          </div>
+          <p class="section-desc" data-reveal>End-to-end engineering — from the first database table to the final deploy, with clean, documented code your team can maintain.</p>
+        </div>
+
+        <ul class="service-list list-unstyled">
+          <li class="service-row" data-reveal data-img="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&q=80">
+            <span class="service-row__num mono">01</span>
+            <h3>Laravel &amp; PHP Applications</h3>
+            <p>Custom web apps, admin panels, multi-tenant SaaS and secure REST APIs.</p>
+            <span class="service-row__arrow"><i class="bi bi-arrow-up-right"></i></span>
+          </li>
+          <li class="service-row" data-reveal data-img="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80">
+            <span class="service-row__num mono">02</span>
+            <h3>Next.js &amp; React Front-ends</h3>
+            <p>SEO-friendly, lightning-fast interfaces with server rendering and polished UX.</p>
+            <span class="service-row__arrow"><i class="bi bi-arrow-up-right"></i></span>
+          </li>
+          <li class="service-row" data-reveal data-img="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=80">
+            <span class="service-row__num mono">03</span>
+            <h3>E-commerce &amp; Payments</h3>
+            <p>Stores and marketplaces with Stripe, PayPal, SSLCommerz and bKash.</p>
+            <span class="service-row__arrow"><i class="bi bi-arrow-up-right"></i></span>
+          </li>
+          <li class="service-row" data-reveal data-img="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80">
+            <span class="service-row__num mono">04</span>
+            <h3>SaaS Dashboards</h3>
+            <p>Role-based dashboards, reporting, subscriptions and real-time data.</p>
+            <span class="service-row__arrow"><i class="bi bi-arrow-up-right"></i></span>
+          </li>
+          <li class="service-row" data-reveal data-img="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=700&q=80">
+            <span class="service-row__num mono">05</span>
+            <h3>APIs &amp; Integrations</h3>
+            <p>Connect CRMs, ERPs, shipping and messaging services into one workflow.</p>
+            <span class="service-row__arrow"><i class="bi bi-arrow-up-right"></i></span>
+          </li>
+          <li class="service-row" data-reveal data-img="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&q=80">
+            <span class="service-row__num mono">06</span>
+            <h3>Performance, Upgrades &amp; Support</h3>
+            <p>Speed audits, Laravel upgrades, bug fixes and long-term maintenance.</p>
+            <span class="service-row__arrow"><i class="bi bi-arrow-up-right"></i></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ STACK ============ -->
+    <section class="section stack" id="stack">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-4">
+            <p class="label mono" data-reveal><span>03</span> Tech stack</p>
+            <h2 class="section-title" data-split>Modern tools, <span class="hl">proven</span> results.</h2>
+            <p class="section-desc" data-reveal>I choose battle-tested technologies that keep your product fast, secure and maintainable for years.</p>
+          </div>
+          <div class="col-lg-8">
+            <div class="stack-grid">
+              <div class="stack-item"><i class="devicon-laravel-original colored"></i><span>Laravel</span></div>
+              <div class="stack-item"><i class="devicon-php-plain colored"></i><span>PHP</span></div>
+              <div class="stack-item"><i class="devicon-nextjs-plain"></i><span>Next.js</span></div>
+              <div class="stack-item"><i class="devicon-react-original colored"></i><span>React</span></div>
+              <div class="stack-item"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+              <div class="stack-item"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
+              <div class="stack-item"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+              <div class="stack-item"><i class="devicon-mysql-original colored"></i><span>MySQL</span></div>
+              <div class="stack-item"><i class="devicon-tailwindcss-original colored"></i><span>Tailwind</span></div>
+              <div class="stack-item"><i class="devicon-bootstrap-plain colored"></i><span>Bootstrap</span></div>
+              <div class="stack-item"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+              <div class="stack-item"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FIXED-BACKGROUND STATEMENT ============ -->
+    <section class="statement" aria-label="Working principles">
+      <div class="container">
+        <p class="label label--light mono" data-reveal><span>~</span> Principles</p>
+        <h2 class="statement__title" data-split>Clean code. Clear communication. <span class="hl">Shipped</span> on time.</h2>
+        <div class="row g-4 statement__points">
+          <div class="col-md-4" data-reveal><span class="mono">const</span> quality = <em>"tested & documented"</em>;</div>
+          <div class="col-md-4" data-reveal><span class="mono">const</span> updates = <em>"daily, in your timezone"</em>;</div>
+          <div class="col-md-4" data-reveal><span class="mono">const</span> handover = <em>"code + docs + support"</em>;</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="work" id="work">
+      <div class="container work__inner">
+        <div class="work__head section-head--split">
+          <div>
+            <p class="label mono" data-reveal><span>04</span> Selected work</p>
+            <h2 class="section-title" data-split>Products I've <span class="hl">shipped</span>.</h2>
+          </div>
+          <p class="section-desc d-none d-lg-block" data-reveal>Scroll to explore — a few recent builds across e-commerce, SaaS, fintech and education.</p>
+        </div>
+        <div class="work__track">
+          <article class="project" data-cursor-text="Let's talk">
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="E-commerce checkout on a tablet" loading="lazy"></div>
+            <div class="project__body">
+              <div class="project__meta mono"><span>case_01</span><span>E-commerce · USA</span></div>
+              <h3>ShopNest — Multi-vendor Marketplace</h3>
+              <p>Vendor dashboards, Stripe payouts and real-time inventory for hundreds of sellers.</p>
+              <ul class="tags mono"><li>Laravel</li><li>Livewire</li><li>Stripe</li></ul>
+              <!-- Point this to the live site or a case-study page when available -->
+              <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="project" data-cursor-text="Let's talk">
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80" alt="Healthcare professional using a digital tablet" loading="lazy"></div>
+            <div class="project__body">
+              <div class="project__meta mono"><span>case_02</span><span>SaaS · Healthcare</span></div>
+              <h3>ClinicFlow — Appointment Platform</h3>
+              <p>Multi-clinic booking, reminders and patient records with role-based access.</p>
+              <ul class="tags mono"><li>Next.js</li><li>Laravel API</li><li>MySQL</li></ul>
+              <!-- Point this to the live site or a case-study page when available -->
+              <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="project" data-cursor-text="Let's talk">
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Analytics dashboard with charts" loading="lazy"></div>
+            <div class="project__body">
+              <div class="project__meta mono"><span>case_03</span><span>Fintech · UK</span></div>
+              <h3>FinTrack — Analytics Dashboard</h3>
+              <p>Interactive financial reporting with live charts, exports and team permissions.</p>
+              <ul class="tags mono"><li>React</li><li>Node.js</li><li>Chart.js</li></ul>
+              <!-- Point this to the live site or a case-study page when available -->
+              <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="project" data-cursor-text="Let's talk">
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Modern residential property" loading="lazy"></div>
+            <div class="project__body">
+              <div class="project__meta mono"><span>case_04</span><span>Real estate · USA</span></div>
+              <h3>UrbanNest — Property Listings</h3>
+              <p>Map search, lead capture and an agent CRM with fast server-rendered pages.</p>
+              <ul class="tags mono"><li>Next.js</li><li>Laravel</li><li>Mapbox</li></ul>
+              <!-- Point this to the live site or a case-study page when available -->
+              <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="project" data-cursor-text="Let's talk">
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80" alt="Student studying online with a laptop" loading="lazy"></div>
+            <div class="project__body">
+              <div class="project__meta mono"><span>case_05</span><span>EdTech · Bangladesh</span></div>
+              <h3>Learnly — LMS Platform</h3>
+              <p>Courses, quizzes, certificates and bKash / SSLCommerz payments.</p>
+              <ul class="tags mono"><li>Laravel</li><li>Vue</li><li>SSLCommerz</li></ul>
+              <!-- Point this to the live site or a case-study page when available -->
+              <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          <div class="project project--cta">
+            <p class="mono">case_06</p>
+            <h3>Your product<br>could be next.</h3>
+            <a href="#contact" class="btn btn-accent btn-lg magnetic"><span>Start a project</span> <i class="bi bi-arrow-up-right"></i></a>
+          </div>
+        </div>
+        <div class="work__progress mono" aria-hidden="true">
+          <span class="js-work-count">01</span>
+          <div class="work__bar"><span></span></div>
+          <span>06</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS (pipeline) ============ -->
+    <section class="section process" id="process">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="label mono" data-reveal><span>05</span> Process</p>
+            <h2 class="section-title" data-split>A delivery <span class="hl">pipeline</span>, not guesswork.</h2>
+          </div>
+          <p class="section-desc" data-reveal>Every project runs through the same proven stages — so you always know what's done, what's next and when it ships.</p>
+        </div>
+
+        <div class="pipeline">
+          <div class="pipeline__track" aria-hidden="true"><span></span></div>
+          <ol class="pipeline__steps list-unstyled">
+            <li class="stage">
+              <span class="stage__node"><i class="bi bi-search"></i></span>
+              <span class="stage__status mono">✓ passed</span>
+              <h3>Discover</h3>
+              <p>Goals, users and scope. You get a clear proposal, estimate and timeline.</p>
+            </li>
+            <li class="stage">
+              <span class="stage__node"><i class="bi bi-diagram-3"></i></span>
+              <span class="stage__status mono">✓ passed</span>
+              <h3>Plan</h3>
+              <p>Architecture, database schema and UI flows — approved before coding.</p>
+            </li>
+            <li class="stage">
+              <span class="stage__node"><i class="bi bi-code-slash"></i></span>
+              <span class="stage__status mono">✓ passed</span>
+              <h3>Build</h3>
+              <p>Weekly demos on a staging link. Your feedback shapes every milestone.</p>
+            </li>
+            <li class="stage">
+              <span class="stage__node"><i class="bi bi-shield-check"></i></span>
+              <span class="stage__status mono">✓ passed</span>
+              <h3>Test</h3>
+              <p>Automated tests, QA and performance checks before anything goes live.</p>
+            </li>
+            <li class="stage">
+              <span class="stage__node"><i class="bi bi-rocket-takeoff"></i></span>
+              <span class="stage__status mono">✓ deployed</span>
+              <h3>Ship &amp; Support</h3>
+              <p>Deployment, handover docs and ongoing support after launch.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WITH CLIENTS (photo gallery — replace with your real photos) ============ -->
+    <section class="section moments" id="clients">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="label mono" data-reveal><span>06</span> With clients</p>
+            <h2 class="section-title" data-split>Real people, <span class="hl">real</span> partnerships.</h2>
+          </div>
+          <p class="section-desc" data-reveal>Kick-offs, workshops and launch days with the teams I build for — in person and across time zones.</p>
+        </div>
+
+        <div class="moments-grid">
+          <button type="button" class="moment moment--a" data-reveal data-media="image" data-src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80" data-caption="Project kick-off with the ShopNest team" data-cursor-text="Open">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="Project kick-off meeting with a client team" loading="lazy">
+            <span class="moment__cap"><span class="mono">kick-off · USA</span>Planning the marketplace roadmap</span>
+          </button>
+          <button type="button" class="moment moment--b" data-reveal data-media="image" data-src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80" data-caption="Sprint review with the Learnly team" data-cursor-text="Open">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" alt="Sprint review with a client team around a laptop" loading="lazy">
+            <span class="moment__cap"><span class="mono">sprint review · Bangladesh</span>Demoing new LMS features</span>
+          </button>
+          <button type="button" class="moment moment--c" data-reveal data-media="image" data-src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80" data-caption="Strategy workshop" data-cursor-text="Open">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80" alt="Strategy workshop with a client" loading="lazy">
+            <span class="moment__cap"><span class="mono">workshop</span>Mapping user journeys</span>
+          </button>
+          <button type="button" class="moment moment--d" data-reveal data-media="image" data-src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" data-caption="Pair-programming with a client's in-house team" data-cursor-text="Open">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Working alongside a client's development team" loading="lazy">
+            <span class="moment__cap"><span class="mono">on-site</span>Pairing with the in-house team</span>
+          </button>
+          <button type="button" class="moment moment--e" data-reveal data-media="image" data-src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80" data-caption="Launch day celebration" data-cursor-text="Open">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80" alt="Launch day meeting with a client team" loading="lazy">
+            <span class="moment__cap"><span class="mono">launch day · UK</span>Shipping FinTrack to production</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REVIEWS (sample content — replace with real client reviews & videos) ============ -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="label mono" data-reveal><span>07</span> Client reviews</p>
+            <h2 class="section-title" data-split>Reviewed &amp; <span class="hl">approved</span> by clients.</h2>
+          </div>
+          <p class="section-desc" data-reveal>Long-term relationships matter more to me than one-off gigs. Hear it from the clients themselves.</p>
+        </div>
+
+        <!-- Video reviews: use data-src="assets/videos/client.mp4" for your own files,
+             or data-media="youtube" data-src="YOUTUBE_VIDEO_ID" for YouTube. -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-4" data-reveal>
+            <button type="button" class="video-card" data-media="video" data-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" data-caption="James Miller — Founder, ShopNest 🇺🇸" data-cursor-text="Play">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80" alt="Video review from James Miller" loading="lazy">
+              <span class="video-card__play"><i class="bi bi-play-fill"></i></span>
+              <span class="video-card__tag mono"><i class="bi bi-camera-video"></i> video review</span>
+              <span class="video-card__info"><strong>James Miller</strong><span class="mono">Founder, ShopNest · 🇺🇸 USA</span></span>
+            </button>
+          </div>
+          <div class="col-md-4" data-reveal>
+            <button type="button" class="video-card" data-media="video" data-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" data-caption="Sarah Collins — Marketing Lead, UrbanNest 🇺🇸" data-cursor-text="Play">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt="Video review from Sarah Collins" loading="lazy">
+              <span class="video-card__play"><i class="bi bi-play-fill"></i></span>
+              <span class="video-card__tag mono"><i class="bi bi-camera-video"></i> video review</span>
+              <span class="video-card__info"><strong>Sarah Collins</strong><span class="mono">Marketing Lead, UrbanNest · 🇺🇸 USA</span></span>
+            </button>
+          </div>
+          <div class="col-md-4" data-reveal>
+            <button type="button" class="video-card" data-media="video" data-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" data-caption="Tanvir Hasan — CEO, Learnly 🇧🇩" data-cursor-text="Play">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Video review from Tanvir Hasan" loading="lazy">
+              <span class="video-card__play"><i class="bi bi-play-fill"></i></span>
+              <span class="video-card__tag mono"><i class="bi bi-camera-video"></i> video review</span>
+              <span class="video-card__info"><strong>Tanvir Hasan</strong><span class="mono">CEO, Learnly · 🇧🇩 Bangladesh</span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6" data-reveal>
+            <article class="review">
+              <header class="review__head">
+                <span class="avatar">JM</span>
+                <p><strong>James Miller</strong> <span class="approved"><i class="bi bi-check-circle-fill"></i> approved these changes</span></p>
+              </header>
+              <blockquote>"Abdur rebuilt our marketplace in Laravel and it's twice as fast. Daily updates and always available during our working hours."</blockquote>
+              <footer class="review__foot mono"><span>Founder, ShopNest</span><span>🇺🇸 USA</span></footer>
+            </article>
+          </div>
+          <div class="col-md-6" data-reveal>
+            <article class="review">
+              <header class="review__head">
+                <span class="avatar">TH</span>
+                <p><strong>Tanvir Hasan</strong> <span class="approved"><i class="bi bi-check-circle-fill"></i> approved these changes</span></p>
+              </header>
+              <blockquote>"Our LMS handles thousands of students without a hiccup. The bKash and SSLCommerz integration worked perfectly from day one."</blockquote>
+              <footer class="review__foot mono"><span>CEO, Learnly</span><span>🇧🇩 Bangladesh</span></footer>
+            </article>
+          </div>
+          <div class="col-md-6" data-reveal>
+            <article class="review">
+              <header class="review__head">
+                <span class="avatar">SC</span>
+                <p><strong>Sarah Collins</strong> <span class="approved"><i class="bi bi-check-circle-fill"></i> approved these changes</span></p>
+              </header>
+              <blockquote>"The Next.js front-end boosted our Lighthouse score and our leads went up noticeably. A true professional who cares about quality."</blockquote>
+              <footer class="review__foot mono"><span>Marketing Lead, UrbanNest</span><span>🇺🇸 USA</span></footer>
+            </article>
+          </div>
+          <div class="col-md-6" data-reveal>
+            <article class="review">
+              <header class="review__head">
+                <span class="avatar">OK</span>
+                <p><strong>Oliver King</strong> <span class="approved"><i class="bi bi-check-circle-fill"></i> approved these changes</span></p>
+              </header>
+              <blockquote>"Delivered a complex dashboard ahead of schedule with clean, documented code. We've already hired him for two more projects."</blockquote>
+              <footer class="review__foot mono"><span>CTO, FinTrack</span><span>🇬🇧 UK</span></footer>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section faq-section" id="faq">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-5">
+            <p class="label mono" data-reveal><span>08</span> FAQ</p>
+            <h2 class="section-title" data-split>Questions clients <span class="hl">ask</span> first.</h2>
+            <p class="section-desc" data-reveal>Straight answers about pricing, time zones and ownership — so we can skip the guesswork and focus on your product.</p>
+            <a href="#contact" class="btn btn-line mt-4 magnetic" data-reveal><span>Ask me anything</span> <i class="bi bi-arrow-up-right"></i></a>
+          </div>
+          <div class="col-lg-7">
+            <div class="faq" id="faqList">
+              <div class="faq-item" data-reveal>
+                <h3 class="faq-q"><button type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1"><span class="mono">01</span>How do you price projects?<i class="bi bi-plus-lg"></i></button></h3>
+                <div id="faq1" class="collapse show" data-bs-parent="#faqList"><p>Fixed price for clearly defined scopes, so you know the total upfront. For ongoing work I offer hourly or monthly retainers. Every estimate is broken into milestones you approve.</p></div>
+              </div>
+              <div class="faq-item" data-reveal>
+                <h3 class="faq-q"><button type="button" class="collapsed" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2"><span class="mono">02</span>Can you work in my time zone?<i class="bi bi-plus-lg"></i></button></h3>
+                <div id="faq2" class="collapse" data-bs-parent="#faqList"><p>I'm in Bangladesh (GMT+6) and keep overlapping hours with US and European clients for calls. You also get a written progress update every working day.</p></div>
+              </div>
+              <div class="faq-item" data-reveal>
+                <h3 class="faq-q"><button type="button" class="collapsed" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3"><span class="mono">03</span>Who owns the code?<i class="bi bi-plus-lg"></i></button></h3>
+                <div id="faq3" class="collapse" data-bs-parent="#faqList"><p>You do — 100%. The code lives in your repository from day one, and you receive full source, credentials and documentation at handover.</p></div>
+              </div>
+              <div class="faq-item" data-reveal>
+                <h3 class="faq-q"><button type="button" class="collapsed" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4"><span class="mono">04</span>Will you sign an NDA?<i class="bi bi-plus-lg"></i></button></h3>
+                <div id="faq4" class="collapse" data-bs-parent="#faqList"><p>Yes. I'm happy to sign your NDA before we discuss any details of your idea or business.</p></div>
+              </div>
+              <div class="faq-item" data-reveal>
+                <h3 class="faq-q"><button type="button" class="collapsed" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5"><span class="mono">05</span>Do you support the project after launch?<i class="bi bi-plus-lg"></i></button></h3>
+                <div id="faq5" class="collapse" data-bs-parent="#faqList"><p>Every project includes a post-launch bug-fix window. After that, I offer maintenance plans for updates, security patches and new features.</p></div>
+              </div>
+              <div class="faq-item" data-reveal>
+                <h3 class="faq-q"><button type="button" class="collapsed" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6"><span class="mono">06</span>Can you take over an existing codebase?<i class="bi bi-plus-lg"></i></button></h3>
+                <div id="faq6" class="collapse" data-bs-parent="#faqList"><p>Absolutely. I start with a short code audit, share what I find, then fix, upgrade or extend your Laravel, PHP, React or Next.js application.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-5">
+            <p class="label mono" data-reveal><span>09</span> Contact</p>
+            <h2 class="section-title" data-split>Let's ship your <span class="hl">next</span> project.</h2>
+            <p class="section-desc" data-reveal>Tell me what you're building. I reply within 12 hours with honest feedback and next steps.</p>
+
+            <div class="email-card" data-reveal>
+              <span class="mono">email</span>
+              <a href="mailto:hello@yourdomain.com" class="email-card__link">hello@yourdomain.com</a>
+              <button type="button" class="copy-btn mono" data-copy="hello@yourdomain.com"><i class="bi bi-clipboard"></i> <span>copy</span></button>
+            </div>
+
+            <ul class="contact-list list-unstyled" data-reveal>
+              <li><i class="bi bi-whatsapp"></i><a href="https://wa.me/8801000000000" target="_blank" rel="noopener">+880 1000-000000</a></li>
+              <li><i class="bi bi-geo-alt"></i><span>Bangladesh · Remote worldwide</span></li>
+            </ul>
+            <div class="socials" data-reveal>
+              <a href="#" class="magnetic" aria-label="GitHub"><i class="bi bi-github"></i></a>
+              <a href="#" class="magnetic" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="magnetic" aria-label="Upwork"><i class="bi bi-briefcase"></i></a>
+              <a href="#" class="magnetic" aria-label="X (Twitter)"><i class="bi bi-twitter-x"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <form class="contact-form needs-validation" novalidate data-reveal data-email="hello@yourdomain.com">
+              <div class="contact-form__head mono"><span>new Project({</span><span class="text-end">// all fields stay private</span></div>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="cName" class="form-label mono">name:</label>
+                  <input type="text" class="form-control" id="cName" name="name" required autocomplete="name" placeholder="Jane Doe">
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="cEmail" class="form-label mono">email:</label>
+                  <input type="email" class="form-control" id="cEmail" name="email" required autocomplete="email" placeholder="jane@company.com">
+                  <div class="invalid-feedback">Please enter a valid email.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="cBudget" class="form-label mono">budget:</label>
+                  <select class="form-select" id="cBudget" name="budget">
+                    <option>Under $1,000</option>
+                    <option selected>$1,000 – $5,000</option>
+                    <option>$5,000 – $15,000</option>
+                    <option>$15,000+</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="cType" class="form-label mono">type:</label>
+                  <select class="form-select" id="cType" name="type">
+                    <option>Web application</option>
+                    <option>E-commerce</option>
+                    <option>SaaS / Dashboard</option>
+                    <option>API / Integration</option>
+                    <option>Maintenance</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="cMsg" class="form-label mono">details:</label>
+                  <textarea class="form-control" id="cMsg" name="message" rows="5" required minlength="10" placeholder="What are you building, and when do you need it?"></textarea>
+                  <div class="invalid-feedback">Please share a few details (10+ characters).</div>
+                </div>
+                <div class="col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
+                  <span class="mono contact-form__close">});</span>
+                  <button type="submit" class="btn btn-accent btn-lg magnetic"><span>Send message</span> <i class="bi bi-send"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__cta">Have an idea? <a href="#contact">Let's talk <i class="bi bi-arrow-up-right"></i></a></p>
+        <ul class="footer__links list-unstyled mono">
+          <li><a href="#about">about</a></li>
+          <li><a href="#services">services</a></li>
+          <li><a href="#work">work</a></li>
+          <li><a href="#clients">clients</a></li>
+          <li><a href="#reviews">reviews</a></li>
+          <li><a href="#faq">faq</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__brand logo" aria-hidden="true">abdur<span>Daily</span><i class="caret"></i></div>
+      <div class="footer__bottom mono">
+        <p class="mb-0">© <span class="js-year"></span> Abdur Rahman · abdurDaily</p>
+        <p class="mb-0">Dhaka · <span class="js-clock">--:--</span> GMT+6</p>
+        <a href="#home" class="back-top magnetic" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating quick-chat (appears after the hero) -->
+  <a class="float-chat" href="https://wa.me/8801000000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="bi bi-whatsapp"></i><span>Chat on WhatsApp</span>
+  </a>
+
+  <!-- Media viewer for client photos & video reviews -->
+  <div class="modal fade media-modal" id="mediaModal" tabindex="-1" aria-label="Media viewer" aria-hidden="true" data-lenis-prevent>
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <button type="button" class="media-modal__close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+        <div class="media-modal__stage"></div>
+        <p class="media-modal__caption mono"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
