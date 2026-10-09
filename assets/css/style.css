@@ -38,6 +38,12 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+/* Mobile browsers still allow sideways panning with overflow-x: hidden on body alone.
+   `clip` cuts overflow without creating a scroll container, so sticky/pinned elements keep working. */
+html, body { overflow-x: clip; }
+/* .g-5 rows use a 3rem gutter whose negative margins poke past the 0.75rem container
+   padding on phones; columns are stacked there anyway, so the horizontal gutter can shrink. */
+@media (max-width: 991.98px) { .row.g-5 { --bs-gutter-x: 1.5rem; } }
 /* faint paper grain */
 body::after {
   content: ""; position: fixed; inset: 0; z-index: 9997; pointer-events: none; opacity: .045;
@@ -161,11 +167,71 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 .nav-toggler span { display: block; height: 2px; background: var(--ink); border-radius: 2px; transition: transform .4s var(--ease); }
 .nav-toggler[aria-expanded="true"] span:first-child { transform: translateY(4.5px) rotate(45deg); }
 .nav-toggler[aria-expanded="true"] span:last-child { transform: translateY(-4.5px) rotate(-45deg); }
+.nav-mobile-foot { display: none; }
 @media (max-width: 991.98px) {
-  .site-nav.is-scrolled { background: rgba(245, 244, 239, .85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-  .site-nav > .container { padding-left: .75rem; }
-  .site-nav .navbar-collapse { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; margin-top: .8rem; box-shadow: var(--shadow); }
-  .site-nav .navbar-collapse .btn { width: 100%; margin-top: .5rem; }
+  /* Floating pill bar. Its glass background lives on ::before, because backdrop-filter on the
+     container itself would trap the position:fixed menu overlay inside the pill. */
+  .site-nav { padding: .75rem 0; }
+  .site-nav > .container {
+    position: relative; isolation: isolate; flex: 1 1 auto; width: auto; max-width: none; margin: 0 .75rem; padding: .35rem .35rem .35rem 1.1rem;
+  }
+  .site-nav > .container::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; border: 1px solid var(--line);
+    background: rgba(255, 255, 255, .78); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 16px 36px -22px rgba(18, 18, 16, .4); opacity: 0; transition: opacity .4s;
+  }
+  .site-nav.is-scrolled { padding: .6rem 0; }
+  /* any transform on .site-nav would become the fixed menu's containing block, so the open menu cancels the hide-on-scroll slide */
+  .site-nav.menu-open { transform: none; transition: none; }
+  .site-nav.is-scrolled > .container::before, .site-nav.menu-open > .container::before { opacity: 1; }
+  .site-nav .navbar-brand { font-size: 1.25rem; }
+
+  .nav-toggler { width: 44px; height: 44px; padding: 0 13px; gap: 6px; border-radius: 50%; background: var(--ink); transition: background-color .3s; }
+  .nav-toggler span { background: #fff; }
+  .nav-toggler[aria-expanded="true"] { background: var(--accent); }
+  .nav-toggler[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+  .nav-toggler[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+  /* Full-screen menu sheet. Bootstrap still toggles .show/.collapsing; we override its
+     height animation and wipe the sheet down with clip-path instead (state from .menu-open). */
+  .site-nav .navbar-collapse, .site-nav .navbar-collapse.collapsing {
+    display: flex !important; height: 100vh !important; height: 100dvh !important;
+    position: fixed; inset: 0; z-index: -2; flex-direction: column; align-items: stretch; overflow-y: auto;
+    padding: 5.6rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom)); background: var(--bg);
+    clip-path: inset(0 0 100% 0); visibility: hidden;
+    transition: clip-path .6s var(--ease), visibility 0s .6s;
+  }
+  .site-nav.menu-open .navbar-collapse { clip-path: inset(0); visibility: visible; transition: clip-path .6s var(--ease), visibility 0s; }
+  .site-nav .navbar-collapse > * { flex-shrink: 0; } /* short screens scroll the sheet instead of squashing it */
+
+  .site-nav .navbar-nav { counter-reset: nav; margin: 0 !important; border-top: 1px solid var(--line); }
+  .site-nav .nav-item { border-bottom: 1px solid var(--line); opacity: 0; translate: 0 18px; transition: opacity .4s, translate .6s var(--ease); }
+  .site-nav .nav-link {
+    display: flex; align-items: baseline; gap: 1rem; padding: .8rem 0 !important;
+    font-size: clamp(1.55rem, 7vw, 2rem); font-weight: 600; letter-spacing: -.04em; line-height: 1.15; color: var(--ink);
+  }
+  .site-nav .nav-link::before { counter-increment: nav; content: "0" counter(nav); font: 400 .72rem var(--mono); letter-spacing: 0; color: var(--accent); }
+  .site-nav .nav-link::after { display: none; }
+  .site-nav .nav-link.active { color: var(--accent); }
+  .site-nav .navbar-collapse > .btn { width: 100%; margin-top: 1.6rem; padding: .95rem 1.8rem; opacity: 0; translate: 0 18px; transition: opacity .4s, translate .6s var(--ease), color .35s; }
+  .nav-mobile-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 1rem; margin-top: auto; padding-top: 1.6rem; font-size: .78rem; color: var(--muted); opacity: 0; transition: opacity .5s; }
+  .nav-mobile-foot a { display: inline-flex; align-items: center; gap: .4rem; color: var(--ink); }
+  .nav-mobile-foot i { color: #25d366; font-size: 1rem; }
+
+  .site-nav.menu-open .nav-item, .site-nav.menu-open .navbar-collapse > .btn { opacity: 1; translate: 0 0; }
+  .site-nav.menu-open .nav-mobile-foot { opacity: 1; transition-delay: .5s; }
+  .site-nav.menu-open .nav-item:nth-child(1) { transition-delay: .12s; }
+  .site-nav.menu-open .nav-item:nth-child(2) { transition-delay: .16s; }
+  .site-nav.menu-open .nav-item:nth-child(3) { transition-delay: .2s; }
+  .site-nav.menu-open .nav-item:nth-child(4) { transition-delay: .24s; }
+  .site-nav.menu-open .nav-item:nth-child(5) { transition-delay: .28s; }
+  .site-nav.menu-open .nav-item:nth-child(6) { transition-delay: .32s; }
+  .site-nav.menu-open .nav-item:nth-child(7) { transition-delay: .36s; }
+  .site-nav.menu-open .navbar-collapse > .btn { transition-delay: .42s; }
+  html.menu-locked { overflow: hidden; }
+}
+@media (max-width: 991.98px) and (prefers-reduced-motion: reduce) {
+  .site-nav .navbar-collapse, .site-nav.menu-open .navbar-collapse, .site-nav .nav-item, .site-nav .navbar-collapse > .btn { transition: none !important; }
 }
 
 /* ---------- Section scaffolding ---------- */

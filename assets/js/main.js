@@ -20,6 +20,7 @@
 
   let lenis = null;
 
+  initMobileMenu();
   initContactForm();
   initCopyButtons();
   initMediaModal();
@@ -57,9 +58,10 @@
       const target = id.length > 1 && $(id);
       if (!target) return;
       e.preventDefault();
+      // close the menu first — it unlocks scrolling, which the scroll below needs
+      if (navCollapse.classList.contains('show')) bootstrap.Collapse.getOrCreateInstance(navCollapse).hide();
       if (lenis) lenis.scrollTo(target, { offset: id === '#home' ? 0 : -20 });
       else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-      if (navCollapse.classList.contains('show')) bootstrap.Collapse.getOrCreateInstance(navCollapse).hide();
     });
   });
 
@@ -542,6 +544,23 @@
         btn.classList.add('is-copied');
         setTimeout(() => { lbl.textContent = 'copy'; btn.classList.remove('is-copied'); }, 1800);
       });
+    });
+  }
+
+  // Mobile menu: full-screen sheet (CSS keys off .menu-open); page scroll is locked while it's open.
+  // Runs without GSAP too. `lenis` is read at event time, so it's whatever smooth-scroll instance exists by then.
+  function initMobileMenu() {
+    const menu = $('#mainNav');
+    const siteNav = $('.site-nav');
+    const lock = on => {
+      siteNav.classList.toggle('menu-open', on);
+      document.documentElement.classList.toggle('menu-locked', on);
+      if (on) lenis?.stop(); else lenis?.start();
+    };
+    menu.addEventListener('show.bs.collapse', () => lock(true));
+    menu.addEventListener('hide.bs.collapse', () => lock(false));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && menu.classList.contains('show')) bootstrap.Collapse.getOrCreateInstance(menu).hide();
     });
   }
 
