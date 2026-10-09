@@ -17,9 +17,10 @@
     "name": "Abdur Rahman",
     "alternateName": "abdurDaily",
     "jobTitle": "Full-Stack Web Developer",
+    "image": "assets/images/abdur-portrait.jpg",
     "knowsAbout": ["Laravel", "PHP", "Next.js", "React", "MySQL", "REST APIs"],
     "address": { "@type": "PostalAddress", "addressCountry": "BD" },
-    "email": "mailto:hello@yourdomain.com"
+    "email": "mailto:abdurdiary.dev@gmail.com"
   }
   </script>
 
@@ -66,6 +67,7 @@
           <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
           <li class="nav-item"><a class="nav-link" href="#clients">Clients</a></li>
           <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
         </ul>
         <a href="#contact" class="btn btn-ink magnetic"><span>Hire me</span> <i class="bi bi-arrow-up-right"></i></a>
       </div>
@@ -75,6 +77,7 @@
   <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero" id="home">
+      <div class="hero__bg" aria-hidden="true"><span class="hero__glow"></span></div>
       <div class="container position-relative">
         <div class="hero__top mono">
           <span class="pill"><span class="status__dot"></span> Available for new projects</span>
@@ -111,6 +114,11 @@
               <pre class="terminal__body mono" aria-label="Terminal showing a build and deploy workflow"><code class="js-terminal"></code><i class="terminal__cursor"></i></pre>
               <span class="chip chip--1 mono"><i class="devicon-laravel-original colored"></i> Laravel 11</span>
               <span class="chip chip--2 mono"><i class="devicon-nextjs-plain"></i> Next.js 15</span>
+              <dl class="hero-stats">
+                <div><dt class="mono">projects live</dt><dd>80+</dd></div>
+                <div><dt class="mono">years shipping</dt><dd>5+</dd></div>
+                <div><dt class="mono">reply time</dt><dd>&lt;12h</dd></div>
+              </dl>
             </div>
           </div>
         </div>
@@ -149,16 +157,17 @@
 
         <div class="row g-5 align-items-start">
           <div class="col-lg-5">
-            <!-- Replace the src with your own smiling photo, e.g. assets/img/abdur.jpg (portrait, ~900×1100) -->
+            <!-- 4:5 crop of assets/images/abdurDaily.png -->
             <figure class="portrait">
               <div class="img-reveal portrait__img" data-img-reveal>
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80" alt="Abdur Rahman smiling" loading="lazy" width="900" height="1100">
+                <img src="assets/images/abdur-portrait.jpg" alt="Abdur Rahman, full-stack web developer, in a navy blazer" loading="lazy" width="900" height="1125">
               </div>
               <span class="portrait__hello">Hi, I'm Abdur <span class="wave">👋</span></span>
-              <div class="portrait__badge" aria-hidden="true">
-                <svg viewBox="0 0 120 120"><defs><path id="badgeCircle" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><text><textPath href="#badgeCircle">abdurDaily • full-stack developer • </textPath></text></svg>
-                <span class="portrait__smile">😊</span>
-              </div>
+              <a href="#contact" class="portrait__badge" aria-label="Let's work together — go to contact">
+                <!-- textLength = path circumference (2π·45) so the words spread evenly with no gap at the seam -->
+                <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="badgeCircle" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><text><textPath href="#badgeCircle" textLength="282.7" lengthAdjust="spacing">let's work together ✦ abdurDaily ✦&#160;</textPath></text></svg>
+                <span class="portrait__arrow" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+              </a>
               <div class="portrait__card mono"><span class="status__dot"></span> usually replies in &lt; 12h</div>
               <figcaption class="mono">Abdur Rahman — Full-stack developer, Bangladesh</figcaption>
             </figure>
@@ -300,9 +309,9 @@
         </div>
         <div class="work__track">
           <article class="project" data-cursor-text="Let's talk">
-            <div class="project__img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="E-commerce checkout on a tablet" loading="lazy"></div>
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="E-commerce checkout on a tablet" loading="lazy"><span class="project__cat mono">E-commerce · USA</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
-              <div class="project__meta mono"><span>case_01</span><span>E-commerce · USA</span></div>
+              <div class="project__meta mono"><span>case_01</span></div>
               <h3>ShopNest — Multi-vendor Marketplace</h3>
               <p>Vendor dashboards, Stripe payouts and real-time inventory for hundreds of sellers.</p>
               <ul class="tags mono"><li>Laravel</li><li>Livewire</li><li>Stripe</li></ul>
@@ -311,9 +320,9 @@
             </div>
           </article>
           <article class="project" data-cursor-text="Let's talk">
-            <div class="project__img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80" alt="Healthcare professional using a digital tablet" loading="lazy"></div>
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80" alt="Healthcare professional using a digital tablet" loading="lazy"><span class="project__cat mono">SaaS · Healthcare</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
-              <div class="project__meta mono"><span>case_02</span><span>SaaS · Healthcare</span></div>
+              <div class="project__meta mono"><span>case_02</span></div>
               <h3>ClinicFlow — Appointment Platform</h3>
               <p>Multi-clinic booking, reminders and patient records with role-based access.</p>
               <ul class="tags mono"><li>Next.js</li><li>Laravel API</li><li>MySQL</li></ul>
@@ -322,9 +331,9 @@
             </div>
           </article>
           <article class="project" data-cursor-text="Let's talk">
-            <div class="project__img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Analytics dashboard with charts" loading="lazy"></div>
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Analytics dashboard with charts" loading="lazy"><span class="project__cat mono">Fintech · UK</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
-              <div class="project__meta mono"><span>case_03</span><span>Fintech · UK</span></div>
+              <div class="project__meta mono"><span>case_03</span></div>
               <h3>FinTrack — Analytics Dashboard</h3>
               <p>Interactive financial reporting with live charts, exports and team permissions.</p>
               <ul class="tags mono"><li>React</li><li>Node.js</li><li>Chart.js</li></ul>
@@ -333,9 +342,9 @@
             </div>
           </article>
           <article class="project" data-cursor-text="Let's talk">
-            <div class="project__img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Modern residential property" loading="lazy"></div>
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Modern residential property" loading="lazy"><span class="project__cat mono">Real estate · USA</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
-              <div class="project__meta mono"><span>case_04</span><span>Real estate · USA</span></div>
+              <div class="project__meta mono"><span>case_04</span></div>
               <h3>UrbanNest — Property Listings</h3>
               <p>Map search, lead capture and an agent CRM with fast server-rendered pages.</p>
               <ul class="tags mono"><li>Next.js</li><li>Laravel</li><li>Mapbox</li></ul>
@@ -344,9 +353,9 @@
             </div>
           </article>
           <article class="project" data-cursor-text="Let's talk">
-            <div class="project__img"><img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80" alt="Student studying online with a laptop" loading="lazy"></div>
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80" alt="Student studying online with a laptop" loading="lazy"><span class="project__cat mono">EdTech · Bangladesh</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
-              <div class="project__meta mono"><span>case_05</span><span>EdTech · Bangladesh</span></div>
+              <div class="project__meta mono"><span>case_05</span></div>
               <h3>Learnly — LMS Platform</h3>
               <p>Courses, quizzes, certificates and bKash / SSLCommerz payments.</p>
               <ul class="tags mono"><li>Laravel</li><li>Vue</li><li>SSLCommerz</li></ul>
@@ -538,12 +547,96 @@
       </div>
     </section>
 
+    <!-- ============ PRICING ============ -->
+    <!-- Starting prices are placeholders — edit the numbers in .plan__price to your own rates -->
+    <section class="section pricing" id="pricing">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="label mono" data-reveal><span>08</span> Pricing</p>
+            <h2 class="section-title" data-split>Clear starting <span class="hl">prices</span>.</h2>
+          </div>
+          <p class="section-desc" data-reveal>Every project is different, so these are starting points. You get a fixed, milestone-based quote after a free 20-minute call.</p>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+          <div class="col-md-6 col-xl-3" data-reveal>
+            <article class="plan">
+              <p class="plan__id mono">plan_01</p>
+              <h3 class="plan__name">Business website</h3>
+              <p class="plan__desc">A fast, polished site that makes your business look credible.</p>
+              <p class="plan__price"><span class="mono">from</span> $499</p>
+              <ul class="plan__list list-unstyled">
+                <li><i class="bi bi-check2"></i>Up to 7 responsive pages</li>
+                <li><i class="bi bi-check2"></i>Contact form &amp; WhatsApp chat</li>
+                <li><i class="bi bi-check2"></i>On-page SEO &amp; analytics</li>
+                <li><i class="bi bi-check2"></i>Easy content editing</li>
+              </ul>
+              <p class="plan__time mono"><i class="bi bi-clock"></i> ~1–2 weeks</p>
+              <a href="#contact" class="btn btn-line plan__cta" data-plan="Business website"><span>Get a quote</span> <i class="bi bi-arrow-up-right"></i></a>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3" data-reveal>
+            <article class="plan plan--featured">
+              <span class="plan__badge mono">most popular</span>
+              <p class="plan__id mono">plan_02</p>
+              <h3 class="plan__name">E-commerce store</h3>
+              <p class="plan__desc">Sell online with secure payments and an admin you'll actually enjoy.</p>
+              <p class="plan__price"><span class="mono">from</span> $1,499</p>
+              <ul class="plan__list list-unstyled">
+                <li><i class="bi bi-check2"></i>Products, cart &amp; checkout</li>
+                <li><i class="bi bi-check2"></i>Stripe, SSLCommerz or bKash</li>
+                <li><i class="bi bi-check2"></i>Orders &amp; inventory dashboard</li>
+                <li><i class="bi bi-check2"></i>Email notifications</li>
+              </ul>
+              <p class="plan__time mono"><i class="bi bi-clock"></i> ~3–5 weeks</p>
+              <a href="#contact" class="btn btn-accent plan__cta" data-plan="E-commerce store"><span>Get a quote</span> <i class="bi bi-arrow-up-right"></i></a>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3" data-reveal>
+            <article class="plan">
+              <p class="plan__id mono">plan_03</p>
+              <h3 class="plan__name">Web app / SaaS</h3>
+              <p class="plan__desc">Custom software built around how your business really works.</p>
+              <p class="plan__price"><span class="mono">from</span> $3,499</p>
+              <ul class="plan__list list-unstyled">
+                <li><i class="bi bi-check2"></i>Laravel API + Next.js front-end</li>
+                <li><i class="bi bi-check2"></i>Auth, roles &amp; permissions</li>
+                <li><i class="bi bi-check2"></i>Dashboards &amp; integrations</li>
+                <li><i class="bi bi-check2"></i>Tests, CI &amp; deployment</li>
+              </ul>
+              <p class="plan__time mono"><i class="bi bi-clock"></i> ~6+ weeks</p>
+              <a href="#contact" class="btn btn-line plan__cta" data-plan="Web app / SaaS"><span>Get a quote</span> <i class="bi bi-arrow-up-right"></i></a>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3" data-reveal>
+            <article class="plan">
+              <p class="plan__id mono">plan_04</p>
+              <h3 class="plan__name">Care plan</h3>
+              <p class="plan__desc">Keep your site fast, secure and up to date after launch.</p>
+              <p class="plan__price"><span class="mono">from</span> $99<small>/mo</small></p>
+              <ul class="plan__list list-unstyled">
+                <li><i class="bi bi-check2"></i>Updates &amp; security patches</li>
+                <li><i class="bi bi-check2"></i>Daily backups &amp; uptime checks</li>
+                <li><i class="bi bi-check2"></i>Small changes every month</li>
+                <li><i class="bi bi-check2"></i>Priority support</li>
+              </ul>
+              <p class="plan__time mono"><i class="bi bi-arrow-repeat"></i> cancel anytime</p>
+              <a href="#contact" class="btn btn-line plan__cta" data-plan="Care plan"><span>Get a quote</span> <i class="bi bi-arrow-up-right"></i></a>
+            </article>
+          </div>
+        </div>
+
+        <p class="pricing__note mono" data-reveal><i class="bi bi-info-circle"></i> Prices in USD · paid by milestone · no hidden costs · Need something custom? <a href="#contact">Let's talk</a></p>
+      </div>
+    </section>
+
     <!-- ============ FAQ ============ -->
     <section class="section faq-section" id="faq">
       <div class="container">
         <div class="row g-5">
           <div class="col-lg-5">
-            <p class="label mono" data-reveal><span>08</span> FAQ</p>
+            <p class="label mono" data-reveal><span>09</span> FAQ</p>
             <h2 class="section-title" data-split>Questions clients <span class="hl">ask</span> first.</h2>
             <p class="section-desc" data-reveal>Straight answers about pricing, time zones and ownership — so we can skip the guesswork and focus on your product.</p>
             <a href="#contact" class="btn btn-line mt-4 magnetic" data-reveal><span>Ask me anything</span> <i class="bi bi-arrow-up-right"></i></a>
@@ -585,18 +678,18 @@
       <div class="container">
         <div class="row g-5">
           <div class="col-lg-5">
-            <p class="label mono" data-reveal><span>09</span> Contact</p>
+            <p class="label mono" data-reveal><span>10</span> Contact</p>
             <h2 class="section-title" data-split>Let's ship your <span class="hl">next</span> project.</h2>
             <p class="section-desc" data-reveal>Tell me what you're building. I reply within 12 hours with honest feedback and next steps.</p>
 
             <div class="email-card" data-reveal>
               <span class="mono">email</span>
-              <a href="mailto:hello@yourdomain.com" class="email-card__link">hello@yourdomain.com</a>
-              <button type="button" class="copy-btn mono" data-copy="hello@yourdomain.com"><i class="bi bi-clipboard"></i> <span>copy</span></button>
+              <a href="mailto:abdurdiary.dev@gmail.com" class="email-card__link">abdurdiary.dev@gmail.com</a>
+              <button type="button" class="copy-btn mono" data-copy="abdurdiary.dev@gmail.com"><i class="bi bi-clipboard"></i> <span>copy</span></button>
             </div>
 
             <ul class="contact-list list-unstyled" data-reveal>
-              <li><i class="bi bi-whatsapp"></i><a href="https://wa.me/8801000000000" target="_blank" rel="noopener">+880 1000-000000</a></li>
+              <li><i class="bi bi-whatsapp"></i><a href="https://wa.me/8801632212661" target="_blank" rel="noopener">+880 1632-212661</a></li>
               <li><i class="bi bi-geo-alt"></i><span>Bangladesh · Remote worldwide</span></li>
             </ul>
             <div class="socials" data-reveal>
@@ -608,7 +701,7 @@
           </div>
 
           <div class="col-lg-7">
-            <form class="contact-form needs-validation" novalidate data-reveal data-email="hello@yourdomain.com">
+            <form class="contact-form needs-validation" novalidate data-reveal data-email="abdurdiary.dev@gmail.com">
               <div class="contact-form__head mono"><span>new Project({</span><span class="text-end">// all fields stay private</span></div>
               <div class="row g-3">
                 <div class="col-md-6">
@@ -621,24 +714,10 @@
                   <input type="email" class="form-control" id="cEmail" name="email" required autocomplete="email" placeholder="jane@company.com">
                   <div class="invalid-feedback">Please enter a valid email.</div>
                 </div>
-                <div class="col-md-6">
-                  <label for="cBudget" class="form-label mono">budget:</label>
-                  <select class="form-select" id="cBudget" name="budget">
-                    <option>Under $1,000</option>
-                    <option selected>$1,000 – $5,000</option>
-                    <option>$5,000 – $15,000</option>
-                    <option>$15,000+</option>
-                  </select>
-                </div>
-                <div class="col-md-6">
-                  <label for="cType" class="form-label mono">type:</label>
-                  <select class="form-select" id="cType" name="type">
-                    <option>Web application</option>
-                    <option>E-commerce</option>
-                    <option>SaaS / Dashboard</option>
-                    <option>API / Integration</option>
-                    <option>Maintenance</option>
-                  </select>
+                <div class="col-12">
+                  <label for="cPhone" class="form-label mono">phone: <span class="form-optional">// optional, WhatsApp works too</span></label>
+                  <input type="tel" class="form-control" id="cPhone" name="phone" autocomplete="tel" inputmode="tel" pattern="[0-9+()\-\s]{6,20}" placeholder="+1 555 123 4567">
+                  <div class="invalid-feedback">Please enter a valid phone number.</div>
                 </div>
                 <div class="col-12">
                   <label for="cMsg" class="form-label mono">details:</label>
@@ -668,8 +747,10 @@
           <li><a href="#work">work</a></li>
           <li><a href="#clients">clients</a></li>
           <li><a href="#reviews">reviews</a></li>
+          <li><a href="#pricing">pricing</a></li>
           <li><a href="#faq">faq</a></li>
           <li><a href="#contact">contact</a></li>
+          <li><a href="https://my.exonhost.com/affiliate?aff=5910" target="_blank" rel="sponsored noopener" title="My recommended hosting: ExonHost">hosting <i class="bi bi-arrow-up-right"></i></a></li>
         </ul>
       </div>
       <div class="footer__brand logo" aria-hidden="true">abdur<span>Daily</span><i class="caret"></i></div>
@@ -682,8 +763,9 @@
   </footer>
 
   <!-- Floating quick-chat (appears after the hero) -->
-  <a class="float-chat" href="https://wa.me/8801000000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <i class="bi bi-whatsapp"></i><span>Chat on WhatsApp</span>
+  <a class="float-chat" href="https://wa.me/8801632212661" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span class="float-chat__icon" aria-hidden="true"><i class="bi bi-whatsapp"></i><span class="float-chat__dot"></span></span>
+    <span class="float-chat__text"><strong>Chat on WhatsApp</strong><small class="mono">usually replies in &lt; 12h</small></span>
   </a>
 
   <!-- Media viewer for client photos & video reviews -->

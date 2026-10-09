@@ -145,7 +145,8 @@
   ------------------------------------------------------------------ */
   const heroWords = splitWords($('[data-hero-split]'));
   gsap.set(heroWords, { yPercent: 115 });
-  gsap.set(['.hero__top', '.hero__kicker', '.hero__sub', '.hero__cta', '.hero__trust'], { autoAlpha: 0, y: 24 });
+  gsap.set(['.hero__top', '.hero__kicker', '.hero__sub', '.hero__cta', '.hero__trust', '.hero-stats'], { autoAlpha: 0, y: 24 });
+  gsap.set('.hero__glow', { autoAlpha: 0, scale: .6 });
   const heroHl = $$('.hero__title .hl');
   gsap.set(heroHl, { backgroundSize: '0% 30%' });
   gsap.set('.terminal', { autoAlpha: 0, y: 50 });
@@ -162,7 +163,23 @@
       .to('.hero__trust', { autoAlpha: 1, y: 0 }, '-=.85')
       .from('.avatars span', { x: -14, autoAlpha: 0, duration: .6, stagger: .07 }, '<')
       .to('.terminal', { autoAlpha: 1, y: 0, duration: 1.2, onStart: () => (reduceMotion ? renderTerminalStatic() : runTerminal()) }, '-=1.3')
-      .to('.chip', { autoAlpha: 1, scale: 1, duration: .7, stagger: .15, ease: 'back.out(2)' }, '-=.7');
+      .to('.chip', { autoAlpha: 1, scale: 1, duration: .7, stagger: .15, ease: 'back.out(2)' }, '-=.7')
+      .to('.hero__glow', { autoAlpha: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, '<-.6')
+      .to('.hero-stats', { autoAlpha: 1, y: 0, duration: .8 }, '-=1.2')
+      .from('.float-chat', { scale: 0, autoAlpha: 0, duration: .8, ease: 'back.out(2.2)', clearProps: 'transform,opacity,visibility' }, '-=.6');
+  }
+
+  // the accent glow drifts gently toward the pointer while it's over the hero
+  if (finePointer && !reduceMotion) {
+    const hero = $('.hero');
+    const glowX = gsap.quickTo('.hero__glow', 'x', { duration: 1.4, ease: 'power3' });
+    const glowY = gsap.quickTo('.hero__glow', 'y', { duration: 1.4, ease: 'power3' });
+    hero.addEventListener('mousemove', e => {
+      const r = hero.getBoundingClientRect();
+      glowX((e.clientX - r.left - r.width / 2) * .08);
+      glowY((e.clientY - r.top - r.height / 2) * .08);
+    });
+    hero.addEventListener('mouseleave', () => { glowX(0); glowY(0); });
   }
 
   const bootMsgs = ['booting portfolio…', 'loading assets…', 'compiling styles…', 'ready ✓'];
@@ -453,13 +470,9 @@
     });
   }
 
-  /* Floating chat: visible after the hero, hidden while the contact section is on screen */
+  /* Floating chat: always on (CSS), hidden only while the contact section is on screen */
   const chat = $('.float-chat');
-  let pastHero = false;
-  let atContact = false;
-  const syncChat = () => chat.classList.toggle('is-visible', pastHero && !atContact);
-  ScrollTrigger.create({ trigger: '.hero', start: 'bottom 40%', end: 'max', onToggle: self => { pastHero = self.isActive; syncChat(); } });
-  ScrollTrigger.create({ trigger: '#contact', start: 'top 80%', end: 'max', onToggle: self => { atContact = self.isActive; syncChat(); } });
+  ScrollTrigger.create({ trigger: '#contact', start: 'top 80%', end: 'max', onToggle: self => chat.classList.toggle('is-hidden', self.isActive) });
 
   /* FAQ open/close changes page height — keep scroll positions accurate */
   $$('.faq .collapse').forEach(panel => {
@@ -537,18 +550,26 @@
   function initContactForm() {
     const form = $('.contact-form');
     if (!form) return;
+
+    // Pricing "Get a quote" buttons start the message for the visitor — unless they've already written their own
+    const msg = $('#cMsg');
+    $$('[data-plan]').forEach(btn => btn.addEventListener('click', () => {
+      if (msg.value.trim() && msg.value !== msg.dataset.prefill) return;
+      msg.value = msg.dataset.prefill = `Hi Abdur, I'm interested in the ${btn.dataset.plan} package. `;
+      setTimeout(() => msg.focus({ preventScroll: true }), 1200);
+    }));
+
     form.addEventListener('submit', e => {
       e.preventDefault();
       form.classList.add('was-validated');
       if (!form.checkValidity()) return;
 
       const data = new FormData(form);
-      const subject = `New project inquiry — ${data.get('type')}`;
+      const subject = `New project inquiry — ${data.get('name')}`;
       const body = [
         `Name: ${data.get('name')}`,
         `Email: ${data.get('email')}`,
-        `Budget: ${data.get('budget')}`,
-        `Project type: ${data.get('type')}`,
+        `Phone: ${data.get('phone') || '—'}`,
         '',
         data.get('message')
       ].join('\n');
