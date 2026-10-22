@@ -9,6 +9,7 @@
   <meta property="og:title" content="abdurDaily — Full-Stack Web Developer">
   <meta property="og:description" content="Laravel · PHP · Next.js · React. Web software that businesses rely on.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://gitasangha.org/assets/images/email-signature/profile-pic.png">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121210'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='30' fill='%23ff5a1f'%3EaD%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
   {
@@ -17,7 +18,7 @@
     "name": "Abdur Rahman",
     "alternateName": "abdurDaily",
     "jobTitle": "Full-Stack Web Developer",
-    "image": "assets/images/abdur-portrait.jpg",
+    "image": "https://gitasangha.org/assets/images/email-signature/profile-pic.png",
     "knowsAbout": ["Laravel", "PHP", "Next.js", "React", "MySQL", "REST APIs"],
     "address": { "@type": "PostalAddress", "addressCountry": "BD" },
     "email": "mailto:abdurdiary.dev@gmail.com"
@@ -26,7 +27,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" rel="stylesheet">
@@ -83,13 +84,12 @@
     <section class="hero" id="home">
       <div class="hero__bg" aria-hidden="true"><span class="hero__glow"></span></div>
       <div class="container position-relative">
-        <div class="hero__top mono">
-          <span class="pill"><span class="status__dot"></span> Available for new projects</span>
-          <span class="pill"><i class="bi bi-clock"></i> Dhaka · <span class="js-clock">--:--</span></span>
-        </div>
-
         <div class="row align-items-center g-5">
           <div class="col-lg-7">
+            <div class="hero__top mono">
+              <span class="pill"><span class="status__dot"></span> Available for new projects</span>
+              <span class="pill"><i class="bi bi-clock"></i> Dhaka · <span class="js-clock">--:--</span></span>
+            </div>
             <p class="kicker mono hero__kicker">// full-stack web developer</p>
             <h1 class="hero__title" data-hero-split>I engineer web products that <span class="hl">scale</span> with your business.</h1>
             <p class="hero__sub">
@@ -109,20 +109,26 @@
             </div>
           </div>
 
-          <div class="col-lg-5">
-            <div class="terminal" data-tilt>
-              <div class="terminal__bar">
-                <span></span><span></span><span></span>
-                <em class="mono">~/clients/new-project — zsh</em>
+          <div class="col-lg-5 order-first order-lg-last">
+            <!-- portrait inside an orbit of the stack; icons ride the ring and stay upright -->
+            <div class="hero-visual">
+              <div class="orbit" aria-hidden="true">
+                <span class="orbit__ring"></span>
+                <span class="orbit__ring orbit__ring--inner"></span>
+                <div class="orbit__spin">
+                  <span class="orbit__arm" style="--a:0deg"><span class="orbit__icon"><i class="devicon-laravel-original colored"></i></span></span>
+                  <span class="orbit__arm" style="--a:60deg"><span class="orbit__icon"><i class="devicon-php-plain colored"></i></span></span>
+                  <span class="orbit__arm" style="--a:120deg"><span class="orbit__icon"><i class="devicon-nextjs-plain"></i></span></span>
+                  <span class="orbit__arm" style="--a:180deg"><span class="orbit__icon"><i class="devicon-react-original colored"></i></span></span>
+                  <span class="orbit__arm" style="--a:240deg"><span class="orbit__icon"><i class="devicon-mysql-original colored"></i></span></span>
+                  <span class="orbit__arm" style="--a:300deg"><span class="orbit__icon"><i class="devicon-tailwindcss-original colored"></i></span></span>
+                </div>
               </div>
-              <pre class="terminal__body mono" aria-label="Terminal showing a build and deploy workflow"><code class="js-terminal"></code><i class="terminal__cursor"></i></pre>
-              <span class="chip chip--1 mono"><i class="devicon-laravel-original colored"></i> Laravel 11</span>
-              <span class="chip chip--2 mono"><i class="devicon-nextjs-plain"></i> Next.js 15</span>
-              <dl class="hero-stats">
-                <div><dt class="mono">projects live</dt><dd>80+</dd></div>
-                <div><dt class="mono">years shipping</dt><dd>5+</dd></div>
-                <div><dt class="mono">reply time</dt><dd>&lt;12h</dd></div>
-              </dl>
+              <figure class="hero-photo">
+                <img src="https://gitasangha.org/assets/images/email-signature/profile-pic.png" alt="Abdur Rahman, full-stack web developer" width="1024" height="1024" fetchpriority="high">
+              </figure>
+              <div class="hero-tag mono"><span class="status__dot"></span><span><strong>Abdur Rahman</strong>Full-stack developer · Dhaka</span></div>
+              <div class="hero-badge"><strong>5+</strong><span class="mono">years<br>shipping</span></div>
             </div>
           </div>
         </div>
@@ -151,39 +157,45 @@
       </div>
     </section>
 
+    <!-- ============ MISSION (words light up as you scroll) ============ -->
+    <section class="section mission" aria-label="Mission">
+      <div class="container">
+        <p class="label mono" data-reveal><span>~</span> Mission</p>
+        <p class="mission__text" data-scrub-words>Every line of code is a promise. I make mine count. Not flashier, just sturdier. Products that feel simple, engineered so they never let your business down.</p>
+      </div>
+    </section>
+
     <!-- ============ ABOUT ============ -->
     <section class="section about" id="about">
       <div class="container">
-        <div class="section-head">
-          <p class="label mono" data-reveal><span>01</span> About</p>
-          <h2 class="section-title" data-split>A developer who thinks like a <span class="hl">product owner</span>.</h2>
+        <div class="section-head section-head--split">
+          <div>
+            <p class="label mono" data-reveal><span>01</span> About</p>
+            <h2 class="section-title" data-split>A developer who thinks like a <span class="hl">product owner</span>.</h2>
+          </div>
+          <p class="about__lead" data-reveal>
+            Clients don't hire me to write code — they hire me to <strong>solve business problems</strong>.
+            One accountable engineer instead of a chain of freelancers.
+          </p>
         </div>
 
-        <div class="row g-5 align-items-start">
-          <div class="col-lg-5">
-            <!-- 4:5 crop of assets/images/abdurDaily.png -->
-            <figure class="portrait">
-              <div class="img-reveal portrait__img" data-img-reveal>
-                <img src="assets/images/abdur-portrait.jpg" alt="Abdur Rahman, full-stack web developer, in a navy blazer" loading="lazy" width="900" height="1125">
-              </div>
-              <span class="portrait__hello">Hi, I'm Abdur <span class="wave">👋</span></span>
-              <a href="#contact" class="portrait__badge" aria-label="Let's work together — go to contact">
-                <!-- textLength = path circumference (2π·45) so the words spread evenly with no gap at the seam -->
-                <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="badgeCircle" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><text><textPath href="#badgeCircle" textLength="282.7" lengthAdjust="spacing">let's work together ✦ abdurDaily ✦&#160;</textPath></text></svg>
-                <span class="portrait__arrow" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
-              </a>
-              <div class="portrait__card mono"><span class="status__dot"></span> usually replies in &lt; 12h</div>
-              <figcaption class="mono">Abdur Rahman — Full-stack developer, Bangladesh</figcaption>
-            </figure>
+        <!-- bento: terminal · profile · numbers · lifecycle · local time -->
+        <div class="bento">
+          <div class="terminal bento__term" data-reveal>
+            <div class="terminal__bar">
+              <span></span><span></span><span></span>
+              <em class="mono">~/clients/new-project — zsh</em>
+            </div>
+            <pre class="terminal__body mono" aria-label="Terminal showing a build and deploy workflow"><code class="js-terminal"></code><i class="terminal__cursor"></i></pre>
+            <div class="terminal__status mono" aria-hidden="true">
+              <span><i class="bi bi-git"></i> main</span>
+              <span><i class="devicon-laravel-original colored"></i> Laravel 11</span>
+              <span><i class="devicon-nextjs-plain"></i> Next.js 15</span>
+              <span class="ok">● all checks passing</span>
+            </div>
           </div>
-          <div class="col-lg-7">
-            <p class="about__lead" data-reveal>
-              Clients don't hire me to write code — they hire me to <strong>solve business problems</strong>.
-              I own the full lifecycle: architecture, back-end, front-end, deployment and support. One accountable
-              engineer instead of a chain of freelancers.
-            </p>
 
-            <div class="config" data-reveal>
+          <div class="config bento__config" data-reveal>
               <div class="config__head mono"><span><i class="bi bi-file-earmark-code"></i> profile.config</span><span>yaml</span></div>
               <dl class="config__body mono">
                 <div><dt>name</dt><dd>"Abdur Rahman"</dd></div>
@@ -194,14 +206,28 @@
                 <div><dt>values</dt><dd>[clean_code, clear_updates, on_time]</dd></div>
                 <div><dt>status</dt><dd class="ok">open_to_work ●</dd></div>
               </dl>
-            </div>
+          </div>
 
-            <div class="row g-3 about__counts">
-              <div class="col-6 col-md-3" data-reveal><strong><span data-count="5">0</span>+</strong><span>years experience</span></div>
-              <div class="col-6 col-md-3" data-reveal><strong><span data-count="80">0</span>+</strong><span>projects shipped</span></div>
-              <div class="col-6 col-md-3" data-reveal><strong><span data-count="40">0</span>+</strong><span>happy clients</span></div>
-              <div class="col-6 col-md-3" data-reveal><strong><span data-count="6">0</span></strong><span>countries served</span></div>
-            </div>
+          <div class="bento__card bento__counts" data-reveal>
+            <div><strong><span data-count="5">0</span>+</strong><span>years experience</span></div>
+            <div><strong><span data-count="80">0</span>+</strong><span>projects shipped</span></div>
+            <div><strong><span data-count="40">0</span>+</strong><span>happy clients</span></div>
+            <div><strong><span data-count="6">0</span></strong><span>countries served</span></div>
+          </div>
+
+          <div class="bento__card bento__flow" data-reveal>
+            <p class="bento__kicker mono">// one engineer, full lifecycle</p>
+            <h3>From idea to production — <span>and long after.</span></h3>
+            <ol class="flow mono">
+              <li>Strategy</li><li>Architecture</li><li>Back-end</li><li>Front-end</li><li>Deploy</li><li>Support</li>
+            </ol>
+          </div>
+
+          <div class="bento__card bento__place" data-reveal>
+            <p class="bento__kicker mono">// based in Dhaka · GMT+6</p>
+            <p class="place__time"><span class="js-clock">--:--</span></p>
+            <p class="place__note">Overlapping hours with US &amp; EU teams, and a written update every working day.</p>
+            <ul class="place__tags list-unstyled mono"><li>🇺🇸 USA</li><li>🇬🇧 UK</li><li>🇧🇩 Bangladesh</li><li>🌍 worldwide</li></ul>
           </div>
         </div>
       </div>
@@ -259,6 +285,39 @@
       </div>
     </section>
 
+    <!-- ============ INDUSTRIES (fanned cards — each one filters the work grid) ============ -->
+    <section class="section industries" id="industries" aria-labelledby="industriesTitle">
+      <div class="container">
+        <div class="fan">
+          <a href="#work" class="fan-card" data-filter-link="ecommerce" data-cursor-text="View work" style="--r:-7deg; --ty:0rem">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy">
+            <span class="fan-card__icon" aria-hidden="true"><i class="bi bi-bag"></i></span>
+            <span class="fan-card__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+            <span class="fan-card__body"><strong>E-commerce</strong><span class="mono">stores · marketplaces</span></span>
+          </a>
+          <a href="#work" class="fan-card" data-filter-link="saas" data-cursor-text="View work" style="--r:4deg; --ty:2.5rem">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy">
+            <span class="fan-card__icon" aria-hidden="true"><i class="bi bi-bar-chart-line"></i></span>
+            <span class="fan-card__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+            <span class="fan-card__body"><strong>SaaS</strong><span class="mono">dashboards · fintech</span></span>
+          </a>
+          <a href="#work" class="fan-card" data-filter-link="realestate" data-cursor-text="View work" style="--r:-3deg; --ty:-.5rem">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy">
+            <span class="fan-card__icon" aria-hidden="true"><i class="bi bi-house"></i></span>
+            <span class="fan-card__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+            <span class="fan-card__body"><strong>Real Estate</strong><span class="mono">listings · CRM</span></span>
+          </a>
+          <a href="#work" class="fan-card" data-filter-link="edtech" data-cursor-text="View work" style="--r:6deg; --ty:2rem">
+            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy">
+            <span class="fan-card__icon" aria-hidden="true"><i class="bi bi-mortarboard"></i></span>
+            <span class="fan-card__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+            <span class="fan-card__body"><strong>Education</strong><span class="mono">LMS · courses</span></span>
+          </a>
+        </div>
+        <h2 class="industries__title" id="industriesTitle" data-split>Software that stops the guesswork and starts the <span class="hl">growth</span>.</h2>
+      </div>
+    </section>
+
     <!-- ============ STACK ============ -->
     <section class="section stack" id="stack">
       <div class="container">
@@ -301,19 +360,42 @@
       </div>
     </section>
 
+    <!-- ============ OUTLINE BAND ============ -->
+    <section class="outline-band" aria-label="What I build">
+      <div class="marquee" data-direction="right">
+        <div class="marquee__track">
+          <div class="marquee__group">
+            <span class="outline-word">Web apps</span><span class="outline-sep" aria-hidden="true"></span>
+            <span class="outline-word">E-commerce</span><span class="outline-sep" aria-hidden="true"></span>
+            <span class="outline-word">SaaS</span><span class="outline-sep" aria-hidden="true"></span>
+            <span class="outline-word">APIs</span><span class="outline-sep" aria-hidden="true"></span>
+            <span class="outline-word">Dashboards</span><span class="outline-sep" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ WORK ============ -->
-    <section class="work" id="work">
-      <div class="container work__inner">
+    <!-- Each project's data-cat must match a filter button's data-filter (and a fan card's data-filter-link) -->
+    <section class="section work" id="work">
+      <div class="container">
         <div class="work__head section-head--split">
           <div>
             <p class="label mono" data-reveal><span>04</span> Selected work</p>
             <h2 class="section-title" data-split>Products I've <span class="hl">shipped</span>.</h2>
           </div>
-          <p class="section-desc d-none d-lg-block" data-reveal>Scroll to explore — a few recent builds across e-commerce, SaaS, fintech and education.</p>
+          <p class="section-desc" data-reveal>Four industries, one standard — fast, secure and built to last.</p>
+        </div>
+        <div class="work-filters" role="group" aria-label="Filter projects" data-reveal>
+          <button type="button" class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter" data-filter="ecommerce" aria-pressed="false">E-commerce</button>
+          <button type="button" class="filter" data-filter="saas" aria-pressed="false">SaaS</button>
+          <button type="button" class="filter" data-filter="realestate" aria-pressed="false">Real Estate</button>
+          <button type="button" class="filter" data-filter="edtech" aria-pressed="false">Education</button>
         </div>
         <div class="work__track">
-          <article class="project" data-cursor-text="Let's talk">
-            <div class="project__img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="E-commerce checkout on a tablet" loading="lazy"><span class="project__cat mono">E-commerce · USA</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
+          <article class="project" data-cat="ecommerce" data-cursor-text="Let's talk">
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="E-commerce checkout on a tablet" loading="lazy"><span class="project__cat mono">E-commerce · USA</span><span class="project__star mono">★ Featured</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
               <div class="project__meta mono"><span>case_01</span></div>
               <h3>ShopNest — Multi-vendor Marketplace</h3>
@@ -323,7 +405,7 @@
               <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
             </div>
           </article>
-          <article class="project" data-cursor-text="Let's talk">
+          <article class="project" data-cat="saas" data-cursor-text="Let's talk">
             <div class="project__img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80" alt="Healthcare professional using a digital tablet" loading="lazy"><span class="project__cat mono">SaaS · Healthcare</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
               <div class="project__meta mono"><span>case_02</span></div>
@@ -334,8 +416,8 @@
               <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
             </div>
           </article>
-          <article class="project" data-cursor-text="Let's talk">
-            <div class="project__img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Analytics dashboard with charts" loading="lazy"><span class="project__cat mono">Fintech · UK</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
+          <article class="project" data-cat="saas" data-cursor-text="Let's talk">
+            <div class="project__img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Analytics dashboard with charts" loading="lazy"><span class="project__cat mono">Fintech · UK</span><span class="project__star mono">★ Featured</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
               <div class="project__meta mono"><span>case_03</span></div>
               <h3>FinTrack — Analytics Dashboard</h3>
@@ -345,7 +427,7 @@
               <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
             </div>
           </article>
-          <article class="project" data-cursor-text="Let's talk">
+          <article class="project" data-cat="realestate" data-cursor-text="Let's talk">
             <div class="project__img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Modern residential property" loading="lazy"><span class="project__cat mono">Real estate · USA</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
               <div class="project__meta mono"><span>case_04</span></div>
@@ -356,7 +438,7 @@
               <a href="#contact" class="project__link stretched-link mono">Build something similar <i class="bi bi-arrow-right"></i></a>
             </div>
           </article>
-          <article class="project" data-cursor-text="Let's talk">
+          <article class="project" data-cat="edtech" data-cursor-text="Let's talk">
             <div class="project__img"><img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80" alt="Student studying online with a laptop" loading="lazy"><span class="project__cat mono">EdTech · Bangladesh</span><span class="project__go" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span></div>
             <div class="project__body">
               <div class="project__meta mono"><span>case_05</span></div>
@@ -372,11 +454,6 @@
             <h3>Your product<br>could be next.</h3>
             <a href="#contact" class="btn btn-accent btn-lg magnetic"><span>Start a project</span> <i class="bi bi-arrow-up-right"></i></a>
           </div>
-        </div>
-        <div class="work__progress mono" aria-hidden="true">
-          <span class="js-work-count">01</span>
-          <div class="work__bar"><span></span></div>
-          <span>06</span>
         </div>
       </div>
     </section>
@@ -680,11 +757,20 @@
     <!-- ============ CONTACT ============ -->
     <section class="section contact" id="contact">
       <div class="container">
+        <div class="cta-banner" data-reveal>
+          <span class="cta-banner__bg" aria-hidden="true"></span>
+          <p class="cta-banner__label mono">10 — Get in touch</p>
+          <h2 class="cta-banner__title">Let's build something <em>people remember.</em></h2>
+          <p class="cta-banner__sub">I'm always open to new projects. Message me and I reply within 12 hours with honest feedback and next steps.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="https://wa.me/8801632212661" target="_blank" rel="noopener" class="btn btn-lg btn-cream magnetic"><span>Chat on WhatsApp</span> <span class="btn-dot" aria-hidden="true"><i class="bi bi-arrow-right"></i></span></a>
+            <a href="mailto:abdurdiary.dev@gmail.com" class="btn btn-lg btn-glass magnetic"><span>Email me</span></a>
+          </div>
+        </div>
+
         <div class="row g-5">
           <div class="col-lg-5">
-            <p class="label mono" data-reveal><span>10</span> Contact</p>
-            <h2 class="section-title" data-split>Let's ship your <span class="hl">next</span> project.</h2>
-            <p class="section-desc" data-reveal>Tell me what you're building. I reply within 12 hours with honest feedback and next steps.</p>
+            <p class="section-desc" data-reveal>Prefer to write it all down? Send the details — what you're building and when you need it.</p>
 
             <div class="email-card" data-reveal>
               <span class="mono">email</span>
@@ -745,7 +831,10 @@
     <div class="container">
       <div class="footer__top">
         <p class="footer__cta">Have an idea? <a href="#contact">Let's talk <i class="bi bi-arrow-up-right"></i></a></p>
-        <ul class="footer__links list-unstyled mono">
+        <a href="#home" class="back-top magnetic" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+      </div>
+      <div class="footer__nav mono">
+        <ul class="footer__links list-unstyled">
           <li><a href="#about">about</a></li>
           <li><a href="#services">services</a></li>
           <li><a href="#work">work</a></li>
@@ -756,12 +845,15 @@
           <li><a href="#contact">contact</a></li>
           <li><a href="https://my.exonhost.com/affiliate?aff=5910" target="_blank" rel="sponsored noopener" title="My recommended hosting: ExonHost">hosting <i class="bi bi-arrow-up-right"></i></a></li>
         </ul>
+        <p class="mb-0">Dhaka · <span class="js-clock">--:--</span> local</p>
       </div>
-      <div class="footer__brand logo" aria-hidden="true">abdur<span>Daily</span><i class="caret"></i></div>
+    </div>
+    <!-- spotlight follows the cursor (drifts on its own on touch screens) -->
+    <div class="footer__brand logo" aria-hidden="true">abdur<span>Daily</span><i class="caret"></i></div>
+    <div class="container">
       <div class="footer__bottom mono">
-        <p class="mb-0">© <span class="js-year"></span> Abdur Rahman · abdurDaily</p>
-        <p class="mb-0">Dhaka · <span class="js-clock">--:--</span> GMT+6</p>
-        <a href="#home" class="back-top magnetic" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+        <p class="mb-0">© <span class="js-year"></span> Abdur Rahman · <a href="#home">abdurDaily</a></p>
+        <p class="mb-0">That's a wrap. git push? <span class="footer__inf">∞</span></p>
       </div>
     </div>
   </footer>
@@ -786,6 +878,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

@@ -24,6 +24,7 @@
   initContactForm();
   initCopyButtons();
   initMediaModal();
+  initWorkFilter();
 
   if (!window.gsap || !window.ScrollTrigger) {
     $('.preloader')?.remove();
@@ -147,12 +148,14 @@
   ------------------------------------------------------------------ */
   const heroWords = splitWords($('[data-hero-split]'));
   gsap.set(heroWords, { yPercent: 115 });
-  gsap.set(['.hero__top', '.hero__kicker', '.hero__sub', '.hero__cta', '.hero__trust', '.hero-stats'], { autoAlpha: 0, y: 24 });
+  gsap.set(['.hero__top', '.hero__kicker', '.hero__sub', '.hero__cta', '.hero__trust'], { autoAlpha: 0, y: 24 });
   gsap.set('.hero__glow', { autoAlpha: 0, scale: .6 });
   const heroHl = $$('.hero__title .hl');
   gsap.set(heroHl, { backgroundSize: '0% 30%' });
-  gsap.set('.terminal', { autoAlpha: 0, y: 50 });
-  gsap.set('.chip', { autoAlpha: 0, scale: .6 });
+  gsap.set('.hero-photo', { clipPath: 'circle(0% at 50% 50%)' });
+  gsap.set('.orbit__ring', { autoAlpha: 0, scale: .7 });
+  gsap.set('.orbit__icon', { autoAlpha: 0 }); // opacity only — their transform belongs to the CSS orbit
+  gsap.set(['.hero-tag', '.hero-badge'], { autoAlpha: 0, scale: .6 });
 
   function heroIntro() {
     return gsap.timeline()
@@ -164,25 +167,47 @@
       .to('.hero__cta', { autoAlpha: 1, y: 0 }, '-=.85')
       .to('.hero__trust', { autoAlpha: 1, y: 0 }, '-=.85')
       .from('.avatars span', { x: -14, autoAlpha: 0, duration: .6, stagger: .07 }, '<')
-      .to('.terminal', { autoAlpha: 1, y: 0, duration: 1.2, onStart: () => (reduceMotion ? renderTerminalStatic() : runTerminal()) }, '-=1.3')
-      .to('.chip', { autoAlpha: 1, scale: 1, duration: .7, stagger: .15, ease: 'back.out(2)' }, '-=.7')
+      // portrait: circular iris-open, then the orbit draws in around it
+      .to('.hero-photo', { clipPath: 'circle(50% at 50% 50%)', duration: 1.4, ease: 'power4.inOut', clearProps: 'clipPath' }, 0.2)
+      .from('.hero-photo img', { scale: 1.35, duration: 1.8, ease: 'power3.out' }, '<')
+      .to('.orbit__ring', { autoAlpha: 1, scale: 1, duration: 1.2, stagger: .12 }, '<.5')
+      .to('.orbit__icon', { autoAlpha: 1, duration: .5, stagger: .08 }, '<.3')
+      .to(['.hero-tag', '.hero-badge'], { autoAlpha: 1, scale: 1, duration: .8, stagger: .15, ease: 'back.out(1.8)' }, '<.2')
       .to('.hero__glow', { autoAlpha: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, '<-.6')
-      .to('.hero-stats', { autoAlpha: 1, y: 0, duration: .8 }, '-=1.2')
+      .add(() => {
+        if (reduceMotion) return;
+        gsap.to('.hero-tag', { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+        gsap.to('.hero-badge', { y: 10, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      })
       .from('.float-chat', { scale: 0, autoAlpha: 0, duration: .8, ease: 'back.out(2.2)', clearProps: 'transform,opacity,visibility' }, '-=.6');
   }
 
-  // the accent glow drifts gently toward the pointer while it's over the hero
+  // the accent glow, portrait and orbit drift gently (in layers) toward the pointer while it's over the hero
   if (finePointer && !reduceMotion) {
     const hero = $('.hero');
-    const glowX = gsap.quickTo('.hero__glow', 'x', { duration: 1.4, ease: 'power3' });
-    const glowY = gsap.quickTo('.hero__glow', 'y', { duration: 1.4, ease: 'power3' });
+    const layers = [['.hero__glow', .08], ['.hero-photo', .02], ['.orbit', -.015]].map(([sel, k]) => ({
+      k, x: gsap.quickTo(sel, 'x', { duration: 1.4, ease: 'power3' }), y: gsap.quickTo(sel, 'y', { duration: 1.4, ease: 'power3' })
+    }));
     hero.addEventListener('mousemove', e => {
       const r = hero.getBoundingClientRect();
-      glowX((e.clientX - r.left - r.width / 2) * .08);
-      glowY((e.clientY - r.top - r.height / 2) * .08);
+      const dx = e.clientX - r.left - r.width / 2;
+      const dy = e.clientY - r.top - r.height / 2;
+      layers.forEach(l => { l.x(dx * l.k); l.y(dy * l.k); });
     });
-    hero.addEventListener('mouseleave', () => { glowX(0); glowY(0); });
+    hero.addEventListener('mouseleave', () => layers.forEach(l => { l.x(0); l.y(0); }));
   }
+
+  // the terminal (now in About) starts typing when it scrolls into view
+  ScrollTrigger.create({
+    trigger: '.terminal', start: 'top 85%', once: true,
+    onEnter: () => (reduceMotion ? renderTerminalStatic() : runTerminal())
+  });
+
+  // lifecycle steps light up one after another
+  gsap.from('.flow li', {
+    autoAlpha: 0, x: -14, duration: .5, stagger: .12,
+    scrollTrigger: { trigger: '.flow', start: 'top 90%', once: true }
+  });
 
   const bootMsgs = ['booting portfolio…', 'loading assets…', 'compiling styles…', 'ready ✓'];
   const counter = { v: 0 };
@@ -262,16 +287,6 @@
       el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, .4)' }));
     });
 
-    $$('[data-tilt]').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - .5;
-        const py = (e.clientY - r.top) / r.height - .5;
-        gsap.to(card, { rotateY: px * 10, rotateX: -py * 10, transformPerspective: 1000, duration: .6, ease: 'power2.out' });
-      });
-      card.addEventListener('mouseleave', () => gsap.to(card, { rotateX: 0, rotateY: 0, duration: .9 }));
-    });
-
     // image preview that follows the cursor over the services list
     const preview = $('.hover-preview');
     const previewImg = $('img', preview);
@@ -340,12 +355,6 @@
     onEnter: batch => gsap.to(batch, { autoAlpha: 1, y: 0, duration: .9, stagger: .08, overwrite: true })
   });
 
-  $$('[data-img-reveal]').forEach(wrap => {
-    gsap.timeline({ scrollTrigger: { trigger: wrap, start: 'top 80%', once: true } })
-      .fromTo(wrap, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'power4.inOut' })
-      .from($('img', wrap), { scale: 1.3, duration: 1.8 }, 0);
-  });
-
   $$('[data-count]').forEach(el => {
     const obj = { v: 0 };
     gsap.to(obj, {
@@ -408,68 +417,70 @@
     });
   }
 
-  /* ------------------------------------------------------------------
-     Work — pinned horizontal scroll on desktop
-  ------------------------------------------------------------------ */
+  /* Mission: each word lights up as the paragraph scrolls through the viewport */
+  $$('[data-scrub-words]').forEach(el => {
+    const words = splitWords(el);
+    if (reduceMotion) return;
+    gsap.fromTo(words, { opacity: .14 }, {
+      opacity: 1, ease: 'none', stagger: .1,
+      scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: .6 }
+    });
+  });
+
+  /* Work grid: one staggered reveal for the whole track (filtering can hide cards, so no per-card triggers) */
+  gsap.from('.work__track > *', {
+    autoAlpha: 0, y: 50, duration: .9, stagger: .1,
+    scrollTrigger: { trigger: '.work__track', start: 'top 85%', once: true }
+  });
+
+  /* Industries: cards start stacked in the middle and fan out with scroll.
+     GSAP takes over the transform here (it clears the CSS rotate/translate fallback), so the
+     fan pose is read from each card's --r / --ty variables. */
   const mm = gsap.matchMedia();
-  mm.add('(min-width: 992px) and (prefers-reduced-motion: no-preference)', () => {
-    const work = $('.work');
-    const track = $('.work__track');
-    const head = $('.work__head');
-    work.classList.add('is-horizontal');
-
-    const distance = () => {
-      const left = head.getBoundingClientRect().left;
-      return Math.max(0, track.scrollWidth - innerWidth + left * 2);
-    };
-
-    const countEl = $('.js-work-count');
-    const bar = $('.work__bar span');
-    const total = $$('.project', track).length;
-    const tween = gsap.to(track, {
-      x: () => -distance(),
+  mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
+    const fan = $('.fan');
+    const cards = $$('.fan-card', fan);
+    const mid = (cards.length - 1) / 2;
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const cssVar = (el, name) => parseFloat(getComputedStyle(el).getPropertyValue(name)) || 0;
+    gsap.fromTo(cards, {
+      // offsetLeft ignores transforms, so this stays correct on refresh
+      x: (i, card) => fan.offsetWidth / 2 - (card.offsetLeft + card.offsetWidth / 2),
+      y: 0,
+      rotation: i => (i - mid) * 3
+    }, {
+      x: 0,
+      y: (i, card) => cssVar(card, '--ty') * rem,
+      rotation: (i, card) => cssVar(card, '--r'),
       ease: 'none',
-      scrollTrigger: {
-        trigger: work,
-        start: 'top top',
-        end: () => `+=${distance()}`,
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-        onUpdate: self => {
-          bar.style.transform = `scaleX(${self.progress})`;
-          countEl.textContent = String(Math.round(self.progress * (total - 1)) + 1).padStart(2, '0');
-        }
-      }
-    });
-
-    $$('.project__img img', track).forEach(img => {
-      gsap.fromTo(img, { xPercent: -6, scale: 1.15 }, {
-        xPercent: 6, ease: 'none',
-        scrollTrigger: { trigger: img.closest('.project'), containerAnimation: tween, start: 'left right', end: 'right left', scrub: true }
-      });
-    });
-
-    // triggers below the pin must be refreshed after it, or they ignore its added scroll height
-    ScrollTrigger.sort();
-    return () => work.classList.remove('is-horizontal');
-  });
-
-  mm.add('(max-width: 991.98px)', () => {
-    gsap.set('.project', { autoAlpha: 0, y: 50 });
-    ScrollTrigger.batch('.project', {
-      start: 'top 90%', once: true,
-      onEnter: batch => gsap.to(batch, { autoAlpha: 1, y: 0, stagger: .12, overwrite: true })
+      scrollTrigger: { trigger: fan, start: 'top 90%', end: 'bottom 55%', scrub: 1, invalidateOnRefresh: true }
     });
   });
 
-  /* Footer wordmark rises into place */
+  /* Footer: wordmark rises into place; an accent spotlight follows the cursor through it */
+  const footerBrand = $('.footer__brand');
   if (!reduceMotion) {
-    gsap.from('.footer__brand', {
+    gsap.from(footerBrand, {
       yPercent: 35, autoAlpha: .3, ease: 'none',
       scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true }
     });
+
+    const spot = { x: 75, y: 55 };
+    const paint = () => {
+      footerBrand.style.setProperty('--mx', spot.x);
+      footerBrand.style.setProperty('--my', spot.y);
+    };
+    if (finePointer) {
+      const sx = gsap.quickTo(spot, 'x', { duration: .9, ease: 'power3', onUpdate: paint });
+      const sy = gsap.quickTo(spot, 'y', { duration: .9, ease: 'power3', onUpdate: paint });
+      $('.footer').addEventListener('mousemove', e => {
+        const r = footerBrand.getBoundingClientRect();
+        sx((e.clientX - r.left) / r.width * 100);
+        sy((e.clientY - r.top) / r.height * 100);
+      });
+    } else {
+      gsap.fromTo(spot, { x: 85 }, { x: 15, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1, onUpdate: paint });
+    }
   }
 
   /* Floating chat: always on (CSS), hidden only while the contact section is on screen */
@@ -489,6 +500,36 @@
   /* ------------------------------------------------------------------
      Helpers that don't depend on GSAP
   ------------------------------------------------------------------ */
+
+  // Work filters (pills + industry fan cards). Animated with GSAP Flip when available, instant otherwise.
+  function initWorkFilter() {
+    const buttons = $$('[data-filter]');
+    const items = $$('.work__track > *');
+    if (!buttons.length) return;
+    const canFlip = window.gsap && window.Flip && !reduceMotion;
+    if (canFlip) gsap.registerPlugin(Flip);
+
+    const setFilter = cat => {
+      buttons.forEach(b => {
+        const on = b.dataset.filter === cat;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on);
+      });
+      const state = canFlip && Flip.getState(items);
+      // cards without data-cat (the "your product could be next" card) always stay
+      items.forEach(el => el.classList.toggle('is-filtered-out', cat !== 'all' && !!el.dataset.cat && el.dataset.cat !== cat));
+      if (!canFlip) { window.ScrollTrigger?.refresh(); return; }
+      Flip.from(state, {
+        duration: .7, ease: 'power3.inOut', absolute: true, scale: true, stagger: .03,
+        onEnter: els => gsap.fromTo(els, { autoAlpha: 0, scale: .9 }, { autoAlpha: 1, scale: 1, duration: .5, delay: .15 }),
+        onLeave: els => gsap.to(els, { autoAlpha: 0, scale: .9, duration: .35 }),
+        onComplete: () => ScrollTrigger.refresh()
+      });
+    };
+
+    buttons.forEach(b => b.addEventListener('click', () => setFilter(b.dataset.filter)));
+    $$('[data-filter-link]').forEach(a => a.addEventListener('click', () => setFilter(a.dataset.filterLink)));
+  }
 
   // One modal for client photos (image), own video files (video) and YouTube links (youtube)
   function initMediaModal() {
