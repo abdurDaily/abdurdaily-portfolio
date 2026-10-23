@@ -3,7 +3,6 @@
 
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -25,10 +24,11 @@
   initCopyButtons();
   initMediaModal();
   initWorkFilter();
+  initGallery();
+  initTestimonials();
 
   if (!window.gsap || !window.ScrollTrigger) {
     $('.preloader')?.remove();
-    renderTerminalStatic();
     return;
   }
 
@@ -96,118 +96,28 @@
   }
 
   /* ------------------------------------------------------------------
-     Terminal — types a real build & deploy flow, then loops
-  ------------------------------------------------------------------ */
-  const terminalScript = [
-    { cmd: 'composer create-project laravel/laravel api' },
-    { out: 'Creating a "laravel/laravel" project…', cls: 't-dim' },
-    { out: '✓ Laravel API ready', cls: 't-ok', wait: 500 },
-    { cmd: 'npx create-next-app@latest web --ts' },
-    { out: '✓ Next.js front-end ready', cls: 't-ok', wait: 500 },
-    { cmd: 'php artisan test' },
-    { out: '✓ All tests passed', cls: 't-ok', wait: 500 },
-    { cmd: 'git push origin main' },
-    { out: '→ CI pipeline running…', cls: 't-dim', wait: 700 },
-    { out: '✓ Deployed to production 🚀', cls: 't-ok' }
-  ];
-  const promptHTML = '<span class="t-path">~/new-project</span> <span class="t-branch">git:(main)</span> <span class="t-prompt">❯</span> ';
-  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-
-  function renderTerminalStatic() {
-    $('.js-terminal').innerHTML = terminalScript
-      .map(s => (s.cmd ? promptHTML + esc(s.cmd) : `<span class="${s.cls}">${esc(s.out)}</span>`))
-      .join('\n');
-  }
-
-  async function runTerminal() {
-    const el = $('.js-terminal');
-    for (;;) {
-      let html = '';
-      el.innerHTML = '';
-      for (const step of terminalScript) {
-        if (step.cmd) {
-          html += promptHTML;
-          for (let i = 1; i <= step.cmd.length; i++) {
-            el.innerHTML = html + esc(step.cmd.slice(0, i));
-            await sleep(26 + Math.random() * 45);
-          }
-          html += esc(step.cmd) + '\n';
-          await sleep(380);
-        } else {
-          html += `<span class="${step.cls}">${esc(step.out)}</span>\n`;
-          el.innerHTML = html;
-          await sleep(step.wait || 280);
-        }
-      }
-      await sleep(5000);
-    }
-  }
-
-  /* ------------------------------------------------------------------
      Preloader + hero intro
   ------------------------------------------------------------------ */
   const heroWords = splitWords($('[data-hero-split]'));
   gsap.set(heroWords, { yPercent: 115 });
-  gsap.set(['.hero__top', '.hero__kicker', '.hero__sub', '.hero__cta', '.hero__trust'], { autoAlpha: 0, y: 24 });
-  gsap.set('.hero__glow', { autoAlpha: 0, scale: .6 });
-  const heroHl = $$('.hero__title .hl');
-  gsap.set(heroHl, { backgroundSize: '0% 30%' });
-  gsap.set('.hero-photo', { clipPath: 'circle(0% at 50% 50%)' });
-  gsap.set('.orbit__ring', { autoAlpha: 0, scale: .7 });
-  gsap.set('.orbit__icon', { autoAlpha: 0 }); // opacity only — their transform belongs to the CSS orbit
-  gsap.set(['.hero-tag', '.hero-badge'], { autoAlpha: 0, scale: .6 });
+  const heroSides = ['.hero-stack', '.hero-contact', '.hero__meta', '.hero__sign'];
+  gsap.set(['.hero__sub', '.hero__cta', ...heroSides], { autoAlpha: 0, y: 24 });
+  gsap.set('.hero__portrait', { autoAlpha: 0, y: 30 });
+  gsap.set('.hero__cutout', { autoAlpha: 0, yPercent: 12 });
+  gsap.set('.hero__status', { autoAlpha: 0, scale: .8 }); // its centring lives in the CSS `translate` property, untouched here
 
+  // calm, formal intro: name rises in, the portrait rises into its capsule and gets its badge, the side blocks follow
   function heroIntro() {
     return gsap.timeline()
-      .to('.hero__top', { autoAlpha: 1, y: 0, duration: .8 })
-      .to('.hero__kicker', { autoAlpha: 1, y: 0, duration: .8 }, '-=.6')
-      .to(heroWords, { yPercent: 0, duration: 1.1, stagger: .045, ease: 'power4.out' }, '-=.6')
-      .to(heroHl, { backgroundSize: '100% 30%', duration: .9, ease: 'power3.inOut' }, '-=.3')
-      .to('.hero__sub', { autoAlpha: 1, y: 0 }, '-=1')
+      .to(heroWords, { yPercent: 0, duration: 1.1, stagger: .06, ease: 'power4.out' })
+      .to('.hero__sub', { autoAlpha: 1, y: 0 }, '-=.8')
       .to('.hero__cta', { autoAlpha: 1, y: 0 }, '-=.85')
-      .to('.hero__trust', { autoAlpha: 1, y: 0 }, '-=.85')
-      .from('.avatars span', { x: -14, autoAlpha: 0, duration: .6, stagger: .07 }, '<')
-      // portrait: circular iris-open, then the orbit draws in around it
-      .to('.hero-photo', { clipPath: 'circle(50% at 50% 50%)', duration: 1.4, ease: 'power4.inOut', clearProps: 'clipPath' }, 0.2)
-      .from('.hero-photo img', { scale: 1.35, duration: 1.8, ease: 'power3.out' }, '<')
-      .to('.orbit__ring', { autoAlpha: 1, scale: 1, duration: 1.2, stagger: .12 }, '<.5')
-      .to('.orbit__icon', { autoAlpha: 1, duration: .5, stagger: .08 }, '<.3')
-      .to(['.hero-tag', '.hero-badge'], { autoAlpha: 1, scale: 1, duration: .8, stagger: .15, ease: 'back.out(1.8)' }, '<.2')
-      .to('.hero__glow', { autoAlpha: 1, scale: 1, duration: 1.6, ease: 'power2.out' }, '<-.6')
-      .add(() => {
-        if (reduceMotion) return;
-        gsap.to('.hero-tag', { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-        gsap.to('.hero-badge', { y: 10, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-      })
+      .to('.hero__portrait', { autoAlpha: 1, y: 0, duration: 1.1 }, 0.2)
+      .to('.hero__cutout', { autoAlpha: 1, yPercent: 0, duration: 1.4, ease: 'power4.out' }, '<.25')
+      .to('.hero__status', { autoAlpha: 1, scale: 1, duration: .7, ease: 'back.out(1.8)' }, '<.9')
+      .to(heroSides, { autoAlpha: 1, y: 0, duration: .8, stagger: .12 }, '<')
       .from('.float-chat', { scale: 0, autoAlpha: 0, duration: .8, ease: 'back.out(2.2)', clearProps: 'transform,opacity,visibility' }, '-=.6');
   }
-
-  // the accent glow, portrait and orbit drift gently (in layers) toward the pointer while it's over the hero
-  if (finePointer && !reduceMotion) {
-    const hero = $('.hero');
-    const layers = [['.hero__glow', .08], ['.hero-photo', .02], ['.orbit', -.015]].map(([sel, k]) => ({
-      k, x: gsap.quickTo(sel, 'x', { duration: 1.4, ease: 'power3' }), y: gsap.quickTo(sel, 'y', { duration: 1.4, ease: 'power3' })
-    }));
-    hero.addEventListener('mousemove', e => {
-      const r = hero.getBoundingClientRect();
-      const dx = e.clientX - r.left - r.width / 2;
-      const dy = e.clientY - r.top - r.height / 2;
-      layers.forEach(l => { l.x(dx * l.k); l.y(dy * l.k); });
-    });
-    hero.addEventListener('mouseleave', () => layers.forEach(l => { l.x(0); l.y(0); }));
-  }
-
-  // the terminal (now in About) starts typing when it scrolls into view
-  ScrollTrigger.create({
-    trigger: '.terminal', start: 'top 85%', once: true,
-    onEnter: () => (reduceMotion ? renderTerminalStatic() : runTerminal())
-  });
-
-  // lifecycle steps light up one after another
-  gsap.from('.flow li', {
-    autoAlpha: 0, x: -14, duration: .5, stagger: .12,
-    scrollTrigger: { trigger: '.flow', start: 'top 90%', once: true }
-  });
 
   const bootMsgs = ['booting portfolio…', 'loading assets…', 'compiling styles…', 'ready ✓'];
   const counter = { v: 0 };
@@ -262,7 +172,10 @@
 
     document.addEventListener('mouseover', e => {
       const labelled = e.target.closest('[data-cursor-text]');
-      const interactive = e.target.closest('a, button, .stack-item, .brand-logo, .service-row');
+      const interactive = e.target.closest('a, button, .brand-logo, .service-row');
+      const onDark = !!e.target.closest('.statement, .project--cta, .cta-banner, .footer');
+      dot.classList.toggle('on-dark', onDark);
+      ring.classList.toggle('on-dark', onDark);
       if (labelled) {
         label.textContent = labelled.dataset.cursorText;
         ring.classList.add('has-label');
@@ -355,20 +268,6 @@
     onEnter: batch => gsap.to(batch, { autoAlpha: 1, y: 0, duration: .9, stagger: .08, overwrite: true })
   });
 
-  $$('[data-count]').forEach(el => {
-    const obj = { v: 0 };
-    gsap.to(obj, {
-      v: +el.dataset.count, duration: 2, ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
-      onUpdate: () => { el.textContent = Math.round(obj.v); }
-    });
-  });
-
-  gsap.from('.stack-item', {
-    autoAlpha: 0, y: 40, scale: .92, duration: .8, stagger: { each: .05, from: 'random' },
-    scrollTrigger: { trigger: '.stack-grid', start: 'top 85%', once: true }
-  });
-
   /* Pipeline: the line fills with scroll and each stage "passes" */
   const stages = $$('.stage');
   const pipeline = $('.pipeline');
@@ -416,16 +315,6 @@
       }
     });
   }
-
-  /* Mission: each word lights up as the paragraph scrolls through the viewport */
-  $$('[data-scrub-words]').forEach(el => {
-    const words = splitWords(el);
-    if (reduceMotion) return;
-    gsap.fromTo(words, { opacity: .14 }, {
-      opacity: 1, ease: 'none', stagger: .1,
-      scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: .6 }
-    });
-  });
 
   /* Work grid: one staggered reveal for the whole track (filtering can hide cards, so no per-card triggers) */
   gsap.from('.work__track > *', {
@@ -567,6 +456,102 @@
       lenis?.start();
     });
   }
+  // Client-photo rail: prev/next buttons step one photo at a time, the bar shows how far along you are,
+  // and each button disables at its end. Native horizontal scrolling (swipe, trackpad) keeps working.
+  function initGallery() {
+    const gallery = $('[data-gallery]');
+    if (!gallery) return;
+    const track = $('.gallery__track', gallery);
+    const bar = $('.gallery__progress span', gallery);
+    const prev = $('[data-gallery-prev]', gallery);
+    const next = $('[data-gallery-next]', gallery);
+    const step = () => {
+      const item = $('.gallery__item', track);
+      return item.offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
+    };
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const visible = track.clientWidth / track.scrollWidth;
+      const p = max > 0 ? track.scrollLeft / max : 1;
+      bar.parentElement.style.setProperty('--p', Math.min(1, visible + (1 - visible) * p));
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+    };
+    const behavior = reduceMotion ? 'auto' : 'smooth';
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  // Review slider: one slide at a time, moved with translateX. Arrows, dots, swipe and ← → keys navigate;
+  // it autoplays every 7s only while on screen and not hovered/focused (never with reduced motion).
+  // Off-screen slides are inert so keyboard users only tab through the visible review.
+  function initTestimonials() {
+    const root = $('[data-tslider]');
+    if (!root) return;
+    const track = $('.tslider__track', root);
+    const slides = $$('.tslider__slide', root);
+    const dots = $$('.tslider__dot', root);
+    const count = $('.tslider__count b', root);
+    const pad = n => String(n).padStart(2, '0');
+    let index = 0;
+    let timer = null;
+    let onScreen = false;
+    let held = false; // hovered or focused
+    let watching = false; // a video review is open in the media viewer
+
+    const go = i => {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-index * 100}%)`;
+      slides.forEach((s, n) => {
+        const on = n === index;
+        s.inert = !on;
+        s.setAttribute('aria-hidden', String(!on));
+      });
+      dots.forEach((d, n) => d.setAttribute('aria-current', String(n === index)));
+      count.textContent = pad(index + 1);
+    };
+    const stop = () => { clearInterval(timer); timer = null; };
+    const sync = () => {
+      stop();
+      if (!reduceMotion && onScreen && !held && !watching) timer = setInterval(() => go(index + 1), 7000);
+    };
+    // any manual move restarts the 7s countdown
+    const step = i => { go(i); sync(); };
+
+    $('[data-tslider-prev]', root).addEventListener('click', () => step(index - 1));
+    $('[data-tslider-next]', root).addEventListener('click', () => step(index + 1));
+    dots.forEach((d, n) => d.addEventListener('click', () => step(n)));
+    root.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') step(index - 1);
+      if (e.key === 'ArrowRight') step(index + 1);
+    });
+
+    let startX = null;
+    const viewport = $('.tslider__viewport', root);
+    viewport.addEventListener('pointerdown', e => { startX = e.clientX; });
+    viewport.addEventListener('pointerup', e => {
+      if (startX === null) return;
+      const dx = e.clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 50) step(index + (dx < 0 ? 1 : -1));
+    });
+
+    const hold = on => { held = on; sync(); };
+    root.addEventListener('mouseenter', () => hold(true));
+    root.addEventListener('mouseleave', () => hold(false));
+    root.addEventListener('focusin', () => hold(true));
+    root.addEventListener('focusout', e => { if (!root.contains(e.relatedTarget)) hold(false); });
+    new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; sync(); }, { threshold: .4 }).observe(root);
+    const modal = $('#mediaModal');
+    modal?.addEventListener('show.bs.modal', () => { watching = true; sync(); });
+    modal?.addEventListener('hidden.bs.modal', () => { watching = false; sync(); });
+
+    go(0);
+  }
+
   function initCopyButtons() {
     $$('[data-copy]').forEach(btn => {
       btn.addEventListener('click', async () => {
@@ -610,14 +595,6 @@
   function initContactForm() {
     const form = $('.contact-form');
     if (!form) return;
-
-    // Pricing "Get a quote" buttons start the message for the visitor — unless they've already written their own
-    const msg = $('#cMsg');
-    $$('[data-plan]').forEach(btn => btn.addEventListener('click', () => {
-      if (msg.value.trim() && msg.value !== msg.dataset.prefill) return;
-      msg.value = msg.dataset.prefill = `Hi Abdur, I'm interested in the ${btn.dataset.plan} package. `;
-      setTimeout(() => msg.focus({ preventScroll: true }), 1200);
-    }));
 
     form.addEventListener('submit', e => {
       e.preventDefault();
