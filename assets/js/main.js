@@ -23,7 +23,6 @@
   initContactForm();
   initCopyButtons();
   initMediaModal();
-  initWorkFilter();
   initGallery();
   initTestimonials();
 
@@ -173,7 +172,7 @@
     document.addEventListener('mouseover', e => {
       const labelled = e.target.closest('[data-cursor-text]');
       const interactive = e.target.closest('a, button, .brand-logo, .service-row');
-      const onDark = !!e.target.closest('.statement, .project--cta, .cta-banner, .footer');
+      const onDark = !!e.target.closest('.statement, .cta-banner, .footer');
       dot.classList.toggle('on-dark', onDark);
       ring.classList.toggle('on-dark', onDark);
       if (labelled) {
@@ -316,12 +315,6 @@
     });
   }
 
-  /* Work grid: one staggered reveal for the whole track (filtering can hide cards, so no per-card triggers) */
-  gsap.from('.work__track > *', {
-    autoAlpha: 0, y: 50, duration: .9, stagger: .1,
-    scrollTrigger: { trigger: '.work__track', start: 'top 85%', once: true }
-  });
-
   /* Industries: cards start stacked in the middle and fan out with scroll.
      GSAP takes over the transform here (it clears the CSS rotate/translate fallback), so the
      fan pose is read from each card's --r / --ty variables. */
@@ -389,36 +382,6 @@
   /* ------------------------------------------------------------------
      Helpers that don't depend on GSAP
   ------------------------------------------------------------------ */
-
-  // Work filters (pills + industry fan cards). Animated with GSAP Flip when available, instant otherwise.
-  function initWorkFilter() {
-    const buttons = $$('[data-filter]');
-    const items = $$('.work__track > *');
-    if (!buttons.length) return;
-    const canFlip = window.gsap && window.Flip && !reduceMotion;
-    if (canFlip) gsap.registerPlugin(Flip);
-
-    const setFilter = cat => {
-      buttons.forEach(b => {
-        const on = b.dataset.filter === cat;
-        b.classList.toggle('is-active', on);
-        b.setAttribute('aria-pressed', on);
-      });
-      const state = canFlip && Flip.getState(items);
-      // cards without data-cat (the "your product could be next" card) always stay
-      items.forEach(el => el.classList.toggle('is-filtered-out', cat !== 'all' && !!el.dataset.cat && el.dataset.cat !== cat));
-      if (!canFlip) { window.ScrollTrigger?.refresh(); return; }
-      Flip.from(state, {
-        duration: .7, ease: 'power3.inOut', absolute: true, scale: true, stagger: .03,
-        onEnter: els => gsap.fromTo(els, { autoAlpha: 0, scale: .9 }, { autoAlpha: 1, scale: 1, duration: .5, delay: .15 }),
-        onLeave: els => gsap.to(els, { autoAlpha: 0, scale: .9, duration: .35 }),
-        onComplete: () => ScrollTrigger.refresh()
-      });
-    };
-
-    buttons.forEach(b => b.addEventListener('click', () => setFilter(b.dataset.filter)));
-    $$('[data-filter-link]').forEach(a => a.addEventListener('click', () => setFilter(a.dataset.filterLink)));
-  }
 
   // One modal for client photos (image), own video files (video) and YouTube links (youtube)
   function initMediaModal() {
