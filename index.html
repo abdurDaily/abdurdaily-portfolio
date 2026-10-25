@@ -464,54 +464,51 @@
       </div>
     </section>
 
-    <!-- ============ WITH CLIENTS (photo gallery — replace with your real photos) ============ -->
-    <!-- a swipeable rail of photos; each opens full-size in the media viewer -->
+    <!-- ============ WITH CLIENTS (photo gallery) ============ -->
+    <!-- a bento grid of photos; each opens full-size in the media viewer.
+         Tile size modifiers: --tall (portrait, 2 rows), --wide, --half; no modifier = standard tile. -->
     <section class="section moments" id="clients">
       <div class="container">
         <div class="section-head section-head--split">
           <div>
-            <p class="label mono" data-reveal><span>05</span> With clients <em class="label__cue">the people</em></p>
-            <h2 class="section-title" data-split>Real people, <span class="hl">real</span> partnerships.</h2>
+            <p class="label mono" data-reveal><span>05</span> Moments <em class="label__cue">the people</em></p>
+            <h2 class="section-title" data-split>People, progress <span class="hl">&amp;</span> milestones.</h2>
           </div>
-          <p class="section-desc" data-reveal>Kick-offs, workshops and launch days with the teams I build for — in person and across time zones.</p>
+          <p class="section-desc" data-reveal>Working sessions with the teams I build alongside — and the milestones along the way.</p>
         </div>
 
-        <div class="gallery" data-gallery>
-          <ul class="gallery__track list-unstyled" aria-label="Photos with clients">
-            <li class="gallery__item" data-reveal>
-              <button type="button" class="gallery__media" data-media="image" data-src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80" data-caption="Project kick-off with the ShopNest team" data-cursor-text="Open">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80" alt="Project kick-off meeting with a client team" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Kick-off · USA</span>Planning the marketplace roadmap</span>
-              </button>
-            </li>
-            <li class="gallery__item" data-reveal>
-              <button type="button" class="gallery__media" data-media="image" data-src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80" data-caption="Sprint review with the Learnly team" data-cursor-text="Open">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="Sprint review with a client team around a laptop" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Sprint review · Bangladesh</span>Demoing new LMS features</span>
-              </button>
-            </li>
-            <li class="gallery__item" data-reveal>
-              <button type="button" class="gallery__media" data-media="image" data-src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80" data-caption="Strategy workshop" data-cursor-text="Open">
-                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="Strategy workshop with a client" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Workshop</span>Mapping user journeys</span>
-              </button>
-            </li>
-            <li class="gallery__item" data-reveal>
-              <button type="button" class="gallery__media" data-media="image" data-src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" data-caption="Pair-programming with a client's in-house team" data-cursor-text="Open">
-                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Working alongside a client's development team" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">On-site</span>Pairing with the in-house team</span>
-              </button>
-            </li>
-            <li class="gallery__item" data-reveal>
-              <button type="button" class="gallery__media" data-media="image" data-src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80" data-caption="Launch day celebration" data-cursor-text="Open">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Launch day meeting with a client team" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Launch day · UK</span>Shipping FinTrack to production</span>
-              </button>
-            </li>
-          </ul>
-          <div class="gallery__bar">
-            <span class="gallery__progress" aria-hidden="true"><span></span></span>
-            <div class="gallery__btns">
-              <button type="button" class="slider-btn" data-gallery-prev aria-label="Previous photos"><i class="bi bi-arrow-left" aria-hidden="true"></i></button>
-              <button type="button" class="slider-btn" data-gallery-next aria-label="Next photos"><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
-            </div>
-          </div>
-        </div>
+        <ul class="gallery list-unstyled" aria-label="Photo gallery">
+          <li class="gallery__item gallery__item--tall" data-reveal>
+            <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/client_abdur_daily_04.jpg" data-caption="At Creative IT Institute" data-cursor-text="Open">
+              <img src="assets/images/gallary/client_abdur_daily_04.jpg" alt="Abdur Rahman and a colleague holding a Creative IT Institute folder at the institute's reception" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Creative IT Institute</span>Building together</span>
+            </button>
+          </li>
+          <li class="gallery__item gallery__item--wide" data-reveal>
+            <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/client_abdur_daily_01.jfif" data-caption="Reviewing a build with the team" data-cursor-text="Open">
+              <img src="assets/images/gallary/client_abdur_daily_01.jfif" alt="Three people reviewing work on a laptop around a small table" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Working session</span>Reviewing a build with the team</span>
+            </button>
+          </li>
+          <li class="gallery__item" data-reveal>
+            <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/client_abdur_daily_02.jfif" data-caption="Working through code side by side" data-cursor-text="Open">
+              <img src="assets/images/gallary/client_abdur_daily_02.jfif" alt="Three people gathered around a laptop discussing code" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Pairing</span>Side by side on the code</span>
+            </button>
+          </li>
+          <li class="gallery__item" data-reveal>
+            <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/client_abdur_daily_03.jpg" data-caption="Convocation with the graduating class, IIUC" data-cursor-text="Open">
+              <img src="assets/images/gallary/client_abdur_daily_03.jpg" alt="Graduates in gowns and caps standing in a row at the IIUC convocation" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">IIUC</span>The graduating class</span>
+            </button>
+          </li>
+          <li class="gallery__item gallery__item--half" data-reveal>
+            <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/client_abdur_daily_05.webp" data-caption="Convocation 2026 — International Islamic University Chittagong" data-cursor-text="Open">
+              <img src="assets/images/gallary/client_abdur_daily_05.webp" alt="Abdur Rahman in a graduation cap in front of the IIUC Convocation 2026 banner" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Convocation 2026</span>International Islamic University Chittagong</span>
+            </button>
+          </li>
+          <li class="gallery__item gallery__item--half" data-reveal>
+            <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/client_abdur_daily_06.jpg" data-caption="Convocation day, January 2026" data-cursor-text="Open">
+              <img src="assets/images/gallary/client_abdur_daily_06.jpg" alt="Abdur Rahman seated in front of large Convocation 2026 letters" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Milestone</span>Convocation day, January 2026</span>
+            </button>
+          </li>
+        </ul>
       </div>
     </section>
 

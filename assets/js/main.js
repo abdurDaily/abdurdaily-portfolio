@@ -23,7 +23,6 @@
   initContactForm();
   initCopyButtons();
   initMediaModal();
-  initGallery();
   initTestimonials();
 
   if (!window.gsap || !window.ScrollTrigger) {
@@ -419,35 +418,6 @@
       lenis?.start();
     });
   }
-  // Client-photo rail: prev/next buttons step one photo at a time, the bar shows how far along you are,
-  // and each button disables at its end. Native horizontal scrolling (swipe, trackpad) keeps working.
-  function initGallery() {
-    const gallery = $('[data-gallery]');
-    if (!gallery) return;
-    const track = $('.gallery__track', gallery);
-    const bar = $('.gallery__progress span', gallery);
-    const prev = $('[data-gallery-prev]', gallery);
-    const next = $('[data-gallery-next]', gallery);
-    const step = () => {
-      const item = $('.gallery__item', track);
-      return item.offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
-    };
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      const visible = track.clientWidth / track.scrollWidth;
-      const p = max > 0 ? track.scrollLeft / max : 1;
-      bar.parentElement.style.setProperty('--p', Math.min(1, visible + (1 - visible) * p));
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= max - 2;
-    };
-    const behavior = reduceMotion ? 'auto' : 'smooth';
-    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior }));
-    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior }));
-    track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
-  }
-
   // Review slider: one slide at a time, moved with translateX. Arrows, dots, swipe and ← → keys navigate;
   // it autoplays every 7s only while on screen and not hovered/focused (never with reduced motion).
   // Off-screen slides are inert so keyboard users only tab through the visible review.
