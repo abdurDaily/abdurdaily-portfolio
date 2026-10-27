@@ -1,0 +1,159 @@
+/* ==========================================================================
+   abdurDaily admin — Filament panel in the site's brand
+   Same tokens as style.css: warm paper background, ink, one orange accent.
+   Filament supplies the primary (orange) + gray (stone) palettes and the fonts;
+   this file adds the surfaces, depth and the custom dashboard widgets (ad-*).
+   ========================================================================== */
+:root {
+  --ad-bg: #f5f4ef;
+  --ad-surface: #ffffff;
+  --ad-ink: #121210;
+  --ad-muted: #6b6a62;
+  --ad-line: rgba(18, 18, 16, .08);
+  --ad-line-strong: rgba(18, 18, 16, .14);
+  --ad-accent: #ff5a1f;
+  --ad-ok: #16a34a;
+  --ad-radius: 18px;
+  --ad-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset, 0 1px 2px rgba(18, 18, 16, .04), 0 18px 40px -30px rgba(18, 18, 16, .28);
+  --ad-ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ---------- Canvas ---------- */
+.fi-body, .fi-simple-layout { background: var(--ad-bg); color: var(--ad-ink); -webkit-font-smoothing: antialiased; }
+.ad-mono { font-family: var(--mono-font-family), ui-monospace, monospace; }
+
+/* ---------- Sidebar ---------- */
+.fi-sidebar { background: var(--ad-surface); border-right: 1px solid var(--ad-line); }
+.fi-sidebar-header { background: var(--ad-surface); border-bottom: 1px solid var(--ad-line); box-shadow: none; }
+.fi-sidebar-group-label {
+  font-family: var(--mono-font-family), monospace; font-size: .66rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ad-muted);
+}
+.fi-sidebar-item-btn { border-radius: 10px; transition: background-color .25s var(--ad-ease), color .25s; }
+.fi-sidebar-item-btn:hover { background: rgba(18, 18, 16, .04); }
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn { background: var(--ad-ink); box-shadow: 0 8px 18px -12px rgba(18, 18, 16, .6); }
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label { color: #fff; }
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-icon { color: var(--ad-accent); }
+
+/* ---------- Top bar & page header ---------- */
+.fi-topbar { background: rgba(245, 244, 239, .82); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--ad-line); box-shadow: none; }
+.fi-topbar > nav, .fi-topbar-ctn > nav { background: transparent; box-shadow: none; }
+.fi-header-heading { font-weight: 600; letter-spacing: -.04em; }
+
+/* ---------- Surfaces ---------- */
+.fi-section:not(.fi-section-not-contained),
+.fi-ta-ctn,
+.fi-wi-stats-overview-stat,
+.fi-modal-window,
+.fi-dropdown-panel {
+  border-radius: var(--ad-radius);
+  box-shadow: var(--ad-shadow);
+  --tw-ring-color: var(--ad-line);
+}
+.fi-section-header-heading { letter-spacing: -.02em; }
+.fi-btn { border-radius: 999px; }
+/* Filled primary buttons: white on #ff5a1f fails text contrast, so Filament falls back to a pale orange.
+   Use the site's own primary button instead — ink pill, accent on hover. */
+.fi-btn.fi-color-primary.fi-bg-color-400 { background-color: var(--ad-ink); color: #fff; transition: background-color .3s var(--ad-ease); }
+.fi-btn.fi-color-primary.fi-bg-color-400:hover { background-color: var(--ad-accent); color: #fff; }
+.fi-btn.fi-color-primary.fi-bg-color-400 .fi-icon { color: currentColor; }
+.fi-input-wrp { border-radius: 12px; }
+.fi-tabs { border-radius: 14px; }
+
+/* ---------- Stats ---------- */
+.fi-wi-stats-overview-stat { position: relative; overflow: hidden; transition: transform .4s var(--ad-ease), box-shadow .4s var(--ad-ease); }
+.fi-wi-stats-overview-stat:hover { transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset, 0 26px 50px -30px rgba(18, 18, 16, .35); }
+.fi-wi-stats-overview-stat-label {
+  font-family: var(--mono-font-family), monospace; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+}
+.fi-wi-stats-overview-stat-value { font-weight: 600; letter-spacing: -.05em; }
+
+/* ---------- Brand wordmark (sidebar + login) ---------- */
+.ad-brand { display: inline-flex; align-items: baseline; font-weight: 700; font-size: 1.3rem; letter-spacing: -.05em; color: var(--ad-ink); line-height: 1; }
+.ad-brand > span { color: var(--ad-accent); }
+.ad-brand__caret { display: inline-block; width: .45em; height: .12em; margin-left: .08em; background: var(--ad-ink); animation: ad-blink 1.1s steps(1) infinite; }
+.ad-brand small {
+  margin-left: .55rem; padding: .2rem .45rem; border: 1px solid var(--ad-line-strong); border-radius: 999px;
+  font-family: var(--mono-font-family), monospace; font-size: .58rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ad-muted);
+}
+@keyframes ad-blink { 50% { opacity: 0; } }
+
+/* ---------- Login ---------- */
+.fi-simple-layout {
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgba(255, 90, 31, .12), transparent 60%),
+    radial-gradient(40rem 24rem at -10% 110%, rgba(18, 18, 16, .06), transparent 60%),
+    var(--ad-bg);
+}
+.fi-simple-main { border-radius: 24px; box-shadow: var(--ad-shadow); --tw-ring-color: var(--ad-line); }
+.fi-simple-header-heading { letter-spacing: -.04em; }
+
+/* ---------- Welcome banner ---------- */
+.ad-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.75rem 2rem;
+  padding: clamp(1.6rem, 3vw, 2.4rem); border-radius: 24px;
+  background: var(--ad-ink); color: #fff;
+  box-shadow: 0 30px 60px -36px rgba(18, 18, 16, .7);
+}
+.ad-hero__glow {
+  position: absolute; inset: auto -10% -60% auto; z-index: -1; width: 34rem; height: 34rem; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 90, 31, .55), rgba(255, 90, 31, 0) 65%);
+  filter: blur(10px); animation: ad-drift 12s ease-in-out infinite alternate;
+}
+.ad-hero::after { /* fine grid, like an engineer's notebook */
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+  background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent 70%); mask-image: linear-gradient(90deg, #000, transparent 70%);
+}
+@keyframes ad-drift { to { transform: translate(-4rem, -2rem); } }
+.ad-hero__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 0 0 1rem; font-size: .72rem; letter-spacing: .06em; color: rgba(255, 255, 255, .6); }
+.ad-hero__title { margin: 0; font-size: clamp(1.9rem, 3.6vw, 2.9rem); font-weight: 600; line-height: 1.05; letter-spacing: -.05em; }
+.ad-hero__title em { font-family: var(--serif-font-family), serif; font-style: italic; font-weight: 400; letter-spacing: -.02em; color: var(--ad-accent); }
+.ad-hero__sub { margin: .8rem 0 0; max-width: 36rem; color: rgba(255, 255, 255, .7); }
+.ad-hero__sub strong { color: #fff; font-weight: 600; }
+
+.ad-status { display: inline-flex; align-items: center; gap: .45rem; padding: .25rem .65rem; border-radius: 999px; background: rgba(22, 163, 74, .16); color: #86efac; }
+.ad-status i { width: .45rem; height: .45rem; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34, 197, 94, .6); animation: ad-pulse 2s infinite; }
+.ad-status--off { background: rgba(255, 255, 255, .08); color: rgba(255, 255, 255, .6); }
+.ad-status--off i { background: rgba(255, 255, 255, .5); animation: none; }
+@keyframes ad-pulse { 70% { box-shadow: 0 0 0 .45rem rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+
+.ad-hero__actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.ad-btn {
+  display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.1rem; border-radius: 999px;
+  font-size: .88rem; font-weight: 500; color: #fff; text-decoration: none;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12);
+  transition: background-color .3s var(--ad-ease), transform .3s var(--ad-ease), border-color .3s;
+}
+.ad-btn:hover { background: rgba(255, 255, 255, .14); transform: translateY(-1px); }
+.ad-btn:focus-visible { outline: 2px solid var(--ad-accent); outline-offset: 2px; }
+.ad-btn__icon { width: 1.05rem; height: 1.05rem; }
+.ad-btn--accent { background: var(--ad-accent); border-color: var(--ad-accent); }
+.ad-btn--accent:hover { background: #ff6d38; }
+.ad-btn--ghost { background: transparent; border-color: rgba(255, 255, 255, .22); }
+.ad-btn__count { min-width: 1.3rem; padding: 0 .35rem; border-radius: 999px; background: #fff; color: var(--ad-accent); font-size: .72rem; font-weight: 700; text-align: center; }
+
+/* ---------- SEO health ---------- */
+.ad-score {
+  --size: 3.1rem; position: relative; display: grid; place-items: center; width: var(--size); height: var(--size); border-radius: 50%;
+  background: conic-gradient(var(--ad-accent) calc(var(--score) * 1%), rgba(18, 18, 16, .08) 0);
+}
+.ad-score::before { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--ad-surface); }
+.ad-score b { position: relative; font-size: .95rem; font-weight: 700; letter-spacing: -.04em; }
+.ad-score b::after { content: "%"; font-size: .6em; font-weight: 500; color: var(--ad-muted); }
+.ad-checks { display: grid; gap: .15rem; margin: 0; padding: 0; list-style: none; }
+.ad-check { display: flex; align-items: flex-start; gap: .65rem; padding: .55rem .2rem; border-bottom: 1px dashed var(--ad-line); }
+.ad-check:last-child { border-bottom: 0; }
+.ad-check__icon { flex: none; width: 1.15rem; height: 1.15rem; margin-top: .1rem; color: #f59e0b; }
+.ad-check--ok .ad-check__icon { color: var(--ad-ok); }
+.ad-check__text { display: grid; font-size: .88rem; font-weight: 500; line-height: 1.3; }
+.ad-check__text a { color: var(--ad-ink); text-decoration: underline; text-decoration-color: var(--ad-accent); text-underline-offset: 3px; }
+.ad-check__text small { margin-top: .15rem; font-size: .75rem; font-weight: 400; color: var(--ad-muted); }
+.ad-seo__sitemap { display: inline-block; margin-top: .9rem; font-size: .72rem; color: var(--ad-muted); text-decoration: none; }
+.ad-seo__sitemap:hover { color: var(--ad-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ad-hero__glow, .ad-status i, .ad-brand__caret { animation: none; }
+}
