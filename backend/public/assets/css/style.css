@@ -339,7 +339,9 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
   position: relative; aspect-ratio: 7 / 10; border-radius: 999px; overflow: hidden; background: #cac6bb;
   box-shadow: 0 50px 90px -50px rgba(18, 18, 16, .55), inset 0 0 0 1px rgba(18, 18, 16, .06);
 }
-.hero__cutout { position: absolute; left: -4%; bottom: 0; width: 108%; max-width: none; height: auto; }
+/* The portrait is uploaded already framed to the capsule's 7:10 (the admin crops to it), so it simply fills
+   the shape; any other ratio is covered, keeping the bottom (shoulders) anchored. */
+.hero__cutout { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 100%; }
 /* gentle life: the capsule floats, an accent arc travels round its outline ring, and the photo breathes.
    Float/breathe use the standalone `translate`/`scale` properties so they never fight GSAP's intro transforms;
    the global reduced-motion rule stills all three. */

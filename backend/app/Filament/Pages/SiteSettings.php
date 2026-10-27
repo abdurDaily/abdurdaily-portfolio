@@ -147,7 +147,17 @@ class SiteSettings extends Page
                 Textarea::make('hero.subtitle')->required()->rows(2)->columnSpanFull()->helperText('Wrap words in *asterisks* to make them bold.'),
                 TextInput::make('hero.primary_cta')->label('Primary button')->required(),
                 TextInput::make('hero.secondary_cta')->label('Secondary button')->required(),
-                FileUpload::make('hero.image')->label('Portrait (cut-out)')->image()->disk('public')->directory('site')->required(),
+                // framed exactly like the site's capsule: 7:10, previewed in the egg shape on its #cac6bb backdrop
+                FileUpload::make('hero.image')->label('Portrait')->image()->disk('public')->directory('site')->required()
+                    ->imageCropAspectRatio('7:10')
+                    ->imageResizeTargetWidth('840')
+                    ->imageResizeTargetHeight('1200')
+                    ->imageEditor()
+                    ->imageEditorEmptyFillColor('#cac6bb')
+                    ->panelAspectRatio('7:10')
+                    ->panelLayout('integrated')
+                    ->extraAttributes(['class' => 'ad-egg-upload'])
+                    ->helperText('Cropped to the hero capsule (7:10). Use the pencil to reposition or zoom out for headroom above your head. A cut-out with a transparent background looks best.'),
                 TextInput::make('hero.image_alt')->label('Portrait alt text')->required(),
                 TextInput::make('hero.stack_title')->label('"Core stack" heading')
                     ->helperText('Choose which tools appear under Tech stack → "Show in hero".'),

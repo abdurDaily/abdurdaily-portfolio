@@ -78,6 +78,21 @@
 }
 @keyframes ad-blink { 50% { opacity: 0; } }
 
+/* ---------- Hero portrait upload: previewed in the site's capsule ---------- */
+.ad-egg-upload .filepond--root { max-width: 260px; } /* only the drop zone — the crop editor inside keeps full size */
+.ad-egg-upload .filepond--root,
+.ad-egg-upload .filepond--panel-root,
+.ad-egg-upload .filepond--item-panel,
+.ad-egg-upload .filepond--image-preview-wrapper,
+.ad-egg-upload .filepond--image-preview { border-radius: 999px; }
+.ad-egg-upload .filepond--root { overflow: hidden; box-shadow: 0 0 0 6px var(--ad-surface), 0 0 0 7px var(--ad-line-strong), 0 30px 50px -34px rgba(18, 18, 16, .55); }
+.ad-egg-upload .filepond--panel-root,
+.ad-egg-upload .filepond--image-preview { background: #cac6bb; }
+.ad-egg-upload .filepond--image-preview-overlay,
+.ad-egg-upload .filepond--file-info { display: none; }
+/* keep the remove / edit controls inside the curve instead of the clipped corners */
+.ad-egg-upload .filepond--action-remove-item { margin: 2.6rem 0 0 2.6rem; }
+
 /* ---------- Login ---------- */
 .fi-simple-layout {
   background:

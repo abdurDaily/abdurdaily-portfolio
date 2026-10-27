@@ -80,7 +80,7 @@ class SiteContentSeeder extends Seeder
                 'subtitle' => 'I design and build fast, secure web products with *Laravel* and *Next.js*, for startups and businesses in the USA, Bangladesh and worldwide.',
                 'primary_cta' => 'My services',
                 'secondary_cta' => 'Book a call',
-                'image' => $this->media('abdur-cutout.webp', 'site'),
+                'image' => $this->media('abdur-hero.webp', 'site'), // cut-out framed to the capsule's 7:10
                 'image_alt' => 'Abdur Rahman, full-stack web developer',
                 'stats' => [
                     ['value' => '5', 'suffix' => '+', 'label' => 'years experience'],

@@ -54,7 +54,7 @@
 
         <div class="hero__portrait">
           <div class="hero__capsule">
-            <img class="hero__cutout" src="{{ media_url(setting('hero.image')) }}" alt="{{ setting('hero.image_alt') }}" width="900" height="1081" fetchpriority="high">
+            <img class="hero__cutout" src="{{ media_url(setting('hero.image')) }}" alt="{{ setting('hero.image_alt') }}" width="840" height="1200" fetchpriority="high">
           </div>
           @if (setting('contact.available'))
           <p class="hero__status mono"><span class="status__dot"></span> {{ setting('contact.available_text') }}</p>

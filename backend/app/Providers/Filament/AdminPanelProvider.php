@@ -47,6 +47,9 @@ class AdminPanelProvider extends PanelProvider
             ->renderHook(PanelsRenderHook::HEAD_END, fn () => new HtmlString(
                 '<link rel="stylesheet" href="' . asset('assets/css/admin.css') . '?v=' . filemtime(public_path('assets/css/admin.css')) . '">'
             ))
+            ->renderHook(PanelsRenderHook::BODY_END, fn () => new HtmlString(
+                '<script src="' . asset('assets/js/admin.js') . '?v=' . filemtime(public_path('assets/js/admin.js')) . '"></script>'
+            ))
             ->navigationItems([
                 NavigationItem::make('View site')
                     ->url(fn () => route('home'), shouldOpenInNewTab: true)
