@@ -269,19 +269,23 @@ class SiteContentSeeder extends Seeder
 
     private function seedGallery(): void
     {
+        // Sizes are picked so the 6-column bento fills exactly three rows (see .gallery in style.css).
         $items = [
             ['04', 'tall', 'Abdur Rahman and a colleague holding a Creative IT Institute folder at the institute\'s reception', 'Creative IT Institute', 'Building together', 'At Creative IT Institute'],
-            ['01', 'wide', 'Three people reviewing work on a laptop around a small table', 'Working session', 'Reviewing a build with the team', 'Reviewing a build with the team'],
+            ['award', 'wide', 'On stage at the Creative IT Action Speaks Award 2024 ceremony', 'Creative IT · 2024', 'Nominated for the Action Speaks Award', 'Nominated for the Action Speaks Award 2024 by Creative IT Institute'],
             ['02', 'standard', 'Three people gathered around a laptop discussing code', 'Pairing', 'Side by side on the code', 'Working through code side by side'],
             ['03', 'standard', 'Graduates in gowns and caps standing in a row at the IIUC convocation', 'IIUC', 'The graduating class', 'Convocation with the graduating class, IIUC'],
-            ['05', 'half', 'Abdur Rahman in a graduation cap in front of the IIUC Convocation 2026 banner', 'Convocation 2026', 'International Islamic University Chittagong', 'Convocation 2026 — International Islamic University Chittagong'],
-            ['06', 'half', 'Abdur Rahman seated in front of large Convocation 2026 letters', 'Milestone', 'Convocation day, January 2026', 'Convocation day, January 2026'],
+            ['01', 'standard', 'Three people reviewing work on a laptop around a small table', 'Working session', 'Reviewing a build with the team', 'Reviewing a build with the team'],
+            ['05', 'standard', 'Abdur Rahman in a graduation cap in front of the IIUC Convocation 2026 banner', 'Convocation 2026', 'International Islamic University Chittagong', 'Convocation 2026 — International Islamic University Chittagong'],
+            ['06', 'standard', 'Abdur Rahman seated in front of large Convocation 2026 letters', 'Milestone', 'Convocation day, January 2026', 'Convocation day, January 2026'],
         ];
 
         foreach ($items as $i => [$n, $size, $alt, $kicker, $title, $caption]) {
-            GalleryItem::create([
-                'image' => $this->media("gallary/abdur-daily-{$n}.webp", 'gallery'),
-                'thumbnail' => $this->media("gallary/abdur-daily-{$n}-thumb.webp", 'gallery'),
+            $media = $n === 'award'
+                ? ['image' => $this->media('gallary/action-speaks-award-2024.jpg', 'gallery'), 'video' => $this->media('gallary/action-speaks-award-2024.mp4', 'gallery')]
+                : ['image' => $this->media("gallary/abdur-daily-{$n}.webp", 'gallery'), 'thumbnail' => $this->media("gallary/abdur-daily-{$n}-thumb.webp", 'gallery')];
+
+            GalleryItem::create($media + [
                 'alt' => $alt, 'kicker' => $kicker, 'title' => $title, 'caption' => $caption, 'size' => $size, 'sort' => $i + 1,
             ]);
         }

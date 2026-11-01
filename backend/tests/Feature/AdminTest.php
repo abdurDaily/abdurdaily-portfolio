@@ -44,6 +44,20 @@ class AdminTest extends TestCase
             ->assertSee('SEO health');
     }
 
+    public function test_gallery_edit_form_detects_video_and_switching_to_photo_clears_it(): void
+    {
+        $item = \App\Models\GalleryItem::whereNotNull('video')->firstOrFail();
+
+        Livewire::test(\App\Filament\Resources\GalleryItems\Pages\ManageGalleryItems::class)
+            ->mountTableAction('edit', $item)
+            ->assertTableActionDataSet(['kind' => 'video'])
+            ->setTableActionData(['kind' => 'photo'])
+            ->callMountedTableAction()
+            ->assertHasNoTableActionErrors();
+
+        $this->assertFalse($item->fresh()->hasVideo());
+    }
+
     public function test_saving_site_content_keeps_images_and_lists_and_updates_the_site(): void
     {
         $before = Setting::allCached();

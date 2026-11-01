@@ -410,7 +410,7 @@
             allowFullscreen: true
           });
         } else if (media === 'video') {
-          node = Object.assign(document.createElement('video'), { src, controls: true, autoplay: true, playsInline: true });
+          node = Object.assign(document.createElement('video'), { src, poster: trigger.dataset.poster || '', controls: true, autoplay: true, playsInline: true, preload: 'metadata' });
         } else {
           node = Object.assign(document.createElement('img'), { src, alt: trigger.dataset.caption || '' });
         }

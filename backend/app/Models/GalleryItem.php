@@ -15,4 +15,9 @@ class GalleryItem extends Model
     protected $guarded = ['id'];
 
     protected $casts = ['is_published' => 'boolean'];
+
+    public function hasVideo(): bool
+    {
+        return filled($this->video);
+    }
 }

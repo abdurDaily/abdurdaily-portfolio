@@ -37,6 +37,16 @@ class SiteTest extends TestCase
             ->assertSee(route('services.show', 'laravel-php-development'), false);
     }
 
+    public function test_gallery_video_opens_in_the_media_viewer_and_photos_still_zoom(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('data-media="video" data-src="' . media_url('gallery/action-speaks-award-2024.mp4') . '"', false)
+            ->assertSee('data-poster="' . media_url('gallery/action-speaks-award-2024.jpg') . '"', false)
+            ->assertSee('class="gallery__play"', false)
+            ->assertSee('data-media="image"', false);
+    }
+
     public function test_highlight_markup_escapes_html(): void
     {
         $this->assertSame('a &lt;b&gt; <span class="hl">c</span>', (string) marked('a <b> *c*'));

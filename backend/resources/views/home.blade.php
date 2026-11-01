@@ -274,12 +274,18 @@
       <div class="container">
         <x-section-head number="05" :section="setting('gallery_section')" />
 
-        <ul class="gallery list-unstyled" aria-label="Photo gallery">
+        <ul class="gallery list-unstyled" aria-label="Photo and video gallery">
           @foreach ($gallery as $photo)
           <li @class(['gallery__item', "gallery__item--{$photo->size}" => $photo->size !== 'standard']) data-reveal>
+            @if ($photo->hasVideo())
+            <button type="button" class="gallery__media gallery__media--video" data-media="video" data-src="{{ media_url($photo->video) }}" data-poster="{{ media_url($photo->image) }}" data-caption="{{ $photo->caption }}" data-cursor-text="Play" aria-label="Play video: {{ $photo->title ?: $photo->alt }}">
+              <img src="{{ media_url($photo->thumbnail ?: $photo->image) }}" alt="{{ $photo->alt }}" loading="lazy"><span class="gallery__play" aria-hidden="true"><i class="bi bi-play-fill"></i></span><span class="gallery__cap"><span class="mono"><i class="bi bi-camera-video" aria-hidden="true"></i> {{ $photo->kicker ?: 'Video' }}</span>{{ $photo->title }}</span>
+            </button>
+            @else
             <button type="button" class="gallery__media" data-media="image" data-src="{{ media_url($photo->image) }}" data-caption="{{ $photo->caption }}" data-cursor-text="Open">
               <img src="{{ media_url($photo->thumbnail ?: $photo->image) }}" alt="{{ $photo->alt }}" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">{{ $photo->kicker }}</span>{{ $photo->title }}</span>
             </button>
+            @endif
           </li>
           @endforeach
         </ul>
