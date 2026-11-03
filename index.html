@@ -84,20 +84,8 @@
   <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero" id="home">
-      <!-- faint code symbols drifting behind the hero (decorative; --x/--y position, --s size, --d phase) -->
-      <div class="hero__code" aria-hidden="true">
-        <span style="--x:4%;--y:16%;--s:2.8rem;--d:0s">&lt;/&gt;</span>
-        <span style="--x:38%;--y:9%;--s:2rem;--d:-4s">{ }</span>
-        <span style="--x:90%;--y:44%;--s:2.6rem;--d:-7s">=&gt;</span>
-        <span style="--x:24%;--y:84%;--s:2rem;--d:-2s">( )</span>
-        <span style="--x:70%;--y:88%;--s:2.3rem;--d:-9s">[ ]</span>
-        <span style="--x:96%;--y:12%;--s:1.8rem;--d:-5s">;</span>
-        <span style="--x:47%;--y:72%;--s:1.6rem;--d:-11s">&amp;&amp;</span>
-        <span style="--x:62%;--y:16%;--s:1.5rem;--d:-3s">#</span>
-        <span style="--x:12%;--y:62%;--s:1.7rem;--d:-8s">$</span>
-        <span style="--x:80%;--y:68%;--s:1.6rem;--d:-6s">//</span>
-        <span style="--x:34%;--y:44%;--s:1.4rem;--d:-10s">!=</span>
-      </div>
+      <!-- decorative backdrop: a hairline grid fading out from behind the portrait -->
+      <div class="hero__bg" aria-hidden="true"></div>
       <!-- three blocks around the portrait: who & why (left) · trust (centre) · act (right) -->
       <div class="container hero__grid">
         <div class="hero__intro">
@@ -181,12 +169,12 @@
     </section>
 
     <!-- ============ ABOUT ============ -->
-    <!-- two columns: the professional story + key facts (left) · how I work (right) -->
+    <!-- minimal: story + one link beside a fact ledger · principles as one quiet row -->
     <section class="section about" id="about">
       <div class="container">
         <div class="section-head">
           <p class="label mono" data-reveal><span>01</span> About <em class="label__cue">who I am</em></p>
-          <h2 class="section-title" data-split>A developer who thinks like a <span class="hl">product owner</span>.</h2>
+          <h2 class="section-title" data-split>The people behind the <span class="hl">work</span>.</h2>
         </div>
 
         <div class="about-grid">
@@ -200,47 +188,24 @@
               build, from architecture and back-end to front-end, deployment and support after launch, so you work
               with one accountable engineer instead of a chain of freelancers.
             </p>
-
-            <dl class="about-facts">
-              <div><dt>Based in</dt><dd>Dhaka, Bangladesh · GMT+6</dd></div>
-              <div><dt>Experience</dt><dd>5+ years · 80+ projects shipped</dd></div>
-              <div><dt>Clients</dt><dd>Startups &amp; businesses in the USA, UK and Bangladesh</dd></div>
-              <div><dt>Specialty</dt><dd>Laravel, PHP, Next.js and React</dd></div>
-              <div><dt>Availability</dt><dd class="about-facts__open"><span class="status__dot"></span> Open for new projects</dd></div>
-            </dl>
-
-            <div class="d-flex flex-wrap gap-3">
-              <a href="#contact" class="btn btn-ink magnetic"><span>Start a project</span> <i class="bi bi-arrow-up-right"></i></a>
-              <a href="#services" class="btn btn-line magnetic"><span>My services</span></a>
-            </div>
+            <a href="#contact" class="about-link">Start a project <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
           </div>
 
-          <div class="about-principles">
-            <p class="about-principles__title mono" data-reveal>How I work</p>
-            <ol class="principles list-unstyled">
-              <li data-reveal>
-                <span class="mono">01</span>
-                <h3>Outcomes before code</h3>
-                <p>Every feature starts with the result it should drive: more sales, hours saved, fewer support tickets.</p>
-              </li>
-              <li data-reveal>
-                <span class="mono">02</span>
-                <h3>One accountable engineer</h3>
-                <p>You talk directly to the person building your product. No hand-offs, nothing lost in translation.</p>
-              </li>
-              <li data-reveal>
-                <span class="mono">03</span>
-                <h3>Clear, regular updates</h3>
-                <p>A written update every working day and a demo on a staging link every week, in your time zone.</p>
-              </li>
-              <li data-reveal>
-                <span class="mono">04</span>
-                <h3>Built to last</h3>
-                <p>Tested, documented code in your own repository from day one, so any team can maintain it.</p>
-              </li>
-            </ol>
-          </div>
+          <dl class="about-facts" data-reveal>
+            <div><dt>Based in</dt><dd>Dhaka, Bangladesh · GMT+6</dd></div>
+            <div><dt>Experience</dt><dd>5+ years · 80+ projects shipped</dd></div>
+            <div><dt>Clients</dt><dd>Startups &amp; businesses in the USA, UK and Bangladesh</dd></div>
+            <div><dt>Specialty</dt><dd>Laravel, PHP, Next.js and React</dd></div>
+            <div><dt>Availability</dt><dd class="about-facts__open"><span class="status__dot"></span> Open for new projects</dd></div>
+          </dl>
         </div>
+
+        <ol class="principles list-unstyled" aria-label="How I work" data-reveal>
+          <li title="Every feature starts with the result it should drive: more sales, hours saved, fewer support tickets."><span class="mono">01</span> Outcomes before code</li>
+          <li title="You talk directly to the person building your product. No hand-offs, nothing lost in translation."><span class="mono">02</span> One accountable engineer</li>
+          <li title="A written update every working day and a demo on a staging link every week, in your time zone."><span class="mono">03</span> Clear, regular updates</li>
+          <li title="Tested, documented code in your own repository from day one, so any team can maintain it."><span class="mono">04</span> Built to last</li>
+        </ol>
       </div>
     </section>
 

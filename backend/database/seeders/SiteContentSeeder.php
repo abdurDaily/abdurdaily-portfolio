@@ -106,7 +106,7 @@ class SiteContentSeeder extends Seeder
             ],
             'about' => [
                 'label' => 'About', 'cue' => 'who I am',
-                'title' => 'A developer who thinks like a *product owner*.',
+                'title' => 'The people behind the *work*.',
                 'lead' => "I'm Abdur Rahman, a full-stack web developer based in Dhaka, Bangladesh. For more than five years I've helped startups and businesses in the USA, UK and Bangladesh turn ideas into dependable web software.",
                 'body' => "Clients don't hire me just to write code. They hire me to solve business problems. I own the whole build, from architecture and back-end to front-end, deployment and support after launch, so you work with one accountable engineer instead of a chain of freelancers.",
                 'facts' => [

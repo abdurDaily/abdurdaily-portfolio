@@ -31,7 +31,7 @@ class SiteTest extends TestCase
             ->assertOk()
             ->assertSee('Do you build mobile apps?')
             ->assertSee('Hi there, I am')
-            ->assertSee('<span class="hl">product owner</span>', false)
+            ->assertSee('<span class="hl">work</span>', false)
             ->assertSee('<link rel="canonical"', false)
             ->assertSee('"@type":"FAQPage"', false)
             ->assertSee(route('services.show', 'laravel-php-development'), false);

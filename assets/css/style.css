@@ -273,23 +273,23 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 .hero { position: relative; overflow: hidden; isolation: isolate; padding: clamp(6.5rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 4.5rem); }
 @media (min-width: 992px) { .hero { min-height: min(100svh, 960px); display: flex; } .hero > .container { width: 100%; margin-block: auto; } }
 
-/* faint code symbols drifting behind everything; the global reduced-motion rule stills them */
-.hero__code { position: absolute; inset: 0; z-index: -1; pointer-events: none; user-select: none; }
-.hero__code span {
-  position: absolute; left: var(--x); top: var(--y); font: 500 var(--s)/1 var(--mono); white-space: nowrap;
-  color: var(--ink); opacity: .07; animation: code-drift 14s ease-in-out var(--d) infinite alternate;
+/* static backdrop: a hairline grid masked to a soft ellipse around the portrait, over a faint warm wash */
+.hero__bg {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(rgba(18, 18, 16, .06) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(18, 18, 16, .06) 1px, transparent 1px) 0 0 / 64px 64px;
+  -webkit-mask: radial-gradient(ellipse 60% 70% at 50% 45%, #000 20%, transparent 75%);
+  mask: radial-gradient(ellipse 60% 70% at 50% 45%, #000 20%, transparent 75%);
 }
-.hero__code span:nth-child(3n) { color: var(--accent); opacity: .14; }
-@keyframes code-drift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(12px, -18px) rotate(6deg); }
-  100% { transform: translate(-8px, -34px) rotate(-4deg); }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background: radial-gradient(ellipse 40% 45% at 50% 50%, rgba(var(--accent-rgb), .07), transparent 70%);
 }
-@media (max-width: 767.98px) { .hero__code span { font-size: calc(var(--s) * .7); } .hero__code span:nth-child(n+8) { display: none; } }
 
 .hero__grid {
-  position: relative; display: grid; gap: 1.5rem clamp(1.5rem, 3vw, 3rem);
-  grid-template-columns: minmax(0, 1fr) minmax(0, 440px) minmax(0, 1fr);
+  position: relative; display: grid; gap: 1.5rem clamp(1.5rem, 2.5vw, 2.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 410px) minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "intro portrait stack"
@@ -383,26 +383,30 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 .hero-contact__head strong { font-size: 1.05rem; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
 .hero-contact__head .mono { font-size: .68rem; color: var(--muted); }
 .hero-contact ul { display: grid; gap: .5rem; margin: 0; }
+/* neutral rows that invert to ink on hover; orange stays a small accent on the labels */
 .hero-contact a {
   display: flex; align-items: center; gap: .75rem; padding: .5rem .9rem .5rem .5rem; border-radius: 14px;
-  background: rgba(var(--accent-rgb), .08); border: 1px solid rgba(var(--accent-rgb), .3); color: var(--ink);
+  background: var(--bg); border: 1px solid var(--line); color: var(--ink);
   font-weight: 600; font-size: .93rem; letter-spacing: -.01em; line-height: 1.25; overflow-wrap: anywhere;
   transition: background-color .3s, color .3s, border-color .3s;
 }
 .hero-contact small { display: block; font-size: .6rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); transition: color .3s; }
 .hero-contact__icon {
   flex-shrink: 0; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px;
-  background: var(--accent); color: #fff; font-size: 1rem; box-shadow: 0 8px 18px -8px rgba(var(--accent-rgb), .9); transition: background-color .3s, color .3s;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); font-size: 1rem; transition: background-color .3s, color .3s, border-color .3s;
 }
-.hero-contact a:hover, .hero-contact a:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
-.hero-contact a:hover small, .hero-contact a:focus-visible small { color: rgba(255, 255, 255, .8); }
-.hero-contact a:hover .hero-contact__icon, .hero-contact a:focus-visible .hero-contact__icon { background: #fff; color: var(--accent); }
+.hero-contact a:hover, .hero-contact a:focus-visible { background: var(--ink); border-color: var(--ink); color: #fff; }
+.hero-contact a:hover small, .hero-contact a:focus-visible small { color: rgba(255, 255, 255, .65); }
+.hero-contact a:hover .hero-contact__icon, .hero-contact a:focus-visible .hero-contact__icon { background: var(--accent); border-color: var(--accent); color: #fff; }
 
 .hero__sign { margin: 0; text-align: right; font-size: clamp(1.8rem, 2.8vw, 2.5rem); font-weight: 700; line-height: 1; letter-spacing: -.05em; color: var(--ink); }
 .hero__sign em { display: block; font: italic 400 1.15em/1 "Instrument Serif", Georgia, serif; letter-spacing: -.01em; color: var(--accent); }
 
 /* keep the portrait inside the viewport on short laptop screens */
-@media (min-width: 992px) { .hero__portrait { max-width: min(410px, 48svh); } }
+@media (min-width: 992px) {
+  .hero__portrait { max-width: min(410px, 48svh); }
+  .hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, min(410px, 48svh)) minmax(0, 1fr); } /* side columns get the slack */
+}
 
 /* tablet: intro on top, portrait centred, the rest in two columns */
 @media (max-width: 991.98px) {
@@ -442,33 +446,47 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 .brand-logo:hover i { color: var(--accent); }
 
 /* ---------- About ---------- */
-/* two calm columns: the professional story + key facts (left) · four working principles (right) */
-.about-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
+/* minimal: the story + one text link (left) · a hairline fact ledger (right) ·
+   the working principles as one quiet, hairline-divided row (their detail lives in the hover title) */
+.about-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
 
-.about-story p { margin: 0 0 1.1rem; font-size: 1.02rem; line-height: 1.7; color: var(--muted); }
-.about-story .about-story__lead { margin-bottom: 1.3rem; font-size: clamp(1.2rem, 1.9vw, 1.45rem); font-weight: 500; line-height: 1.45; letter-spacing: -.02em; color: var(--ink); }
+.about-story p { max-width: 580px; margin: 0 0 1rem; font-size: 1.02rem; line-height: 1.75; color: var(--muted); }
+.about-story .about-story__lead {
+  max-width: none; margin-bottom: 1.3rem; font-size: clamp(1.3rem, 2.1vw, 1.7rem); font-weight: 500;
+  line-height: 1.4; letter-spacing: -.03em; color: var(--ink);
+}
+.about-link {
+  display: inline-flex; align-items: center; gap: .4rem; margin-top: .6rem; padding-bottom: .2rem;
+  font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--ink); transition: color .3s, border-color .3s;
+}
+.about-link i { transition: transform .3s var(--ease); }
+.about-link:hover { color: var(--accent); border-color: var(--accent); }
+.about-link:hover i { transform: translate(2px, -2px); }
 
 /* key facts as a quiet ledger: label left, value right, hairline rows */
-.about-facts { margin: 2rem 0 2.2rem; border-top: 1px solid var(--line-strong); }
-.about-facts > div { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 1rem; align-items: baseline; padding: .85rem 0; border-bottom: 1px solid var(--line); }
-.about-facts dt { font: 400 .7rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.about-facts dd { margin: 0; font-size: .96rem; font-weight: 500; color: var(--ink); }
+.about-facts { margin: 0; border-top: 1px solid var(--line-strong); }
+.about-facts > div { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 1rem; align-items: baseline; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+.about-facts dt { font: 400 .68rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.about-facts dd { margin: 0; font-size: .95rem; font-weight: 500; color: var(--ink); }
 .about-facts__open { display: inline-flex; align-items: center; gap: .55rem; color: var(--ok) !important; }
 
-/* principles: a 2×2 grid divided by hairlines, numbered like chapters */
-.about-principles__title { margin: 0 0 1rem; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line-strong); }
-.principles li { padding: 1.9rem 2rem 2rem 0; border-bottom: 1px solid var(--line); }
-.principles li:nth-child(even) { padding: 1.9rem 0 2rem 2rem; border-left: 1px solid var(--line); }
-.principles span { display: block; margin-bottom: 1.3rem; font-size: .78rem; color: var(--accent); }
-.principles h3 { margin: 0 0 .5rem; font-size: clamp(1.2rem, 1.8vw, 1.45rem); letter-spacing: -.035em; }
-.principles p { margin: 0; font-size: .95rem; line-height: 1.6; color: var(--muted); }
+.principles {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: clamp(3rem, 6vw, 4.5rem) 0 0;
+  border-top: 1px solid var(--line-strong);
+}
+.principles li { padding: 1.1rem 1.2rem 0; border-left: 1px solid var(--line); font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+.principles li:first-child { padding-left: 0; border-left: 0; }
+.principles span { margin-right: .4rem; font-size: .74rem; font-weight: 400; color: var(--accent); }
 
-@media (max-width: 991.98px) { .about-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 991.98px) {
+  .about-grid { grid-template-columns: minmax(0, 1fr); }
+  .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1rem; }
+  .principles li:nth-child(odd) { padding-left: 0; border-left: 0; }
+}
 @media (max-width: 575.98px) {
-  .principles { grid-template-columns: minmax(0, 1fr); }
-  .principles li, .principles li:nth-child(even) { padding: 1.5rem 0; border-left: 0; }
-  .about-facts > div { grid-template-columns: 96px minmax(0, 1fr); }
+  .principles { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .principles li { padding: .8rem 0; border-left: 0; border-bottom: 1px solid var(--line); }
+  .about-facts > div { grid-template-columns: 92px minmax(0, 1fr); }
 }
 
 /* ---------- Services (editorial list) ---------- */

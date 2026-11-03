@@ -27,20 +27,8 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="home">
-      <!-- faint code symbols drifting behind the hero (decorative; --x/--y position, --s size, --d phase) -->
-      <div class="hero__code" aria-hidden="true">
-        <span style="--x:4%;--y:16%;--s:2.8rem;--d:0s">&lt;/&gt;</span>
-        <span style="--x:38%;--y:9%;--s:2rem;--d:-4s">{ }</span>
-        <span style="--x:90%;--y:44%;--s:2.6rem;--d:-7s">=&gt;</span>
-        <span style="--x:24%;--y:84%;--s:2rem;--d:-2s">( )</span>
-        <span style="--x:70%;--y:88%;--s:2.3rem;--d:-9s">[ ]</span>
-        <span style="--x:96%;--y:12%;--s:1.8rem;--d:-5s">;</span>
-        <span style="--x:47%;--y:72%;--s:1.6rem;--d:-11s">&amp;&amp;</span>
-        <span style="--x:62%;--y:16%;--s:1.5rem;--d:-3s">#</span>
-        <span style="--x:12%;--y:62%;--s:1.7rem;--d:-8s">$</span>
-        <span style="--x:80%;--y:68%;--s:1.6rem;--d:-6s">//</span>
-        <span style="--x:34%;--y:44%;--s:1.4rem;--d:-10s">!=</span>
-      </div>
+      <!-- decorative backdrop: a hairline grid fading out from behind the portrait -->
+      <div class="hero__bg" aria-hidden="true"></div>
       <!-- three blocks around the portrait: who & why (left) · trust (centre) · act (right) -->
       <div class="container hero__grid">
         <div class="hero__intro">
@@ -121,41 +109,31 @@
       <div class="container">
         <x-section-head number="01" :section="setting('about')" />
 
+        <!-- minimal: the story + one text link (left) · a hairline fact ledger (right) · principles as one quiet row -->
         <div class="about-grid">
           <div class="about-story" data-reveal>
             <p class="about-story__lead">{{ setting('about.lead') }}</p>
             @foreach (preg_split('/\R{2,}/', (string) setting('about.body')) as $paragraph)
             <p>{{ $paragraph }}</p>
             @endforeach
-
-            <dl class="about-facts">
-              @foreach (setting('about.facts', []) as $fact)
-              <div><dt>{{ $fact['label'] }}</dt><dd>{{ $fact['value'] }}</dd></div>
-              @endforeach
-              @if (setting('contact.available'))
-              <div><dt>Availability</dt><dd class="about-facts__open"><span class="status__dot"></span> {{ setting('about.availability') }}</dd></div>
-              @endif
-            </dl>
-
-            <div class="d-flex flex-wrap gap-3">
-              <a href="#contact" class="btn btn-ink magnetic"><span>{{ setting('about.primary_cta') }}</span> <i class="bi bi-arrow-up-right"></i></a>
-              <a href="#services" class="btn btn-line magnetic"><span>{{ setting('about.secondary_cta') }}</span></a>
-            </div>
+            <a href="#contact" class="about-link">{{ setting('about.primary_cta') }} <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
           </div>
 
-          <div class="about-principles">
-            <p class="about-principles__title mono" data-reveal>{{ setting('about.principles_title') }}</p>
-            <ol class="principles list-unstyled">
-              @foreach (setting('about.principles', []) as $principle)
-              <li data-reveal>
-                <span class="mono">{{ $pad($loop->iteration) }}</span>
-                <h3>{{ $principle['title'] }}</h3>
-                <p>{{ $principle['text'] }}</p>
-              </li>
-              @endforeach
-            </ol>
-          </div>
+          <dl class="about-facts" data-reveal>
+            @foreach (setting('about.facts', []) as $fact)
+            <div><dt>{{ $fact['label'] }}</dt><dd>{{ $fact['value'] }}</dd></div>
+            @endforeach
+            @if (setting('contact.available'))
+            <div><dt>Availability</dt><dd class="about-facts__open"><span class="status__dot"></span> {{ setting('about.availability') }}</dd></div>
+            @endif
+          </dl>
         </div>
+
+        <ol class="principles list-unstyled" aria-label="{{ setting('about.principles_title') }}" data-reveal>
+          @foreach (setting('about.principles', []) as $principle)
+          <li title="{{ $principle['text'] }}"><span class="mono">{{ $pad($loop->iteration) }}</span> {{ $principle['title'] }}</li>
+          @endforeach
+        </ol>
       </div>
     </section>
 
