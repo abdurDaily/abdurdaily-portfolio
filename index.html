@@ -209,6 +209,28 @@
       </div>
     </section>
 
+    <!-- ============ FEATURED FILM ============ -->
+    <section class="film" aria-labelledby="film-title">
+      <div class="container">
+        <div class="film__head" data-reveal>
+          <div>
+            <p class="label mono"><span><i class="bi bi-play-fill" aria-hidden="true"></i></span> Featured <em class="label__cue">Creative IT · 2024</em></p>
+            <h2 class="film__title" id="film-title">Nominated for the Action Speaks Award</h2>
+          </div>
+          <p class="film__caption">Nominated for the Action Speaks Award 2024 by Creative IT Institute</p>
+        </div>
+
+        <!-- a muted looping preview (decorative); the whole frame opens the full video with sound in the media modal -->
+        <div class="film__frame" data-reveal>
+          <video class="film__preview" src="assets/videos/action-speaks-award-2024.mp4" poster="assets/images/gallary/action-speaks-award-2024.jpg" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+          <button type="button" class="film__play" data-media="video" data-src="assets/videos/action-speaks-award-2024.mp4" data-poster="assets/images/gallary/action-speaks-award-2024.jpg" data-caption="Nominated for the Action Speaks Award 2024 by Creative IT Institute" data-cursor-text="Play" aria-label="Play video with sound: Nominated for the Action Speaks Award">
+            <span class="film__btn"><span class="film__icon" aria-hidden="true"><i class="bi bi-play-fill"></i></span> Watch with sound</span>
+          </button>
+          <span class="film__chip mono" aria-hidden="true"><span class="film__rec"></span> Creative IT · 2024</span>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ SERVICES ============ -->
     <section class="section services" id="services">
       <div class="container">
@@ -449,11 +471,6 @@
             </button>
           </li>
           <li class="gallery__item gallery__item--wide" data-reveal>
-            <button type="button" class="gallery__media gallery__media--video" data-media="video" data-src="assets/videos/action-speaks-award-2024.mp4" data-poster="assets/images/gallary/action-speaks-award-2024.jpg" data-caption="Nominated for the Action Speaks Award 2024 by Creative IT Institute" data-cursor-text="Play" aria-label="Play video: Nominated for the Action Speaks Award">
-              <img src="assets/images/gallary/action-speaks-award-2024.jpg" alt="On stage at the Creative IT Action Speaks Award 2024 ceremony" loading="lazy"><span class="gallery__play" aria-hidden="true"><i class="bi bi-play-fill"></i></span><span class="gallery__cap"><span class="mono"><i class="bi bi-camera-video" aria-hidden="true"></i> Creative IT · 2024</span>Nominated for the Action Speaks Award</span>
-            </button>
-          </li>
-          <li class="gallery__item" data-reveal>
             <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/abdur-daily-01.webp" data-caption="Reviewing a build with the team" data-cursor-text="Open">
               <img src="assets/images/gallary/abdur-daily-01-thumb.webp" alt="Three people reviewing work on a laptop around a small table" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Working session</span>Reviewing a build with the team</span>
             </button>
@@ -473,7 +490,7 @@
               <img src="assets/images/gallary/abdur-daily-05-thumb.webp" alt="Abdur Rahman in a graduation cap in front of the IIUC Convocation 2026 banner" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Convocation 2026</span>International Islamic University Chittagong</span>
             </button>
           </li>
-          <li class="gallery__item" data-reveal>
+          <li class="gallery__item gallery__item--wide" data-reveal>
             <button type="button" class="gallery__media" data-media="image" data-src="assets/images/gallary/abdur-daily-06.webp" data-caption="Convocation day, January 2026" data-cursor-text="Open">
               <img src="assets/images/gallary/abdur-daily-06-thumb.webp" alt="Abdur Rahman seated in front of large Convocation 2026 letters" loading="lazy"><span class="gallery__zoom" aria-hidden="true"><i class="bi bi-arrows-angle-expand"></i></span><span class="gallery__cap"><span class="mono">Milestone</span>Convocation day, January 2026</span>
             </button>

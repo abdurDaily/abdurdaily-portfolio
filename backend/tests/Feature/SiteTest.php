@@ -37,13 +37,14 @@ class SiteTest extends TestCase
             ->assertSee(route('services.show', 'laravel-php-development'), false);
     }
 
-    public function test_gallery_video_opens_in_the_media_viewer_and_photos_still_zoom(): void
+    public function test_gallery_video_is_featured_and_opens_in_the_media_viewer_while_photos_still_zoom(): void
     {
         $this->get('/')
             ->assertOk()
+            ->assertSee('class="film__frame"', false)
             ->assertSee('data-media="video" data-src="' . media_url('gallery/action-speaks-award-2024.mp4') . '"', false)
             ->assertSee('data-poster="' . media_url('gallery/action-speaks-award-2024.jpg') . '"', false)
-            ->assertSee('class="gallery__play"', false)
+            ->assertDontSee('class="gallery__media gallery__media--video"', false) // featured, so not repeated in the grid
             ->assertSee('data-media="image"', false);
     }
 

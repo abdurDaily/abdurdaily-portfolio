@@ -491,6 +491,56 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
   .about-facts > div { grid-template-columns: 92px minmax(0, 1fr); }
 }
 
+/* ---------- Featured film ---------- */
+/* one cinematic frame: a muted looping preview under a soft gradient, a frosted "watch with sound" pill
+   in the centre (the whole frame is the button) and the kicker as a small recording chip */
+.film { padding: 0 0 clamp(5rem, 10vw, 8.5rem); }
+.film__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 3rem; margin-bottom: clamp(1.5rem, 3vw, 2.2rem); }
+.film__head .label { margin-bottom: .9rem; }
+.film__title { max-width: 720px; margin: 0; font-size: clamp(1.8rem, 3.6vw, 2.9rem); line-height: 1.05; letter-spacing: -.045em; }
+.film__caption { max-width: 340px; margin: 0; font-size: .95rem; line-height: 1.6; color: var(--muted); }
+
+.film__frame {
+  position: relative; aspect-ratio: 16 / 9; border-radius: clamp(18px, 2.4vw, 28px); overflow: hidden; isolation: isolate;
+  background: var(--ink); box-shadow: 0 60px 120px -70px rgba(18, 18, 16, .65);
+}
+.film__preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); transition: transform 1.4s var(--ease); }
+.film__frame::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(18, 18, 16, .05), rgba(18, 18, 16, .45)), linear-gradient(180deg, transparent 55%, rgba(18, 18, 16, .55));
+}
+.film__frame:hover .film__preview { transform: scale(1.06); }
+
+.film__play { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.film__btn {
+  display: inline-flex; align-items: center; gap: .85rem; padding: .45rem 1.4rem .45rem .45rem; border-radius: 100px;
+  font-weight: 600; font-size: .98rem; letter-spacing: -.01em; color: var(--ink);
+  background: rgba(255, 255, 255, .88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, .16), 0 20px 40px -20px rgba(18, 18, 16, .6);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.film__icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; font-size: 1.45rem; color: #fff; background: var(--ink); transition: background-color .3s; }
+.film__icon .bi { margin-left: .12em; }
+.film__play:hover .film__btn, .film__play:focus-visible .film__btn { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(255, 255, 255, .14), 0 24px 48px -20px rgba(18, 18, 16, .6); }
+.film__play:hover .film__icon, .film__play:focus-visible .film__icon { background: var(--accent); }
+.film__play:focus-visible { outline: none; }
+.film__play:focus-visible .film__btn { outline: 2px solid #fff; outline-offset: 4px; }
+
+.film__chip {
+  position: absolute; left: clamp(.9rem, 2vw, 1.5rem); bottom: clamp(.9rem, 2vw, 1.4rem); z-index: 1; pointer-events: none;
+  display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .75rem; border-radius: 100px;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: #fff;
+  background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .25); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.film__rec { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: rec-blink 1.6s ease-in-out infinite; }
+@keyframes rec-blink { 50% { opacity: .25; } }
+
+@media (max-width: 575.98px) {
+  .film__frame { aspect-ratio: 4 / 3; }
+  .film__btn { padding-right: 1.1rem; font-size: .9rem; }
+  .film__icon { width: 42px; height: 42px; font-size: 1.25rem; }
+}
+
 /* ---------- Services (editorial list) ---------- */
 .service-list { border-bottom: 1px solid var(--line); margin: 0; }
 .service-row {

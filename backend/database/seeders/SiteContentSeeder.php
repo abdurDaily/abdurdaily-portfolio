@@ -269,15 +269,16 @@ class SiteContentSeeder extends Seeder
 
     private function seedGallery(): void
     {
-        // Sizes are picked so the 6-column bento fills exactly three rows (see .gallery in style.css).
+        // The video becomes the home page's featured film, so the photo sizes alone are picked to fill
+        // the 6-column bento in exactly three rows (see .gallery in style.css).
         $items = [
             ['04', 'tall', 'Abdur Rahman and a colleague holding a Creative IT Institute folder at the institute\'s reception', 'Creative IT Institute', 'Building together', 'At Creative IT Institute'],
             ['award', 'wide', 'On stage at the Creative IT Action Speaks Award 2024 ceremony', 'Creative IT · 2024', 'Nominated for the Action Speaks Award', 'Nominated for the Action Speaks Award 2024 by Creative IT Institute'],
-            ['02', 'standard', 'Three people gathered around a laptop discussing code', 'Pairing', 'Side by side on the code', 'Working through code side by side'],
+            ['02', 'wide', 'Three people gathered around a laptop discussing code', 'Pairing', 'Side by side on the code', 'Working through code side by side'],
             ['03', 'standard', 'Graduates in gowns and caps standing in a row at the IIUC convocation', 'IIUC', 'The graduating class', 'Convocation with the graduating class, IIUC'],
             ['01', 'standard', 'Three people reviewing work on a laptop around a small table', 'Working session', 'Reviewing a build with the team', 'Reviewing a build with the team'],
             ['05', 'standard', 'Abdur Rahman in a graduation cap in front of the IIUC Convocation 2026 banner', 'Convocation 2026', 'International Islamic University Chittagong', 'Convocation 2026 — International Islamic University Chittagong'],
-            ['06', 'standard', 'Abdur Rahman seated in front of large Convocation 2026 letters', 'Milestone', 'Convocation day, January 2026', 'Convocation day, January 2026'],
+            ['06', 'wide', 'Abdur Rahman seated in front of large Convocation 2026 letters', 'Milestone', 'Convocation day, January 2026', 'Convocation day, January 2026'],
         ];
 
         foreach ($items as $i => [$n, $size, $alt, $kicker, $title, $caption]) {

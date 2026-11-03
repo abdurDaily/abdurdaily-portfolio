@@ -23,6 +23,7 @@
   initContactForm();
   initCopyButtons();
   initMediaModal();
+  initFilmPreview();
   initTestimonials();
 
   if (!window.gsap || !window.ScrollTrigger) {
@@ -381,6 +382,16 @@
   /* ------------------------------------------------------------------
      Helpers that don't depend on GSAP
   ------------------------------------------------------------------ */
+
+  // Featured film: the muted preview loops only while on screen, and never with reduced motion
+  function initFilmPreview() {
+    const preview = $('.film__preview');
+    if (!preview || reduceMotion || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) preview.play().catch(() => {}); // autoplay may be refused; the poster stays
+      else preview.pause();
+    }, { threshold: .25 }).observe(preview);
+  }
 
   // One modal for client photos (image), own video files (video) and YouTube links (youtube)
   function initMediaModal() {

@@ -8,6 +8,9 @@
     // fan pose for each industry card (rotation, vertical offset), repeating
     $fan = [['-7deg', '0rem'], ['4deg', '2.5rem'], ['-3deg', '-.5rem'], ['6deg', '2rem']];
     $pad = fn ($n) => str_pad($n, 2, '0', STR_PAD_LEFT);
+    // the first gallery video gets its own featured section; the photo gallery shows the rest
+    $featuredVideo = $gallery->first(fn ($item) => $item->hasVideo());
+    $moments = $gallery->reject(fn ($item) => $item->is($featuredVideo));
 @endphp
 <x-layout :title="setting('site.meta_title')" :description="setting('site.meta_description')" :canonical="route('home')" type="profile" :schema="$schema">
   <x-slot:head>
@@ -137,6 +140,34 @@
       </div>
     </section>
 
+    <!-- ============ FEATURED FILM ============ -->
+    @if ($featuredVideo)
+    <section class="film" aria-labelledby="film-title">
+      <div class="container">
+        <div class="film__head" data-reveal>
+          <div>
+            <p class="label mono"><span><i class="bi bi-play-fill" aria-hidden="true"></i></span> Featured <em class="label__cue">{{ $featuredVideo->kicker ?: 'on film' }}</em></p>
+            <h2 class="film__title" id="film-title">{{ $featuredVideo->title }}</h2>
+          </div>
+          @if ($featuredVideo->caption)
+          <p class="film__caption">{{ $featuredVideo->caption }}</p>
+          @endif
+        </div>
+
+        <!-- a muted looping preview (decorative); the whole frame opens the full video with sound in the media modal -->
+        <div class="film__frame" data-reveal>
+          <video class="film__preview" src="{{ media_url($featuredVideo->video) }}" poster="{{ media_url($featuredVideo->image) }}" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+          <button type="button" class="film__play" data-media="video" data-src="{{ media_url($featuredVideo->video) }}" data-poster="{{ media_url($featuredVideo->image) }}" data-caption="{{ $featuredVideo->caption }}" data-cursor-text="Play" aria-label="Play video with sound: {{ $featuredVideo->title ?: $featuredVideo->alt }}">
+            <span class="film__btn"><span class="film__icon" aria-hidden="true"><i class="bi bi-play-fill"></i></span> Watch with sound</span>
+          </button>
+          @if ($featuredVideo->kicker)
+          <span class="film__chip mono" aria-hidden="true"><span class="film__rec"></span> {{ $featuredVideo->kicker }}</span>
+          @endif
+        </div>
+      </div>
+    </section>
+    @endif
+
     <!-- ============ SERVICES ============ -->
     <section class="section services" id="services">
       <div class="container">
@@ -247,13 +278,13 @@
     </section>
 
     <!-- ============ WITH CLIENTS (photo gallery) ============ -->
-    @if ($gallery->isNotEmpty())
+    @if ($moments->isNotEmpty())
     <section class="section moments" id="clients">
       <div class="container">
         <x-section-head number="05" :section="setting('gallery_section')" />
 
         <ul class="gallery list-unstyled" aria-label="Photo and video gallery">
-          @foreach ($gallery as $photo)
+          @foreach ($moments as $photo)
           <li @class(['gallery__item', "gallery__item--{$photo->size}" => $photo->size !== 'standard']) data-reveal>
             @if ($photo->hasVideo())
             <button type="button" class="gallery__media gallery__media--video" data-media="video" data-src="{{ media_url($photo->video) }}" data-poster="{{ media_url($photo->image) }}" data-caption="{{ $photo->caption }}" data-cursor-text="Play" aria-label="Play video: {{ $photo->title ?: $photo->alt }}">
