@@ -53,7 +53,7 @@ class SiteContentSeeder extends Seeder
                 'job_title' => 'Full-Stack Web Developer',
                 'meta_title' => 'Abdur Rahman — Laravel & Next.js Developer | abdurDaily',
                 'meta_description' => 'Full-stack web developer in Dhaka building fast, secure web apps, SaaS and e-commerce with Laravel, PHP, Next.js and React for clients worldwide.',
-                'og_image' => $this->media('abdur-portrait.jpg', 'site'),
+                'og_image' => $this->media('abdur_rahman_convocation_img.png', 'site'),
                 'twitter' => '@abdurDaily',
                 'google_verification' => null,
             ],
