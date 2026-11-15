@@ -290,7 +290,17 @@
   ------------------------------------------------------------------ */
   const marquees = $$('.marquee').map(marquee => {
     const track = $('.marquee__track', marquee);
-    const clone = $('.marquee__group', track).cloneNode(true);
+    const group = $('.marquee__group', track);
+    // a short list (a few client logos) repeats until one group spans the strip, so the loop has no gap
+    const items = [...group.children];
+    while (items.length && group.offsetWidth && group.offsetWidth < marquee.offsetWidth) {
+      items.forEach(item => {
+        const copy = item.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        group.append(copy);
+      });
+    }
+    const clone = group.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
     track.append(clone);
 

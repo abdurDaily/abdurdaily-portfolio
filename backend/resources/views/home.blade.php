@@ -30,8 +30,6 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="home">
-      <!-- decorative backdrop: a hairline grid fading out from behind the portrait -->
-      <div class="hero__bg" aria-hidden="true"></div>
       <!-- three blocks around the portrait: who & why (left) · trust (centre) · act (right) -->
       <div class="container hero__grid">
         <div class="hero__intro">
@@ -99,7 +97,11 @@
         <div class="marquee__track">
           <div class="marquee__group">
             @foreach (setting('brands.items') as $brand)
+            @if (! empty($brand['logo']))
+            <span class="brand-logo"><img src="{{ media_url($brand['logo']) }}" alt="{{ $brand['name'] }}" loading="lazy"></span>
+            @else
             <span class="brand-logo">@if (! empty($brand['icon']))<i class="bi {{ $brand['icon'] }}"></i> @endif{{ $brand['name'] }}</span>
+            @endif
             @endforeach
           </div>
         </div>

@@ -177,6 +177,8 @@ class SiteSettings extends Page
                     ->schema([
                         TextInput::make('name')->required(),
                         TextInput::make('icon')->placeholder('bi-hexagon-fill'),
+                        FileUpload::make('logo')->image()->disk('public')->directory('brands')->columnSpanFull()
+                            ->helperText('Transparent PNG/WebP works best. Shown instead of the name and icon.'),
                     ]),
             ]),
         ]);

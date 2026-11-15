@@ -94,14 +94,8 @@ class SiteContentSeeder extends Seeder
             'brands' => [
                 'title' => 'Trusted by teams across the USA, Bangladesh & beyond',
                 'items' => [
-                    ['name' => 'NovaPay', 'icon' => 'bi-hexagon-fill'],
-                    ['name' => 'Bridgewise', 'icon' => 'bi-triangle-fill'],
-                    ['name' => 'Orbitly', 'icon' => 'bi-circle-square'],
-                    ['name' => 'Voltera', 'icon' => 'bi-lightning-charge-fill'],
-                    ['name' => 'Bloomcart', 'icon' => 'bi-flower1'],
-                    ['name' => 'UrbanNest', 'icon' => 'bi-buildings-fill'],
-                    ['name' => 'MediSync', 'icon' => 'bi-heart-pulse-fill'],
-                    ['name' => 'Learnly', 'icon' => 'bi-mortarboard-fill'],
+                    ['name' => 'Bali Arcade', 'logo' => $this->media('clients/bali-arcade.webp', 'brands')],
+                    ['name' => 'Degchi Dine', 'logo' => $this->media('clients/degchi-dine.webp', 'brands')],                    ['name' => 'Vevarz', 'logo' => $this->media('clients/vevarz.webp', 'brands')],
                 ],
             ],
             'about' => [
