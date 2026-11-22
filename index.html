@@ -9,7 +9,18 @@
   <meta property="og:title" content="abdurDaily — Full-Stack Web Developer">
   <meta property="og:description" content="Laravel · PHP · Next.js · React. Web software that businesses rely on.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/images/abdurDailyLinkedin.png">
+  <meta property="og:site_name" content="abdurDaily">
+  <meta property="og:url" content="https://abdurdaily.github.io/abdurdaily-portfolio/">
+  <meta property="og:image" content="https://abdurdaily.github.io/abdurdaily-portfolio/assets/images/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Abdur Rahman — Full-Stack Web Developer (Laravel, PHP, Next.js, React)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@abdurDaily">
+  <meta name="twitter:title" content="abdurDaily — Full-Stack Web Developer">
+  <meta name="twitter:description" content="Laravel · PHP · Next.js · React. Web software that businesses rely on.">
+  <meta name="twitter:image" content="https://abdurdaily.github.io/abdurdaily-portfolio/assets/images/og-image.png">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121210'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='30' fill='%23ff5a1f'%3EaD%3C/text%3E%3C/svg%3E">
   <script type="application/ld+json">
   {
@@ -31,26 +42,14 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" rel="stylesheet">
+  <!-- everything is self-hosted: no extra origins to connect to before first paint -->
+  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/fonts.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- Preloader -->
-  <div class="preloader" aria-hidden="true">
-    <div class="preloader__logo logo">abdur<span>Daily</span><i class="caret"></i></div>
-    <div class="preloader__log mono">
-      <span class="js-boot">booting portfolio…</span>
-      <span class="preloader__count"><span class="js-count">0</span>%</span>
-    </div>
-    <div class="preloader__bar"><span></span></div>
-  </div>
 
   <!-- Cursor -->
   <div class="cursor-dot" aria-hidden="true"></div>
@@ -87,7 +86,7 @@
       <!-- three blocks around the portrait: who & why (left) · trust (centre) · act (right) -->
       <div class="container hero__grid">
         <div class="hero__intro">
-          <h1 class="hero__name" data-hero-split><span class="hero__hello">Hello, I'm</span> Abdur Rahman<span class="hero__dot">.</span></h1>
+          <h1 class="hero__name"><span class="hero__hello">Hello, I'm</span> Abdur Rahman<span class="hero__dot">.</span></h1>
           <p class="hero__sub">I design and build fast, secure web products with <strong>Laravel</strong> and <strong>Next.js</strong>, for startups and businesses in the USA, Bangladesh and worldwide.</p>
           <div class="hero__cta d-flex flex-wrap gap-3">
             <a href="#services" class="btn btn-ink btn-lg magnetic"><span>My services</span> <i class="bi bi-arrow-down-right"></i></a>
@@ -98,7 +97,7 @@
         <!-- portrait photo filling a tall capsule, ringed by a concentric outline, wearing a status badge -->
         <div class="hero__portrait">
           <div class="hero__capsule">
-            <img class="hero__cutout" src="assets/images/abdur-hero-02.webp" alt="Abdur Rahman, full-stack web developer" width="840" height="1200" fetchpriority="high">
+            <img class="hero__cutout" src="assets/images/abdur-hero-02.webp" srcset="assets/images/abdur-hero-02-560.webp 560w, assets/images/abdur-hero-02.webp 840w" sizes="(max-width: 575.98px) 300px, 410px" alt="Abdur Rahman, full-stack web developer" width="840" height="1200" fetchpriority="high">
           </div>
           <p class="hero__status mono"><span class="status__dot"></span> Available for work</p>
         </div>
@@ -153,8 +152,8 @@
       <div class="marquee" data-direction="left">
         <div class="marquee__track">
           <div class="marquee__group">
-            <span class="brand-logo"><img src="assets/images/clients/bali-arcade.webp" alt="Bali Arcade" width="258" height="160" loading="lazy"></span>
-            <span class="brand-logo"><img src="assets/images/clients/degchi-dine.webp" alt="Degchi Dine" width="162" height="160" loading="lazy"></span>            <span class="brand-logo"><img src="assets/images/clients/vevarz.webp" alt="Vevarz" width="213" height="160" loading="lazy"></span>
+            <span class="brand-logo"><img src="assets/images/clients/bali-arcade.webp" alt="Bali Arcade" width="187" height="116" loading="lazy"></span>
+            <span class="brand-logo"><img src="assets/images/clients/degchi-dine.webp" alt="Degchi Dine" width="117" height="116" loading="lazy"></span>            <span class="brand-logo"><img src="assets/images/clients/vevarz.webp" alt="Vevarz" width="154" height="116" loading="lazy"></span>
           </div>
         </div>
       </div>
@@ -214,7 +213,7 @@
 
         <!-- a muted looping preview (decorative); the whole frame opens the full video with sound in the media modal -->
         <div class="film__frame" data-reveal>
-          <video class="film__preview" src="assets/videos/action-speaks-award-2024.mp4" poster="assets/images/gallary/action-speaks-award-2024.jpg" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+          <video class="film__preview" src="assets/videos/action-speaks-award-2024.mp4" poster="assets/images/gallary/action-speaks-award-2024.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
           <button type="button" class="film__play" data-media="video" data-src="assets/videos/action-speaks-award-2024.mp4" data-poster="assets/images/gallary/action-speaks-award-2024.jpg" data-caption="Nominated for the Action Speaks Award 2024 by Creative IT Institute" data-cursor-text="Play" aria-label="Play video with sound: Nominated for the Action Speaks Award">
             <span class="film__btn"><span class="film__icon" aria-hidden="true"><i class="bi bi-play-fill"></i></span> Watch with sound</span>
           </button>
@@ -754,10 +753,10 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="assets/vendor/bootstrap.min.js" defer></script>
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="assets/vendor/lenis.min.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>

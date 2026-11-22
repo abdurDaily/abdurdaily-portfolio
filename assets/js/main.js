@@ -26,13 +26,10 @@
   initFilmPreview();
   initTestimonials();
 
-  if (!window.gsap || !window.ScrollTrigger) {
-    $('.preloader')?.remove();
-    return;
-  }
+  if (!window.gsap || !window.ScrollTrigger) return;
 
   gsap.registerPlugin(ScrollTrigger);
-  // The intro and the one-shot scroll reveals assume a load at the top. If the browser
+  // The one-shot scroll reveals assume a load at the top. If the browser
   // (or ScrollTrigger's own scroll memory) restores a mid-page position on reload, passed
   // "once" triggers kill themselves inside ScrollTrigger's first refresh and crash it.
   // (behavior 'instant' matters: the CSS `scroll-behavior: smooth` would otherwise animate it)
@@ -48,7 +45,6 @@
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(time => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
-    lenis.stop(); // locked until the preloader finishes
   }
 
   const navCollapse = $('#mainNav');
@@ -94,58 +90,8 @@
     return $$('.wi', el);
   }
 
-  /* ------------------------------------------------------------------
-     Preloader + hero intro
-  ------------------------------------------------------------------ */
-  const heroWords = splitWords($('[data-hero-split]'));
-  gsap.set(heroWords, { yPercent: 115 });
-  const heroSides = ['.hero-stack', '.hero-contact', '.hero__meta', '.hero__sign'];
-  gsap.set(['.hero__sub', '.hero__cta', ...heroSides], { autoAlpha: 0, y: 24 });
-  gsap.set('.hero__portrait', { autoAlpha: 0, y: 30 });
-  gsap.set('.hero__cutout', { autoAlpha: 0, yPercent: 12 });
-  gsap.set('.hero__status', { autoAlpha: 0, scale: .8 }); // its centring lives in the CSS `translate` property, untouched here
-
-  // calm, formal intro: name rises in, the portrait rises into its capsule and gets its badge, the side blocks follow
-  function heroIntro() {
-    return gsap.timeline()
-      .to(heroWords, { yPercent: 0, duration: 1.1, stagger: .06, ease: 'power4.out' })
-      .to('.hero__sub', { autoAlpha: 1, y: 0 }, '-=.8')
-      .to('.hero__cta', { autoAlpha: 1, y: 0 }, '-=.85')
-      .to('.hero__portrait', { autoAlpha: 1, y: 0, duration: 1.1 }, 0.2)
-      .to('.hero__cutout', { autoAlpha: 1, yPercent: 0, duration: 1.4, ease: 'power4.out' }, '<.25')
-      .to('.hero__status', { autoAlpha: 1, scale: 1, duration: .7, ease: 'back.out(1.8)' }, '<.9')
-      .to(heroSides, { autoAlpha: 1, y: 0, duration: .8, stagger: .12 }, '<')
-      .from('.float-chat', { scale: 0, autoAlpha: 0, duration: .8, ease: 'back.out(2.2)', clearProps: 'transform,opacity,visibility' }, '-=.6');
-  }
-
-  const bootMsgs = ['booting portfolio…', 'loading assets…', 'compiling styles…', 'ready ✓'];
-  const counter = { v: 0 };
-  const countEl = $('.js-count');
-  const bootEl = $('.js-boot');
-  // full boot animation once per visit; returning page loads are near-instant
-  let seenBoot = false;
-  try {
-    seenBoot = sessionStorage.getItem('abdurDaily:booted') === '1';
-    sessionStorage.setItem('abdurDaily:booted', '1');
-  } catch { /* storage blocked — just play it */ }
-  const bootDur = reduceMotion || seenBoot ? .2 : 1.5;
-  gsap.timeline()
-    .to(counter, {
-      v: 100, duration: bootDur, ease: 'power2.inOut',
-      onUpdate: () => {
-        countEl.textContent = Math.round(counter.v);
-        bootEl.textContent = bootMsgs[Math.min(bootMsgs.length - 1, Math.floor(counter.v / 100 * bootMsgs.length))];
-      }
-    })
-    .to('.preloader__bar span', { scaleX: 1, duration: bootDur, ease: 'power2.inOut' }, 0)
-    .to('.preloader > *', { autoAlpha: 0, y: -16, duration: seenBoot ? .15 : .35, stagger: .05 })
-    .to('.preloader', { clipPath: 'inset(0 0 100% 0)', duration: seenBoot ? .6 : .9, ease: 'power4.inOut' })
-    .add(() => {
-      $('.preloader').remove();
-      lenis?.start();
-      ScrollTrigger.refresh();
-    })
-    .add(heroIntro(), '-=.45');
+  /* Hero: no preloader and nothing hidden for JS to reveal. The portrait is the page's largest paint, so it
+     shows at once; the gentle intro is CSS (style.css, "Hero intro") and starts with the first frame. */
 
   /* ------------------------------------------------------------------
      Cursor, magnetic buttons, tilt, service hover previews
@@ -371,7 +317,9 @@
         sy((e.clientY - r.top) / r.height * 100);
       });
     } else {
-      gsap.fromTo(spot, { x: 85 }, { x: 15, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1, onUpdate: paint });
+      // touch screens: the spotlight drifts on its own, but only while the footer is on screen
+      const drift = gsap.fromTo(spot, { x: 85 }, { x: 15, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true, onUpdate: paint });
+      ScrollTrigger.create({ trigger: '.footer', start: 'top bottom', end: 'bottom top', onToggle: self => (self.isActive ? drift.play() : drift.pause()) });
     }
   }
 
@@ -385,9 +333,9 @@
     panel.addEventListener('hidden.bs.collapse', () => ScrollTrigger.refresh());
   });
 
+  // no manual refresh here: ScrollTrigger already re-measures on DOMContentLoaded and load,
+  // and every extra refresh is a full-page layout during startup
   ScrollTrigger.sort();
-  ScrollTrigger.refresh();
-  window.addEventListener('load', () => ScrollTrigger.refresh());
 
   /* ------------------------------------------------------------------
      Helpers that don't depend on GSAP
