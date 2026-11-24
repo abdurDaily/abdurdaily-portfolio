@@ -58,13 +58,6 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (min-width: 1400px) { .container { max-width: 1240px; } }
 
-/* highlight bar is drawn in by JS (background-size 0% → 100%) */
-.hl {
-  color: var(--accent-ink);
-  background: linear-gradient(rgba(var(--accent-rgb), .16), rgba(var(--accent-rgb), .16)) no-repeat 0 92% / 100% 30%;
-  padding: 0 .04em;
-}
-
 .skip-link {
   position: fixed; top: .75rem; left: .75rem; z-index: 10001; padding: .6rem 1rem; border-radius: 10px;
   background: var(--ink); color: #fff; font-size: .9rem; transform: translateY(-160%); transition: transform .3s var(--ease);
@@ -243,10 +236,6 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 /* story cue after each section label ("01 About — who I am") so the page reads as one storyline */
 .label__cue { font: italic 400 1.02rem/1 "Instrument Serif", Georgia, serif; letter-spacing: 0; text-transform: none; color: var(--ink-2); }
 .label__cue::before { content: "— "; color: var(--muted); }
-.label--light .label__cue { color: rgba(255, 255, 255, .9); }
-.label--light .label__cue::before { color: rgba(255, 255, 255, .5); }
-.label--light { color: rgba(255, 255, 255, .7); }
-.label--light span { border-color: rgba(255, 255, 255, .3); }
 .section-title { font-size: clamp(2.2rem, 5vw, 4.1rem); line-height: 1.02; letter-spacing: -.05em; margin-bottom: 1.3rem; }
 .section-desc { color: var(--muted); font-size: 1.05rem; max-width: 440px; margin: 0; }
 
@@ -257,183 +246,101 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 .tags li { font-size: .74rem; padding: .28rem .65rem; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); color: var(--ink-2); }
 
 /* ---------- Hero ---------- */
-/* Light, formal hero: three blocks around a capsule portrait.
-   Left = who & why (name, value proposition, CTAs, proof) · centre = trust (portrait + status) ·
-   right = act (core stack, contact card, title). Grid areas re-stack the same blocks on tablets and phones. */
-.hero { position: relative; overflow: hidden; isolation: isolate; padding: clamp(6.5rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 4.5rem); }
-@media (min-width: 992px) { .hero { min-height: min(100svh, 960px); display: flex; } .hero > .container { width: 100%; margin-block: auto; } }
-
-/* static backdrop: a faint warm wash behind the portrait */
-.hero::before {
-  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
-  background: radial-gradient(ellipse 40% 45% at 50% 50%, rgba(var(--accent-rgb), .07), transparent 70%);
+/* A cut-out portrait standing in a warm wash. "Hey," and "there" sit either side of the head, the status and
+   the specialty at shoulder height, the name (left) and role (right) along the bottom.
+   Everything that has to line up with the photo is sized from one stage height, --h, so the greeting stays
+   split around the head at any width. Desktop: one fixed-height stage. Below 992px the photo and greeting
+   keep their stage at the top and the rest follows in reading order. */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate; padding-top: 4.5rem;
+  background:
+    radial-gradient(ellipse 34% 55% at 50% 42%, rgba(255, 186, 120, .55), transparent 70%),
+    radial-gradient(ellipse 30% 45% at 8% 45%, rgba(255, 214, 120, .5), transparent 70%),
+    radial-gradient(ellipse 30% 45% at 92% 45%, rgba(255, 214, 120, .5), transparent 70%),
+    linear-gradient(transparent 70%, var(--bg));
+  background-color: var(--bg);
 }
 
-.hero__grid {
-  position: relative; display: grid; gap: 1.5rem clamp(1.5rem, 2.5vw, 2.5rem);
-  grid-template-columns: minmax(0, 1fr) minmax(0, 410px) minmax(0, 1fr);
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "intro portrait stack"
-    "intro portrait contact"
-    "meta  portrait sign";
+/* padding + stage = exactly one screen, so the whole hero shows without scrolling on laptops too */
+.hero__stage { --h: clamp(460px, calc(100svh - 4.5rem), 820px); position: relative; height: var(--h); }
+
+/* the cut-out is 944×944; its head spans x 30–71% and its eyes sit at y 27% */
+.hero__photo {
+  position: absolute; left: 50%; top: calc(var(--h) * .07); z-index: 1; translate: -50% 0;
+  height: calc(var(--h) * .93); width: auto; max-width: none;
+  -webkit-mask-image: linear-gradient(#000 80%, transparent 99%), linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(#000 80%, transparent 99%), linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-composite: intersect;
 }
-.hero__intro { grid-area: intro; align-self: start; }
-.hero__portrait { grid-area: portrait; align-self: center; }
-.hero__meta { grid-area: meta; align-self: end; }
-.hero-stack { grid-area: stack; justify-self: end; }
-.hero-contact { grid-area: contact; align-self: center; justify-self: end; }
-.hero__sign { grid-area: sign; align-self: end; }
+/* the two words part around the head: the gap is the head's width, the shift follows the head's off-centre */
+.hero__hello {
+  position: absolute; left: 0; right: 0; top: calc(var(--h) * .22); z-index: 0; margin: 0;
+  display: flex; justify-content: center; gap: calc(var(--h) * .41); translate: calc(var(--h) * .01) 0;
+  font: italic 400 calc(var(--h) * .17)/1 "Instrument Serif", Georgia, serif; letter-spacing: -.02em; white-space: nowrap; color: var(--ink);
+}
+
+.hero__status {
+  position: absolute; left: 0; top: calc(var(--h) * .5); z-index: 2; margin: 0;
+  display: inline-flex; align-items: center; gap: .6rem; padding: .55rem 1.1rem .55rem .7rem; border-radius: 100px;
+  font-size: .85rem; font-weight: 500; color: var(--ink); background: rgba(255, 255, 255, .9);
+  box-shadow: 0 14px 30px -20px rgba(18, 18, 16, .35);
+}
+/* orange dot in a soft halo */
+.hero__dot { position: relative; flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(var(--accent-rgb), .2); }
+.hero__dot::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: rgba(var(--accent-rgb), .45); animation: pulse 2s infinite; }
+.hero__spec { position: absolute; right: 0; top: calc(var(--h) * .48); z-index: 2; max-width: 230px; margin: 0; font-size: .92rem; font-weight: 500; line-height: 1.5; color: var(--ink); }
+
+/* tall condensed type, like a poster: name bottom-left, role bottom-right */
+.hero__name, .hero__role { position: absolute; z-index: 2; margin: 0; font-family: "Anton", Impact, "Arial Narrow", sans-serif; font-weight: 400; text-transform: uppercase; color: var(--ink); }
+.hero__name { left: 0; bottom: calc(var(--h) * .07); font-size: calc(var(--h) * .16); line-height: .92; letter-spacing: .005em; }
+.hero__name > span { display: block; }
+.hero__role { right: 0; bottom: calc(var(--h) * .08); font-size: calc(var(--h) * .068); line-height: .98; letter-spacing: .01em; }
 
 .status__dot { position: relative; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
 /* pulse = a scaling, fading ring (compositor-only) rather than an animated box-shadow */
 .status__dot::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: rgba(22, 163, 74, .5); animation: pulse 2s infinite; }
 @keyframes pulse { from { transform: scale(1); opacity: 1; } 70%, to { transform: scale(3.25); opacity: 0; } }
 
-/* ---- left: who & why ---- */
-/* "Hello, I'm" in serif italic over a bold name; the full stop is the only accent */
-.hero__name { margin-bottom: 1.3rem; font-size: clamp(2.8rem, 4.6vw, 4.4rem); font-weight: 700; line-height: 1; letter-spacing: -.055em; }
-.hero__hello { display: block; margin-bottom: .35rem; font: italic 400 .52em/1.1 "Instrument Serif", Georgia, serif; letter-spacing: -.01em; color: var(--ink-2); }
-.hero__dot { color: var(--accent-ink); }
-.hero__sub { max-width: 360px; margin-bottom: 1.8rem; font-size: 1.06rem; line-height: 1.6; color: var(--muted); }
-.hero__sub strong { font-weight: 600; color: var(--ink); }
-
-/* proof: three figures in one row, divided by hairlines, socials beneath */
-.hero-stats { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; margin: 0 0 1.3rem; padding-top: 1.3rem; border-top: 1px solid var(--line); }
-.hero-stats > div { display: flex; flex-direction: column-reverse; padding: 0 1.3rem; border-left: 1px solid var(--line); }
-.hero-stats > div:first-child { padding-left: 0; border-left: 0; }
-.hero-stats dd { margin: 0; font-size: clamp(1.7rem, 2.6vw, 2.15rem); font-weight: 600; line-height: 1; letter-spacing: -.05em; color: var(--ink); }
-.hero-stats dd span { color: var(--accent-ink); }
-.hero-stats dt { margin-top: .4rem; font-size: .76rem; font-weight: 400; color: var(--muted); }
-.hero-social { display: flex; gap: .6rem; margin: 0; }
-.hero-social a {
-  width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; font-size: .95rem; color: var(--ink);
-  border: 1px solid var(--line-strong); transition: background-color .3s, color .3s, border-color .3s;
-}
-.hero-social a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
-
-/* ---- centre: trust ---- */
-/* a tall capsule filled with #CAC6BB holding the cut-out photo, a concentric outline ring, and a status badge on the ring */
-.hero__portrait {
-  position: relative; width: 100%; max-width: 410px; margin-inline: auto; padding: 14px;
-  border-radius: 999px; border: 1px solid var(--line-strong);
-}
-.hero__capsule {
-  position: relative; aspect-ratio: 7 / 10; border-radius: 999px; overflow: hidden; background: #cac6bb;
-  box-shadow: 0 50px 90px -50px rgba(18, 18, 16, .55), inset 0 0 0 1px rgba(18, 18, 16, .06);
-}
-.hero__cutout { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 100%; }
-/* gentle life: the capsule floats, an accent arc travels round its outline ring, and the photo breathes.
-   Float/breathe use the standalone `translate`/`scale` properties so they never fight GSAP's intro transforms;
-   the global reduced-motion rule stills all three. */
-@property --sweep { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.hero__portrait { animation: portrait-float 7s ease-in-out infinite; }
-.hero__portrait::before {
-  content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 2px; pointer-events: none;
-  background: conic-gradient(from var(--sweep), transparent 0 62%, rgba(var(--accent-rgb), .15) 75%, var(--accent) 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  animation: ring-sweep 6s linear infinite;
-}
-.hero__cutout { transform-origin: 50% 100%; animation: portrait-breathe 9s ease-in-out infinite; }
-@keyframes portrait-float { 50% { translate: 0 -10px; } }
-@keyframes ring-sweep { to { --sweep: 360deg; } }
-@keyframes portrait-breathe { 50% { scale: 1.035; } }
-
 /* Hero intro: pure CSS, so it runs from the first frame instead of waiting for the scripts.
-   The portrait (the page's largest paint) only rises, never fades, so it counts as painted at once.
-   Side blocks rise and fade in after it; the status badge pops (its centring lives in `translate`, so it scales). */
+   The photo (the page's largest paint) only rises, never fades, so it counts as painted at once. */
 @media (prefers-reduced-motion: no-preference) {
-  .hero__capsule { animation: hero-lift 1.2s var(--ease) both; }
-  .hero__name, .hero__sub, .hero__cta, .hero-stack, .hero-contact, .hero__meta, .hero__sign { animation: hero-rise .9s var(--ease) both; }
-  .hero__sub { animation-delay: .12s; }
-  .hero__cta { animation-delay: .22s; }
-  .hero-stack { animation-delay: .4s; }
-  .hero-contact { animation-delay: .5s; }
-  .hero__meta { animation-delay: .6s; }
-  .hero__sign { animation-delay: .7s; }
-  .hero__status { animation: hero-pop .7s .8s cubic-bezier(.34, 1.56, .64, 1) both; }
+  .hero__photo { animation: hero-lift 1.2s var(--ease) both; }
+  .hero__hello > span, .hero__status, .hero__spec, .hero__name, .hero__role { animation: hero-rise .9s var(--ease) both; }
+  .hero__hello > span:last-child { animation-delay: .1s; }
+  .hero__name { animation-delay: .2s; }
+  .hero__role { animation-delay: .3s; }
+  .hero__status { animation-delay: .4s; }
+  .hero__spec { animation-delay: .5s; }
   .float-chat { animation: hero-pop .8s 1s cubic-bezier(.34, 1.56, .64, 1) backwards; }
 }
+.hero__hello > span { display: inline-block; }
 @keyframes hero-lift { from { transform: translateY(28px); } }
 @keyframes hero-rise { from { opacity: 0; transform: translateY(22px); } }
 @keyframes hero-pop { from { opacity: 0; scale: .8; } }
-.hero__status {
-  position: absolute; left: 50%; bottom: -1px; translate: -50% 50%; z-index: 1; margin: 0; white-space: nowrap;
-  display: inline-flex; align-items: center; gap: .55rem; padding: .55rem 1rem; border-radius: 100px;
-  font-size: .74rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line);
-  box-shadow: 0 16px 34px -18px rgba(18, 18, 16, .45);
-}
 
-/* ---- right: act ---- */
-.hero-stack { display: flex; flex-direction: column; align-items: flex-end; gap: .6rem; }
-.hero-stack p { margin: 0; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.hero-stack ul { display: flex; gap: .45rem; margin: 0; }
-.hero-stack li {
-  width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; font-size: 1.25rem;
-  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .4s var(--ease);
-}
-.hero-stack li:hover { transform: translateY(-3px); }
-.hero-stack .devicon-nextjs-plain { color: var(--ink); }
-
-/* one contact card: reply promise + live local time, then highlighted email & phone */
-.hero-contact {
-  width: 100%; max-width: 310px; padding: 1.1rem; border-radius: 20px;
-  background: var(--surface); border: 1px solid var(--line); box-shadow: 0 34px 70px -40px rgba(18, 18, 16, .45);
-}
-.hero-contact__head { display: flex; flex-direction: column; gap: .2rem; margin: 0 .2rem .9rem; line-height: 1.3; }
-.hero-contact__head strong { font-size: 1.05rem; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
-.hero-contact__head .mono { font-size: .68rem; color: var(--muted); }
-.hero-contact ul { display: grid; gap: .5rem; margin: 0; }
-/* neutral rows that invert to ink on hover; orange stays a small accent on the labels */
-.hero-contact a {
-  display: flex; align-items: center; gap: .75rem; padding: .5rem .9rem .5rem .5rem; border-radius: 14px;
-  background: var(--bg); border: 1px solid var(--line); color: var(--ink);
-  font-weight: 600; font-size: .93rem; letter-spacing: -.01em; line-height: 1.25; overflow-wrap: anywhere;
-  transition: background-color .3s, color .3s, border-color .3s;
-}
-.hero-contact small { display: block; font-size: .6rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); transition: color .3s; }
-.hero-contact__icon {
-  flex-shrink: 0; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px;
-  background: var(--surface); border: 1px solid var(--line); color: var(--ink); font-size: 1rem; transition: background-color .3s, color .3s, border-color .3s;
-}
-.hero-contact a:hover, .hero-contact a:focus-visible { background: var(--ink); border-color: var(--ink); color: #fff; }
-.hero-contact a:hover small, .hero-contact a:focus-visible small { color: rgba(255, 255, 255, .65); }
-.hero-contact a:hover .hero-contact__icon, .hero-contact a:focus-visible .hero-contact__icon { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-.hero__sign { margin: 0; text-align: right; font-size: clamp(1.8rem, 2.8vw, 2.5rem); font-weight: 700; line-height: 1; letter-spacing: -.05em; color: var(--ink); }
-.hero__sign em { display: block; font: italic 400 1.15em/1 "Instrument Serif", Georgia, serif; letter-spacing: -.01em; color: var(--accent-ink); }
-
-/* keep the portrait inside the viewport on short laptop screens */
-@media (min-width: 992px) {
-  .hero__portrait { max-width: min(410px, 48svh); }
-  .hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, min(410px, 48svh)) minmax(0, 1fr); } /* side columns get the slack */
-}
-
-/* tablet: intro on top, portrait centred, the rest in two columns */
+/* tablet & phone: the photo and greeting keep a stage of their own at the top; name, role, status and
+   specialty follow beneath in reading order */
 @media (max-width: 991.98px) {
-  .hero__grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: none; gap: 2.2rem 1.5rem;
-    grid-template-areas:
-      "intro    intro"
-      "portrait portrait"
-      "meta     contact"
-      "stack    sign";
+  /* the desktop side glows are sized in % of the hero, which on a tall phone stretches them into vertical
+     stripes; here one round glow (sized from the screen width) sits behind the portrait instead */
+  .hero {
+    background:
+      radial-gradient(75vw 70vw at 50% calc(4.5rem + 42vw), rgba(255, 186, 120, .45), transparent 70%),
+      radial-gradient(110vw 80vw at 50% calc(4.5rem + 30vw), rgba(255, 224, 178, .45), transparent 72%),
+      var(--bg);
   }
-  .hero__portrait { max-width: 340px; margin-top: 1rem; }
-  .hero__sub { max-width: 520px; }
-  .hero-stack { justify-self: start; align-items: flex-start; align-self: end; }
-}
-/* phone: one column, in reading order */
-@media (max-width: 575.98px) {
-  .hero__grid {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "intro" "portrait" "contact" "meta" "stack" "sign";
-  }
-  .hero__portrait { max-width: min(300px, 80%); padding: 10px; }
-  .hero-contact { justify-self: stretch; max-width: none; }
-  .hero-stats > div { padding: 0 1rem; }
-  .hero__sign { text-align: left; }
+  /* --h follows the screen width here, and the greeting is a size smaller, so "Hey, … there" fits a phone */
+  .hero__stage { --h: min(calc(100vw - 2rem), 640px); height: auto; padding-top: var(--h); padding-bottom: 3rem; display: flex; flex-direction: column; align-items: flex-start; }
+  .hero__photo { top: 0; }
+  .hero__hello { top: calc(var(--h) * .25); font-size: calc(var(--h) * .13); }
+  .hero__status, .hero__spec, .hero__name, .hero__role { position: static; }
+  .hero__name { order: 1; margin-top: .5rem; font-size: clamp(3.6rem, 17vw, 7rem); }
+  .hero__name > span { display: inline; }
+  .hero__role { order: 2; margin-top: .5rem; font-size: clamp(1.6rem, 7vw, 2.6rem); }
+  .hero__role br { display: none; }
+  .hero__status { order: 3; margin-top: 1.5rem; }
+  .hero__spec { order: 4; max-width: 420px; margin-top: 1rem; }
 }
 
 /* ---------- Brand marquee ---------- */
@@ -594,20 +501,6 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 @media (max-width: 991.98px) { .stack-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stack-col:last-child { grid-column: 1 / -1; } }
 @media (max-width: 575.98px) { .stack-cols { grid-template-columns: minmax(0, 1fr); } }
 
-/* ---------- Statement (fixed background image) ---------- */
-.statement {
-  position: relative; padding: clamp(6rem, 14vw, 11rem) 0; color: #fff;
-  background:
-    linear-gradient(180deg, rgba(18, 18, 16, .88), rgba(18, 18, 16, .7) 50%, rgba(18, 18, 16, .9)),
-    url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=60") center / cover fixed;
-}
-@media (hover: none), (max-width: 991.98px) { .statement { background-attachment: scroll; } }
-.statement__title { color: #fff; font-size: clamp(2.3rem, 6vw, 5rem); line-height: 1.02; letter-spacing: -.055em; max-width: 1000px; margin-bottom: 3.5rem; }
-.statement__title .hl { background: none; color: var(--accent); }
-.statement__points > div { font-family: var(--mono); font-size: .9rem; color: rgba(255, 255, 255, .75); padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, .18); }
-.statement__points span { color: #c58af9; }
-.statement__points em { font-style: normal; color: #ffb48f; }
-
 /* ---------- Industries (fanned cards) ---------- */
 .industries { overflow: hidden; }
 .fan { position: relative; display: flex; justify-content: center; gap: clamp(.75rem, 2vw, 1.75rem); padding-bottom: 2.5rem; }
@@ -645,16 +538,6 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
   .fan-card:hover { top: 0; }
 }
 
-/* ---------- Outline band ---------- */
-.outline-band { padding: clamp(1.2rem, 3vw, 2rem) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
-.outline-band .marquee__group { gap: clamp(1.5rem, 3vw, 2.8rem); padding-right: clamp(1.5rem, 3vw, 2.8rem); }
-.outline-word {
-  font: 700 clamp(3.6rem, 11vw, 9.5rem)/1.05 var(--font); letter-spacing: -.05em; white-space: nowrap;
-  color: transparent; -webkit-text-stroke: 1.5px rgba(18, 18, 16, .3); transition: color .5s, -webkit-text-stroke-color .5s;
-}
-.outline-word:hover { color: var(--accent-ink); -webkit-text-stroke-color: var(--accent-ink); }
-.outline-sep { flex-shrink: 0; width: clamp(.7rem, 1.4vw, 1.1rem); aspect-ratio: 1; background: rgba(18, 18, 16, .3); }
-
 /* ---------- Process (pipeline) ---------- */
 .process { background: var(--bg-2); }
 .pipeline { position: relative; }
@@ -666,7 +549,7 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
   background: var(--bg-2); border: 2px solid var(--line-strong); color: var(--muted); margin-bottom: 1.3rem;
   transition: background-color .5s var(--ease), border-color .5s, color .5s, transform .5s var(--ease);
 }
-.stage__status { display: inline-block; font-size: .72rem; color: var(--ok); margin-bottom: .45rem; opacity: 0; transform: translateY(6px); transition: opacity .4s, transform .4s var(--ease); }
+.stage__status { display: inline-block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: .45rem; opacity: 0; transform: translateY(6px); transition: opacity .4s, transform .4s var(--ease); }
 .stage h3 { font-size: 1.25rem; margin-bottom: .4rem; }
 .stage p { color: var(--muted); font-size: .93rem; margin: 0; }
 .stage.is-done .stage__node { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.06); }
@@ -908,10 +791,10 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 .socials a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
 
 .contact-form { padding: clamp(1.5rem, 4vw, 2.4rem); border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
-.contact-form__head { display: flex; justify-content: space-between; gap: 1rem; font-size: .8rem; color: #7a5af8; margin-bottom: 1.4rem; }
-.contact-form__head span:last-child { color: var(--muted); }
-.contact-form__close { font-size: .8rem; color: #7a5af8; }
-.contact-form .form-label { font-size: .78rem; color: var(--muted); margin-bottom: .35rem; }
+.contact-form__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1.4rem; }
+.contact-form__head span:first-child { font-size: 1.15rem; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+.contact-form__head span:last-child, .contact-form__note { font-size: .85rem; color: var(--muted); }
+.contact-form .form-label { font-size: .85rem; font-weight: 500; color: var(--ink-2); margin-bottom: .35rem; }
 .form-optional { opacity: .65; }
 .contact-form .form-control, .contact-form .form-select { background-color: var(--bg); border: 1px solid var(--line); color: var(--ink); border-radius: 10px; padding: .8rem 1rem; }
 .contact-form .form-control::placeholder { color: #a9a79e; }
@@ -944,7 +827,6 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; letter-spacing: -.0
 .footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; padding-top: 1.6rem; border-top: 1px solid rgba(255, 255, 255, .1); position: relative; }
 .footer__bottom a { color: #fff; border-bottom: 1px solid var(--accent); }
 .footer__bottom a:hover { color: var(--accent); }
-.footer__inf { color: var(--accent); }
 .back-top { flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-size: 1.1rem; box-shadow: 0 14px 30px -12px rgba(var(--accent-rgb), .9); transition: background-color .3s, color .3s; }
 .back-top:hover { background: #fff; color: var(--ink); }
 

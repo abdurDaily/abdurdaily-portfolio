@@ -62,7 +62,7 @@
   });
 
   /* ------------------------------------------------------------------
-     Word splitting — keeps inline elements like .hl intact
+     Word splitting — keeps inline elements intact
   ------------------------------------------------------------------ */
   function wrapWord(node) {
     const outer = document.createElement('span');
@@ -118,7 +118,7 @@
     document.addEventListener('mouseover', e => {
       const labelled = e.target.closest('[data-cursor-text]');
       const interactive = e.target.closest('a, button, .brand-logo, .service-row');
-      const onDark = !!e.target.closest('.statement, .cta-banner, .footer');
+      const onDark = !!e.target.closest('.cta-banner, .footer');
       dot.classList.toggle('on-dark', onDark);
       ring.classList.toggle('on-dark', onDark);
       if (labelled) {
@@ -195,23 +195,20 @@
   /* ------------------------------------------------------------------
      Scroll reveals
   ------------------------------------------------------------------ */
-  $$('[data-split]').forEach(el => {
-    const words = splitWords(el);
-    const marks = $$('.hl', el).filter(hl => getComputedStyle(hl).backgroundImage !== 'none');
-    const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 85%', once: true } })
-      .from(words, { yPercent: 115, duration: 1.1, stagger: .05, ease: 'power4.out' });
-    if (marks.length) {
-      gsap.set(marks, { backgroundSize: '0% 30%' });
-      tl.to(marks, { backgroundSize: '100% 30%', duration: .9, ease: 'power3.inOut' }, '-=.45');
-    }
-  });
+  // with reduced motion, content is simply there: nothing is hidden waiting for a scroll
+  if (!reduceMotion) {
+    $$('[data-split]').forEach(el => {
+      gsap.from(splitWords(el), { yPercent: 115, duration: 1.1, stagger: .05, ease: 'power4.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+    });
 
-  gsap.set('[data-reveal]', { autoAlpha: 0, y: 40 });
-  ScrollTrigger.batch('[data-reveal]', {
-    start: 'top 88%',
-    once: true,
-    onEnter: batch => gsap.to(batch, { autoAlpha: 1, y: 0, duration: .9, stagger: .08, overwrite: true })
-  });
+    gsap.set('[data-reveal]', { autoAlpha: 0, y: 40 });
+    ScrollTrigger.batch('[data-reveal]', {
+      start: 'top 88%',
+      once: true,
+      onEnter: batch => gsap.to(batch, { autoAlpha: 1, y: 0, duration: .9, stagger: .08, overwrite: true })
+    });
+  }
 
   /* Pipeline: the line fills with scroll and each stage "passes" */
   const stages = $$('.stage');
